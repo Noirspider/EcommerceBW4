@@ -2,21 +2,23 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container mt-3">
-        <asp:Repeater ID="carrelloRepeater" runat="server"  OnItemCommand="CarrelloRepeater_ItemCommand">
+        <asp:Repeater ID="carrelloRepeater" runat="server" OnItemCommand="CarrelloRepeater_ItemCommand">
             <HeaderTemplate>
-                <div class="row">
+                <div class="row row-cols-6">
             </HeaderTemplate>
             <ItemTemplate>
-                <div class="col-md-2 mb-4">
-                    <div class="card h-100 bg-dark">
-                        <img src='<%# Eval("ImmagineURL") %>' alt="Product Image" class="card-img-top" />
+                <div class="col mb-4">
+                    <div class="card h-100 w-100 bg-dark">
+                        <img src='<%# Eval("ImmagineURL") %>' alt="Product Image" class="card-img-top" style="object-fit: cover" />
                         <div class="card-body">
                             <h5 class="card-title"><%# Eval("Nome") %></h5>
                             <p class="card-text">Quantità: <%# Eval("Quantita") %></p>
                             <p class="card-text">Prezzo unitario: <%# Eval("Prezzo") %>€</p>
                             <p class="card-text">Prezzo totale: <%# Eval("Totale") %>€</p>
-                            <asp:LinkButton ID="btnRemoveOne" runat="server" CommandArgument='<%# Eval("ProdottoID") %>' CommandName="RemoveOne" Text="Rimuovi uno" CssClass="btn btn-danger" />
-                            <asp:LinkButton ID="btnAddOne" runat="server" CommandArgument='<%# Eval("ProdottoID") %>' CommandName="AddOne" Text="Aggiungi uno" CssClass="btn btn-success" />
+                            <div class="d-flex align-items-center justify-content-between">
+                                <asp:LinkButton ID="btnRemoveOne" runat="server" CommandArgument='<%# Eval("ProdottoID") %>' CommandName="RemoveOne" Text="- uno" CssClass="btn btn-sm btn-danger" />
+                                <asp:LinkButton ID="btnAddOne" runat="server" CommandArgument='<%# Eval("ProdottoID") %>' CommandName="AddOne" Text="+ uno" CssClass="btn btn-sm btn-success" />
+                            </div>
                         </div>
                     </div>
                 </div>

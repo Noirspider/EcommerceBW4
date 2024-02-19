@@ -106,7 +106,26 @@ namespace EcommerceBW4
                         cmd.Parameters.AddWithValue("@UtenteID", utenteId);
                         cmd.ExecuteNonQuery();
                     }
+                    string checkQuantityQuery = "SELECT Quantita FROM CarrelloDettaglio WHERE ProdottoID = @ProdottoID AND CarrelloID IN (SELECT CarrelloID FROM Carrello WHERE UtenteID = @UtenteID)";
+                    using (SqlCommand checkCmd = new SqlCommand(checkQuantityQuery, conn))
+                    {
+                        checkCmd.Parameters.AddWithValue("@ProdottoID", prodottoId);
+                        checkCmd.Parameters.AddWithValue("@UtenteID", utenteId);
+
+                        int quantity = Convert.ToInt32(checkCmd.ExecuteScalar());
+                        if (quantity <= 0)
+                        {
+                            string deleteQuery = "DELETE FROM CarrelloDettaglio WHERE ProdottoID = @ProdottoID AND CarrelloID IN (SELECT CarrelloID FROM Carrello WHERE UtenteID = @UtenteID)";
+                            using (SqlCommand deleteCmd = new SqlCommand(deleteQuery, conn))
+                            {
+                                deleteCmd.Parameters.AddWithValue("@ProdottoID", prodottoId);
+                                deleteCmd.Parameters.AddWithValue("@UtenteID", utenteId);
+                                deleteCmd.ExecuteNonQuery();
+                            }
+                        }
+                    }
                 }
+
                 else if (e.CommandName == "AddOne")
                 {
                     string query = @"
