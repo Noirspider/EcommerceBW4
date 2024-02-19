@@ -23,7 +23,7 @@ namespace EcommerceBW4
             string password = txtPassword.Value;
 
             // connessione dal web.config.
-            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceConnectionString"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -69,7 +69,7 @@ namespace EcommerceBW4
             string password = txtPassword.Value;
 
 
-            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceConnectionString"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
 
             using (SqlConnection conn = new SqlConnection(connectionString))
