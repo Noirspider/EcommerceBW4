@@ -24,21 +24,21 @@ namespace EcommerceBW4
         protected global::System.Web.UI.WebControls.Repeater carrelloRepeater;
 
         /// <summary>
-        /// Controllo btnClearCart.
+        /// Controllo BtnClearCart.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnClearCart;
+        protected global::System.Web.UI.WebControls.Button BtnClearCart;
 
         /// <summary>
-        /// Controllo btnCompleteOrder.
+        /// Controllo BtnCompleteOrder.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCompleteOrder;
+        protected global::System.Web.UI.WebControls.Button BtnCompleteOrder;
     }
 }
