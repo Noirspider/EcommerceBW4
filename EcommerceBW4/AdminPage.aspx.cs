@@ -15,17 +15,18 @@ namespace EcommerceBW4
         {
             if (!IsPostBack)
             {
-                PopoloDropDownProdotto();
-                PopoloDropDownVenditeAnnue();
-                PopoloDropDownVenditeRegione();
+               DropDownProdotto_SelectedIndexChanged();
+                //PopoloDropDownVenditeAnnue();
+                //PopoloDropDownVenditeRegione();
             }
         }
 
-        private void PopoloDropDownProdotto()
+
+        protected void DropDownProdotto_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["YourConnectionStringName"].ConnectionString))
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;"].ConnectionString))
                 {
                     connection.Open();
                     string query = "SELECT ProdottoID, Nome FROM Prodotti";
@@ -44,6 +45,5 @@ namespace EcommerceBW4
                 Console.WriteLine($"Si è verificato un errore: {ex.Message}");
             }
         }
-
     }
 }

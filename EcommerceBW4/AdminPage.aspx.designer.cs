@@ -11,7 +11,7 @@ namespace EcommerceBW4
 {
 
 
-    public partial class WebForm1
+    public partial class AdminPage
     {
 
         /// <summary>
