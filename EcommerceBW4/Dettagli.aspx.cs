@@ -17,8 +17,9 @@ namespace EcommerceBW4
         {
             if (!IsPostBack)
             {
-                int productId = 1;
-                string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+                if (int.TryParse(Request.QueryString["id"], out int productId))
+                {
+                    string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
                         connection.Open();
@@ -47,14 +48,14 @@ namespace EcommerceBW4
                             }
                         }
                     }
-                
+                }
             } 
         }
         protected void AddCarrello_Click(object sender, EventArgs e)
-        {
+        {   
             if (Session["UserId"] == null)
             {
-                PopupLiteral.Text = "<script>alert('Prodotto aggiunto al carrello!');</script>";
+                PopupLiteral.Text = "<script>alert('Devi effettuare l\'accesso per aggiungere il prodotto al carrello');</script>";
             }
             else
             {
@@ -63,19 +64,28 @@ namespace EcommerceBW4
                     int quantita;
                     if (int.TryParse(QuantitaTextBox.Text, out quantita))
                     {
-                        AggiungiAlCarrello(prodottoId, quantita);
+                        try
+                        {
+                            AggiungiAlCarrello(prodottoId, quantita);
+                            PopupLiteral.Text = "<script>alert('Prodotto aggiunto al carrello!');</script>";
+                        }
+                        catch (Exception ex)
+                        {
+                            PopupLiteral.Text = $"<script>alert('Si è verificato un errore durante l\'aggiunta del prodotto al carrello: {ex.Message}');</script>";
+                        }
                     }
                     else
                     {
-                        // da completare
+                        PopupLiteral.Text = "<script>alert('Inserisci una quantità valida');</script>";
                     }
                 }
                 else
                 {
-                    // da completare
+                    PopupLiteral.Text = "<script>alert('Errore nell\'ID del prodotto');</script>";
                 }
             }
         }
+
 
         private void AggiungiAlCarrello(int prodottoId, int quantita)
         {
@@ -116,7 +126,17 @@ namespace EcommerceBW4
                     cmd.Parameters.AddWithValue("@Quantita", quantita);
                     decimal prezzo = AggiungiPrezzo (prodottoId);
                     cmd.Parameters.AddWithValue("@Prezzo", prezzo);
-                    cmd.ExecuteNonQuery();
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        
+                        PopupLiteral.Text = "<script>alert('Prodotto aggiunto al carrello!');</script>";
+                    }
+                    catch (Exception ex)
+                    {
+                        PopupLiteral.Text = $"<script>alert('Si è verificato un errore nella funzione AggiungiAlCarrello: {ex.Message}');</script>";
+                        
+                    }
                 }
             }
         }
