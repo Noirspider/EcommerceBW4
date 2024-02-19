@@ -28,7 +28,8 @@ namespace EcommerceBW4
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
 
-                string query = "SELECT COUNT(1) FROM Utenti WHERE NomeUtente=@username AND Password=@password";
+                // string query = "SELECT COUNT(1) FROM Utenti WHERE NomeUtente=@username AND Password=@password";
+                string query = "SELECT UtenteID FROM Utenti WHERE NomeUtente=@username AND Password=@password";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -36,17 +37,19 @@ namespace EcommerceBW4
                     cmd.Parameters.AddWithValue("@password", password);
 
                     conn.Open();
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    object result = cmd.ExecuteScalar();
 
-                    if (count == 1)
+                    if (result != null)
                     {
-
+                        // L'utente è autenticato correttamente.
+                        int userId = Convert.ToInt32(result);
+                        Session["UserId"] = userId;
                         Session["Username"] = username;
                         Response.Redirect("Default.aspx");
                     }
                     else
                     {
-                        // errore.
+                        // Autenticazione fallita.
                         lblError.Visible = true;
                         lblError.Text = "Username o password errati";
                     }
