@@ -16,7 +16,7 @@ namespace EcommerceBW4
         {
             if (!IsPostBack)
             {
-                string connectionString = ConfigurationManager.ConnectionStrings["EcommerceConnectionString"].ConnectionString;
+                string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
                 SqlConnection conn = new SqlConnection(connectionString);
                 conn.Open();
 
