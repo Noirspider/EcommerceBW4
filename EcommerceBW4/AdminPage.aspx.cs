@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EcommerceBW4
 {
@@ -15,7 +10,7 @@ namespace EcommerceBW4
         {
             if (!IsPostBack)
             {
-               DropDownProdotto_SelectedIndexChanged();
+                //  DropDownProdotto_SelectedIndexChanged();
                 //PopoloDropDownVenditeAnnue();
                 //PopoloDropDownVenditeRegione();
             }
