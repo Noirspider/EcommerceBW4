@@ -22,6 +22,8 @@
                 </header>
                 <br />
                 <div class="field-set">
+                    <asp:TextBox ID="txtEta" CssClass="form-input" TextMode="SingleLine" placeholder="Età" runat="server" />
+
                     <span class="input-item">
                         <i class="fa fa-user-circle"></i>
                     </span>

@@ -67,47 +67,49 @@ namespace EcommerceBW4
         // metodo per la registrazione dell'utente nel database
         protected void SignUp_Click(object sender, EventArgs e)
         {
-
             string username = txtUsername.Value;
             string password = txtPassword.Value;
+            int eta;
 
+            // Controllo che l'input per l'età sia un numero intero valido
+            if (!int.TryParse(txtEta.Text, out eta))
+            {
+                lblError.Visible = true;
+                lblError.Text = "L'età inserita non è valida. Inserisci un numero intero.";
+                return;
+            }
 
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
-
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
 
-                string query = "INSERT INTO Utenti (NomeUtente, Password, IsAdmin) VALUES (@username, @password, 0)";
-
+                string query = "INSERT INTO Utenti (NomeUtente, Password, IsAdmin, Eta) VALUES (@username, @password, 0, @Eta)";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.Parameters.AddWithValue("@password", password);
-
+                    cmd.Parameters.AddWithValue("@Eta", eta);
 
                     conn.Open();
 
-
                     int result = cmd.ExecuteNonQuery();
-
 
                     if (result > 0)
                     {
-
                         Response.Redirect("Login.aspx");
                     }
                     else
                     {
-                        // Errore
                         lblError.Visible = true;
-                        lblError.Text = "Username o password errati";
+                        lblError.Text = "Errore durante la registrazione. Riprova.";
                     }
                 }
             }
         }
+
+
 
         // metodo per il logout dell'utente
         protected void Logout_Click(object sender, EventArgs e)
