@@ -78,13 +78,29 @@ namespace EcommerceBW4
                                 {
                                     carrello.AggiungiProdotto(prodotto);
                                 }
-                                Session["Carrello"] = carrello;
                             }
                         }
                     }
                 }
             }
         } */
+        protected void IncrementaQuantita(object sender, EventArgs e)
+        {
+            int quantita = Convert.ToInt32(QuantitaTextBox.Text);
+            quantita++;
+            QuantitaTextBox.Text = quantita.ToString();
+        }
+
+        protected void DecrementaQuantita(object sender, EventArgs e)
+        {
+            int quantita = Convert.ToInt32(QuantitaTextBox.Text);
+            if (quantita > 1)
+            {
+                quantita--;
+                QuantitaTextBox.Text = quantita.ToString();
+            }
+        }
+
 
     }
 }

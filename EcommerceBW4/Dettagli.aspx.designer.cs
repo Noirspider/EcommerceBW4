@@ -69,6 +69,42 @@ namespace EcommerceBW4
         protected global::System.Web.UI.WebControls.Label Prezzo;
 
         /// <summary>
+        /// Controllo QuantitaTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox QuantitaTextBox;
+
+        /// <summary>
+        /// Controllo Incrementa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Incrementa;
+
+        /// <summary>
+        /// Controllo Decrementa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Decrementa;
+
+        /// <summary>
+        /// Controllo AddCarrello.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button AddCarrello;
+
+        /// <summary>
         /// Controllo UpdatePanel1.
         /// </summary>
         /// <remarks>

@@ -13,8 +13,10 @@
                     <p> <asp:Label ID="DescrizioneEstesa" class="card-text" runat="server"></asp:Label></p>
                     <p> <asp:Label ID="QuantitaDisponibile" class="card-text" runat="server"></asp:Label></p>
                     <p><strong><asp:Label ID="Prezzo" runat="server"></asp:Label></strong></p>
-               <%-- <asp:TextBox ID="QuantitaTextBox" runat="server" Text="1"></asp:TextBox>
-                    <asp:Button ID="AddCarrello" runat="server" Text="Aggiungi al Carrello" CssClass="btn btn-danger" OnClick="AddCarrello_Click" />  --%>
+                    <asp:TextBox ID="QuantitaTextBox" runat="server" Text="1"></asp:TextBox>
+                    <asp:Button ID="Incrementa" runat="server" Text="+" OnClick="IncrementaQuantita" />
+                    <asp:Button ID="Decrementa" runat="server" Text="-" OnClick="DecrementaQuantita" />
+                    <asp:Button ID="AddCarrello" runat="server" Text="Aggiungi al Carrello" CssClass="btn btn-danger" OnClick="AddCarrello_Click" />  
                 </div>
             </div>
         </div>
