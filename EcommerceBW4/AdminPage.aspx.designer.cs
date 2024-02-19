@@ -15,13 +15,13 @@ namespace EcommerceBW4
     {
 
         /// <summary>
-        /// Controllo DropDown1.
+        /// Controllo LabelDropDownProdotto.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label DropDown1;
+        protected global::System.Web.UI.WebControls.Label LabelDropDownProdotto;
 
         /// <summary>
         /// Controllo DropDownProdotto.
@@ -51,21 +51,39 @@ namespace EcommerceBW4
         protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
 
         /// <summary>
-        /// Controllo Label3.
+        /// Controllo Card.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Card;
 
         /// <summary>
-        /// Controllo DropDownList1.
+        /// Controllo ImgCarrello.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.HtmlControls.HtmlImage ImgCarrello;
+
+        /// <summary>
+        /// Controllo LblNome.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LblNome;
+
+        /// <summary>
+        /// Controllo LblPrezzo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LblPrezzo;
     }
 }

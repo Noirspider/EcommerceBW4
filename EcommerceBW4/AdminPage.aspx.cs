@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -15,35 +13,63 @@ namespace EcommerceBW4
         {
             if (!IsPostBack)
             {
-               DropDownProdotto_SelectedIndexChanged();
-                //PopoloDropDownVenditeAnnue();
-                //PopoloDropDownVenditeRegione();
+                BindProdottiDropDown();
+
             }
         }
 
-
-        protected void DropDownProdotto_SelectedIndexChanged(object sender, EventArgs e)
+        private void BindProdottiDropDown()
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;"].ConnectionString))
+                string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
                     string query = "SELECT ProdottoID, Nome FROM Prodotti";
-                    SqlCommand cmd = new SqlCommand(query, connection);
-                    SqlDataReader reader = cmd.ExecuteReader();
 
-
-                    DropDownProdotto.DataSource = reader;
-                    DropDownProdotto.DataTextField = "Nome";
-                    DropDownProdotto.DataValueField = "ProdottoID";
-                    DropDownProdotto.DataBind();
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            DropDownProdotto.DataSource = reader;
+                            DropDownProdotto.DataTextField = "Nome";
+                            DropDownProdotto.DataValueField = "ProdottoID";
+                            DropDownProdotto.DataBind();
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
+
                 Console.WriteLine($"Si è verificato un errore: {ex.Message}");
             }
         }
+       
+
+            protected void DropDownProdotto_SelectedIndexChanged(object sender, EventArgs e)
+            {
+               
+                string selectedValue = DropDownProdotto.SelectedValue;
+
+                
+                if (!string.IsNullOrEmpty(selectedValue))
+                {
+                    Card.Style["display"] = "block";
+
+                    ImgCarrello.Src = "ImmagineURL"; 
+                    LblNome.InnerText = "Nome Prodotto " + selectedValue;
+                    LblPrezzo.InnerText = "Prezzo Prodotto " + selectedValue;
+                }
+                else
+                {
+                    
+                    Card.Style["display"] = "none";
+                }
+            }
+        }
     }
-}
+
+
