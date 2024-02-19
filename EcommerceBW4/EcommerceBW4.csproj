@@ -104,6 +104,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Carrello.aspx" />
+    <Content Include="Content\Assets\css\Carrello.css" />
     <Content Include="Content\Assets\css\Login.css" />
     <Content Include="AdminPage.aspx" />
     <Content Include="Contact.aspx" />

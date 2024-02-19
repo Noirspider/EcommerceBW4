@@ -26,7 +26,7 @@ namespace EcommerceBW4
 
         private void BindCarrello()
         {
-            int utenteId = Convert.ToInt32(Session["UserId"]); // Assumi che l'ID dell'utente sia salvato nella sessione al momento del login.
+            int utenteId = Convert.ToInt32(Session["UserId"]);
             List<CarrelloItem> itemsDelCarrello = new List<CarrelloItem>();
 
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
