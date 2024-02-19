@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Dettagli.aspx.cs" Inherits="EcommerceBW4.Dettagli" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" EnableViewState="true" CodeBehind="Dettagli.aspx.cs" Inherits="EcommerceBW4.Dettagli" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="card mb-3">
@@ -8,13 +8,13 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h3><asp:Label ID="Nome" class="card-title" runat="server"></asp:Label></h3>
-                    <p> <asp:Label ID="Descrizione" class="card-text" runat="server"></asp:Label></p>
-                    <p> <asp:Label ID="DescrizioneEstesa" class="card-text" runat="server"></asp:Label></p>
-                    <p> <asp:Label ID="QuantitaDisponibile" class="card-text" runat="server"></asp:Label></p>
-                    <p><strong><asp:Label ID="Prezzo" runat="server"></asp:Label></strong></p>
-               <%-- <asp:TextBox ID="QuantitaTextBox" runat="server" Text="1"></asp:TextBox>
-                    <asp:Button ID="AddCarrello" runat="server" Text="Aggiungi al Carrello" CssClass="btn btn-danger" OnClick="AddCarrello_Click" />  --%>
+                    <h3><asp:Label ID="Nome" class="card-title text-dark" runat="server"></asp:Label></h3>
+                    <p> <asp:Label ID="Descrizione" class="card-text text-dark" runat="server"></asp:Label></p>
+                    <p> <asp:Label ID="DescrizioneEstesa" class="card-text text-dark" runat="server"></asp:Label></p>
+                    <p> <asp:Label ID="QuantitaDisponibile" class="card-text text-dark" runat="server"></asp:Label></p>
+                    <p><strong><asp:Label ID="Prezzo" class="text-dark" runat="server"></asp:Label></strong></p>
+                    <asp:TextBox ID="QuantitaTextBox" runat="server" Text="1"></asp:TextBox>
+                    <asp:Button ID="AddCarrello" runat="server" Text="Aggiungi al Carrello" CssClass="btn btn-danger" OnClick="AddCarrello_Click" />  
                 </div>
             </div>
         </div>
