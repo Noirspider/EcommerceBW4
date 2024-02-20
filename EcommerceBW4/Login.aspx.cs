@@ -67,8 +67,8 @@ namespace EcommerceBW4
         // metodo per la registrazione dell'utente nel database
         protected void SignUp_Click(object sender, EventArgs e)
         {
-            string username = txtUsername.Value;
-            string password = txtPassword.Value;
+            string username = txtUsernameSignUp.Text;
+            string password = txtPasswordSignUp.Text;
             int eta;
 
             // Controllo che l'input per l'età sia un numero intero valido

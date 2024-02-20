@@ -1,0 +1,41 @@
+﻿/* Personalizzazione delle card */
+.card-custom {
+    background-color: black;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
+}
+
+    .card-custom img {
+        max-width: 100%;
+        max-height: 10rem;
+        overflow: hidden;
+    }
+
+    .card-custom .card-title {
+        color: white;
+        font-size: 1.25rem;
+    }
+
+    .card-custom .card-price {
+        color: white;
+    }
+
+/* Personalizzazione dei bottoni */
+.btn-custom {
+    background-color: #5cdb95;
+    color: white;
+    border-color: #5cdb95;
+}
+
+    .btn-custom:hover,
+    .btn-custom:focus {
+        background-color: #3daea9;
+        border-color: #3daea9;
+        color: white;
+    }
+
+/* Personalizzazione del messaggio di benvenuto */
+.welcome-message {
+    color: #5cdb95;
+    font-weight: bold;
+}

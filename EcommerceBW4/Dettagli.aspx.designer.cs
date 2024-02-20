@@ -87,21 +87,30 @@ namespace EcommerceBW4
         protected global::System.Web.UI.WebControls.Button AddCarrello;
 
         /// <summary>
-        /// Controllo UpdatePanel1.
+        /// Controllo myModal.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl myModal;
 
         /// <summary>
-        /// Controllo PopupLiteral.
+        /// Controllo ModalContent.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal PopupLiteral;
+        protected global::System.Web.UI.WebControls.Label ModalContent;
+
+        /// <summary>
+        /// Controllo CloseButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button CloseButton;
     }
 }
