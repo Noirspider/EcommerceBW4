@@ -59,5 +59,25 @@ namespace EcommerceBW4
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEta;
 
+
+        /// <summary>
+        /// Controllo txtUsernameSignUp.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtUsernameSignUp;
+
+        /// <summary>
+        /// Controllo txtPasswordSignUp.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPasswordSignUp;
+
+        /// 
     }
 }
