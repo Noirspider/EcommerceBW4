@@ -109,6 +109,10 @@
     <Content Include="Content\Assets\css\Login.css" />
     <Content Include="AdminPage.aspx" />
     <Content Include="Contact.aspx" />
+    <Content Include="Content\Assets\images\detectiveaddsquare.png" />
+    <Content Include="Content\Assets\images\LogoEE.png" />
+    <Content Include="Content\Assets\images\murderisteryaddsquare.png" />
+    <Content Include="Content\Assets\images\securityaddsquare.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -160,6 +164,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\CardRotation.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />

@@ -6,55 +6,80 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="./Content/Assets/css/Login.css" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ 
+
     <title>Log-in Form 2023</title>
     <script src="https://kit.fontawesome.com/2b9cdc1c9a.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css">
+<!-- Bootstrap CSS -->
+
 </head>
 <body>
     <div class="overlay">
         <form id="form1" runat="server">
-            <div class="con  position-relative">
-                <header class="head-form">
-                    <h2>Log-In</h2>
-                    <p>Log-in here using your username and password</p>
-                    <p>Or Insert username and password and click Sign Up</p>
-                </header>
-                <br />
-                <div class="field-set">
-                    <asp:TextBox ID="txtEta" CssClass="form-input" TextMode="SingleLine" placeholder="Età" runat="server" Visible="false"/>
-                        <button class="btn btn-sm bg-transparent btn-pstn">
-                             <i class="bi bi-arrow-left"></i>
-                        </button>
-                    <span class="input-item">
-                        <i class="fa fa-user-circle"></i>
-                    </span>
-                    <input class="form-input" type="text" placeholder="@UserName" id="txtUsername" required runat="server" />
+            <div class="con flip">
 
+            <button id="btn-1" type="button" class="btn-flip btn-pstn p-2" onclick="flipCard()">
+                  <i class="bi bi-arrow-left"></i>
+             </button>
+              <div class="card__front">
+                    <header class="head-form">
+                        <h2>Log-In</h2>
+                        <p>Log-in here using your username and password</p>
+                    </header>
                     <br />
-                    <span class="input-item">
-                        <i class="fa fa-key"></i>
-                    </span>
-                    <input class="form-input" type="password" placeholder="Password" id="txtPassword" required autocomplete="on" runat="server" />           
-                    <span>
-                        <i class="fa fa-eye" aria-hidden="true" id="eye"></i>
-                    </span>
+                 <div class="field-set d-flex flex-column align-items-center justify-content-center">
+                       
+                    <div class="d-flex align-items-center justify-content-center">
+                        <span class="input-item">
+                            <i class="fa fa-user-circle"></i>
+                        </span>
+                        <input class="form-input" type="text" placeholder="@UserName" id="txtUsername" required runat="server" />
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <br />
+                        <span class="input-item">
+                            <i class="fa fa-key"></i>
+                        </span>
+                        <input class="form-input" type="password" placeholder="Password" id="txtPassword" required autocomplete="on" runat="server" />           
+                        
+                            <i class="fa fa-eye mx-0" aria-hidden="true" id="eye"></i>
+                    </div>
+                        
+                        <button class="log-in btn-doblue my-2" runat="server" onserverclick="Login_Click" >Log In</button>
+               
+                    <button class="btn submits frgt-pass btn-doblue my-2 text-light" runat="server" onserverclick="ForgotPassword_Click">Forgot Password</button>
+                  </div>
+             </div>
+             <div class="card__back" style="display:none;">
+                    <header class="head-form">
+                        <h2>Sign Up</h2>
+                        <p>Insert username and password and click Sign Up, Age is required</p>
+                    </header>
                     <br />
-                    <button class="log-in btn-doblue" runat="server" onserverclick="Login_Click">Log In</button>
-                </div>
-                <div class="other">
-                    <button class="btn submits frgt-pass btn-doblue" runat="server" onserverclick="ForgotPassword_Click">Forgot Password</button>
-                    <button class="btn submits sign-up btn-doblue" runat="server" onserverclick="SignUp_Click" Visible="false">
+
+                 <button id="btn-2" type="button" class="btn-flip btn-pstn p-2" onclick="flipCard()">
+                    <i class="bi bi-arrow-right"></i>
+               </button>
+<div class="d-flex flex-column align-items-center justify-content-center">
+                <asp:Label Text="text" ID="lblError" runat="server" Visible="False" CssClass="error" />
+                <asp:TextBox ID="txtUsernameSignUp" CssClass="form-input" TextMode="SingleLine" placeholder="Username" runat="server" />
+                <asp:TextBox ID="txtPasswordSignUp" CssClass="form-input" TextMode="Password" placeholder="Password" runat="server" />
+                <asp:TextBox ID="txtEta" CssClass="form-input" TextMode="SingleLine" placeholder="Età" runat="server" />
+                    <button class="btn submits sign-up btn-doblue" runat="server" onserverclick="SignUp_Click">
                         Sign Up
                         <i class="fa fa-user-plus" aria-hidden="true"></i>
                     </button>
+</div>
                 </div>
-                <asp:Label Text="text" ID="lblError" runat="server" Visible="False" CssClass="error" />
             </div>
         </form>
     </div>
 
     <script src="Scripts\Login.js"></script>
+    <script src="Scripts\CardRotation.js"></script>
 </body>
 </html>
