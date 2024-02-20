@@ -59,7 +59,7 @@ namespace EcommerceBW4
                 Response.Redirect("Login.aspx");
             }
         }
-
+      
         protected void AddCarrello_Click(object sender, EventArgs e)
         {
             if (int.TryParse(Request.QueryString["id"], out int prodottoId))
@@ -86,18 +86,18 @@ namespace EcommerceBW4
             {
                 PopupLiteral.Text = "<script>alert('Errore nell\'ID del prodotto');</script>";
             }
-        }
-
+        } 
 
         private void AggiungiAlCarrello(int prodottoId, int quantita)
         {
+            
+
             if (Session["UserId"] != null && int.TryParse(Session["UserId"].ToString(), out int utenteId))
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-
                     int carrelloId;
                     string query = "SELECT CarrelloID FROM Carrello WHERE UtenteID = @UtenteID";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -106,10 +106,11 @@ namespace EcommerceBW4
                         object result = cmd.ExecuteScalar();
                         if (result != null)
                         {
+                            System.Diagnostics.Debug.WriteLine("Errore 2");
                             carrelloId = Convert.ToInt32(result);
                         }
                         else
-                        {
+                        {        
                             query = "INSERT INTO Carrello (UtenteID, DataOra) VALUES (@UtenteID, @DataOra); SELECT SCOPE_IDENTITY();";
                             using (SqlCommand insertCmd = new SqlCommand(query, conn))
                             {
@@ -119,7 +120,6 @@ namespace EcommerceBW4
                             }
                         }
                     }
-
                     query = "INSERT INTO CarrelloDettaglio (CarrelloID, ProdottoID, Quantita, Prezzo) VALUES (@CarrelloID, @ProdottoID, @Quantita, @Prezzo)";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
@@ -127,12 +127,12 @@ namespace EcommerceBW4
                         cmd.Parameters.AddWithValue("@ProdottoID", prodottoId);
                         cmd.Parameters.AddWithValue("@Quantita", quantita);
                         decimal prezzo = AggiungiPrezzo(prodottoId);
-                        cmd.Parameters.AddWithValue("@Prezzo", prezzo);
+                        cmd.Parameters.AddWithValue("@Prezzo", prezzo);     
                         try
                         {
                             int rowsAffected = cmd.ExecuteNonQuery();
                             if (rowsAffected > 0)
-                            {
+                            { 
                                 PopupLiteral.Text = "<script>alert('Prodotto aggiunto al carrello!');</script>";
                             }
                             else

@@ -14,7 +14,7 @@
                     <p> <asp:Label ID="QuantitaDisponibile" class="card-text text-dark" runat="server"></asp:Label></p>
                     <p><strong><asp:Label ID="Prezzo" class="text-dark" runat="server"></asp:Label></strong></p>
                     <asp:TextBox ID="QuantitaTextBox" runat="server" Text="1"></asp:TextBox>
-                    <asp:Button ID="AddCarrello" runat="server" Text="Aggiungi al Carrello" CssClass="btn btn-danger" OnClick="AddCarrello_Click" />  
+                    <asp:Button ID="AddCarrello" runat="server" Text="Aggiungi al Carrello" CssClass="btn text-white" style="background-image: linear-gradient(-220deg, #5cdb95 0%, #000000 60%);" OnClick="AddCarrello_Click" />  
                 </div>
             </div>
         </div>
