@@ -51,16 +51,6 @@ namespace EcommerceBW4
         protected global::System.Web.UI.WebControls.Label lblError;
 
         /// <summary>
-        /// Controllo txtEta.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEta;
-
-
-        /// <summary>
         /// Controllo txtUsernameSignUp.
         /// </summary>
         /// <remarks>
@@ -78,6 +68,13 @@ namespace EcommerceBW4
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPasswordSignUp;
 
-        /// 
+        /// <summary>
+        /// Controllo txtEta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEta;
     }
 }
