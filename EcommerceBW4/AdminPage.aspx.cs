@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EcommerceBW4
 {
@@ -47,29 +43,56 @@ namespace EcommerceBW4
                 Console.WriteLine($"Si è verificato un errore: {ex.Message}");
             }
         }
-       
 
-            protected void DropDownProdotto_SelectedIndexChanged(object sender, EventArgs e)
+
+        protected void DropDownProdotto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedValue = DropDownProdotto.SelectedValue;
+
+            if (!string.IsNullOrEmpty(selectedValue))
             {
-               
-                string selectedValue = DropDownProdotto.SelectedValue;
-
-                
-                if (!string.IsNullOrEmpty(selectedValue))
+                try
                 {
-                    Card.Style["display"] = "block";
+                    string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        string query = "SELECT Nome, Prezzo, ImmagineURL FROM Prodotti WHERE ProdottoID = @ProdottoID";
 
-                    ImgCarrello.Src = "ImmagineURL"; 
-                    LblNome.InnerText = "Nome Prodotto " + selectedValue;
-                    LblPrezzo.InnerText = "Prezzo Prodotto " + selectedValue;
+                        using (SqlCommand cmd = new SqlCommand(query, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@ProdottoID", selectedValue);
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    ImgCarrello.ImageUrl = reader["ImmagineURL"].ToString();
+                                    LblNome.Text = reader["Nome"].ToString();
+                                    LblPrezzo.Text = string.Format("Prezzo: {0:C}", reader["Prezzo"]);
+                                    Card.Visible = true;
+                                }
+                                else
+                                {
+                                    Card.Visible = false;
+                                }
+                            }
+                        }
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    
-                    Card.Style["display"] = "none";
+                    // Gestisci l'errore
                 }
             }
+            else
+            {
+                Card.Visible = false;
+            }
         }
+
+
+
     }
+}
 
 

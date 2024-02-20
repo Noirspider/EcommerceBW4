@@ -18,9 +18,7 @@
                                     <p>Prezzo: <i><%#Eval("Prezzo") %>&euro;</i></p>
                                     <!-- Da reintegrare -->
                                     
-                                    <asp:LinkButton ID="ToDetail" runat="server" CommandArgument='<%# Eval("ProdottoID") %>' OnCommand="ToDetail_Command" Text="Dettagli" CssClass="btn btn-dark" Style="background-color: #5cdb95;" />
-
-                                    
+                                  <asp:LinkButton ID="ToDetail" runat="server" CommandArgument='<%# Eval("ProdottoID") %>' OnCommand="ToDetail_Command" Text="Dettagli" CssClass="btn btn-dark" Style="background-color: #5cdb95;" />                                    
                                   <asp:LinkButton ID="AddCart" CommandArgument='<%# Eval("ProdottoID") %>' runat="server" OnCommand="AddCart_OnClickButton">Aggiungi al carrello</asp:LinkButton>
 
                                 </div>

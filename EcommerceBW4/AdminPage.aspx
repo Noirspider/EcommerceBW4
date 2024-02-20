@@ -4,21 +4,21 @@
     <main>
         <div class="form-group">
             <asp:Label ID="LabelDropDownProdotto" runat="server" AssociatedControlID="DropDownProdotto" Text="Seleziona un Prodotto"></asp:Label>
-            <asp:DropDownList ID="DropDownProdotto" runat="server" CssClass="form-control mb-3" OnSelectedIndexChanged="DropDownProdotto_SelectedIndexChanged"></asp:DropDownList>
+            <asp:DropDownList ID="DropDownProdotto" runat="server" CssClass="form-control mb-3" AutoPostBack="true" OnSelectedIndexChanged="DropDownProdotto_SelectedIndexChanged"></asp:DropDownList>
         </div>
         <div class="form-group">
             <asp:Label ID="Label2" runat="server" Text="Vendite per anno"></asp:Label>
             <asp:DropDownList ID="DropDownList2" runat="server" CssClass="form-control mb-3" AutoPostBack="true"></asp:DropDownList>
         </div>
 
-        <div id="Card" runat="server" class="card" style="display: none;">
-            <img src='<%# Eval ("ImmagineURL") %>' id="ImgCarrello" runat="server" class="card-img-top" alt="Card Image" width="200" height="150" />
+      <div id="Card" runat="server" class="card">
+    <asp:Image ID="ImgCarrello" runat="server" ImageUrl="~/path/to/default/image.jpg" CssClass="card-img-top" alt="Card Image" Width="200" Height="150" />
+    <div class="card-body">
+        <asp:Label id="LblNome" runat="server" class="card-title"></asp:Label>
+        <asp:Label id="LblPrezzo" runat="server" class="card-text"></asp:Label>
+        <a href="#" class="btn btn-primary">Learn More</a>
+    </div>
+</div>
 
-            <div class="card-body">
-                <h5 id="LblNome" runat="server" class="card-title"></h5>
-                <p id="LblPrezzo" runat="server" class="card-text"></p>
-                <a href="#" class="btn btn-primary">Learn More</a>
-            </div>
-        </div>
     </main>
 </asp:Content>

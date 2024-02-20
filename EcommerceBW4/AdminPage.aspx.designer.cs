@@ -66,7 +66,7 @@ namespace EcommerceBW4
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage ImgCarrello;
+        protected global::System.Web.UI.WebControls.Image ImgCarrello;
 
         /// <summary>
         /// Controllo LblNome.
@@ -75,7 +75,7 @@ namespace EcommerceBW4
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LblNome;
+        protected global::System.Web.UI.WebControls.Label LblNome;
 
         /// <summary>
         /// Controllo LblPrezzo.
@@ -84,6 +84,6 @@ namespace EcommerceBW4
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LblPrezzo;
+        protected global::System.Web.UI.WebControls.Label LblPrezzo;
     }
 }
