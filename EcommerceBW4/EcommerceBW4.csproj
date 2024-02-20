@@ -112,6 +112,7 @@
     <Content Include="Content\Assets\css\Login.css" />
     <Content Include="AdminPage.aspx" />
     <Content Include="Contact.aspx" />
+    <Content Include="Content\Assets\images\biggamesquare.png" />
     <Content Include="Content\Assets\images\detectiveaddsquare.png" />
     <Content Include="Content\Assets\images\LogoEE.png" />
     <Content Include="Content\Assets\images\murderisteryaddsquare.png" />

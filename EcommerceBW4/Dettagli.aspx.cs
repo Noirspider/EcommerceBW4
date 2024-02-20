@@ -208,6 +208,18 @@ namespace EcommerceBW4
             }
             return quantitaDisponibile;
         }
+        protected void MostraDettagli(object sender, EventArgs e)
+        {
+            MostraAltroButton.Visible = false;
+            NascondiButton.Visible = true;
+            DescrizioneEstesaDiv.Style["display"] = "block";
+        }
 
-    } 
+        protected void NascondiDettagli(object sender, EventArgs e)
+        {
+            MostraAltroButton.Visible = true;
+            NascondiButton.Visible = false;
+            DescrizioneEstesaDiv.Style["display"] = "none";
+        }
+    }
 }

@@ -25,6 +25,7 @@
 .btn-custom:hover {
     background-color: #5cdb95;
     border: none;
+    margin: 0,8rem;
 }
 
     .btn-custom svg {
