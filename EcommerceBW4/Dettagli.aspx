@@ -19,9 +19,11 @@
             </div>
         </div>
     </div>
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-        <ContentTemplate>
-            <asp:Literal ID="PopupLiteral" runat="server"></asp:Literal>
-        </ContentTemplate>
-    </asp:UpdatePanel>
+<div id="myModal" class="modal" runat="server" visible="false">
+    <div class="modal-content">
+        <asp:Label ID="ModalContent" runat="server" CssClass="text-white"/>
+        <asp:Button ID="CloseButton" runat="server" Text="Chiudi" OnClick="CloseButton_Click" cssClass="bottoneModale" />
+    </div>
+</div>
+
 </asp:Content>  

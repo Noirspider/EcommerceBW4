@@ -1,4 +1,38 @@
-﻿
-#AddCarrello {
-    background-color: #5cdb95;
+﻿.modal {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: -20%;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.5); 
+}
+
+.modal-content {
+    text-align: center;
+    background-image: linear-gradient(-220deg, #5cdb95 0%, #000000 60%);
+    padding: 20px;
+    border: 1px solid #888;
+    width: auto;
+    max-width: 600px;
+    position: relative;
+}
+
+.bottoneModale {
+    width: 80%;
+    color: #000000;
+    background: #8b8b8b;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s linear;
+    margin: 2% auto;
+    letter-spacing: 0.05em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }

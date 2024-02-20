@@ -25,12 +25,10 @@ namespace EcommerceBW4
                             using (SqlConnection connection = new SqlConnection(connectionString))
                             {
                                 connection.Open();
-                                // string query =  @"SELECT p.Nome, p.Descrizione, p.Prezzo, p.ImmagineURL, d.DescrizioneEstesa, d.QuantitàDisponibile
-                                //                 FROM Prodotti p
-                                //                 INNER JOIN DettagliProdotti d ON p.ProdottoID = d.ProdottoID
-                                //                 WHERE p.ProdottoID = @ProductId";
-
-                                string query = "SELECT * FROM Prodotti WHERE ProdottoID = @ProductId";
+                                string query =  @"SELECT p.Nome, p.Descrizione, p.Prezzo, p.ImmagineURL, d.DescrizioneEstesa, d.QuantitàDisponibile
+                                                FROM Prodotti p
+                                                INNER JOIN DettagliProdotto d ON p.ProdottoID = d.ProdottoID
+                                                WHERE p.ProdottoID = @ProductId";
 
                                 using (SqlCommand command = new SqlCommand(query, connection))
                                 {
@@ -42,10 +40,10 @@ namespace EcommerceBW4
                                         {
                                             Nome.Text = reader["Nome"].ToString();
                                             Descrizione.Text = reader["Descrizione"].ToString();
-                                            // DescrizioneEstesa.Text = reader["DescrizioneEstesa"].ToString();
+                                            DescrizioneEstesa.Text = reader["DescrizioneEstesa"].ToString();
                                             Prezzo.Text = Convert.ToDecimal(reader["Prezzo"]).ToString("0.00€");
                                             ImgUrl.ImageUrl = reader["ImmagineURL"].ToString();
-                                            // QuantitaDisponibile.Text = reader["QuantitàDisponibile"].ToString();
+                                            QuantitaDisponibile.Text = reader["QuantitàDisponibile"].ToString();
                                         }
                                     }
                                 }
@@ -69,22 +67,29 @@ namespace EcommerceBW4
                 {
                     try
                     {
+                        myModal.Visible = true;
+                        ModalContent.Text = "PRODOTTO AGGIUNTO CON SUCCESSO AL CARRELLO!";
                         AggiungiAlCarrello(prodottoId, quantita);
-                        PopupLiteral.Text = "<script>alert('Prodotto aggiunto al carrello!');</script>";
+                        
                     }
                     catch (Exception ex)
                     {
-                        PopupLiteral.Text = $"<script>alert('Si è verificato un errore durante l\'aggiunta del prodotto al carrello: {ex.Message}');</script>";
+                        ModalContent.Text = "Si è verificato un errore durante l\'aggiunta del prodotto al carrello: {ex.Message}";
+                        myModal.Visible = true;
+                       
                     }
                 }
                 else
                 {
-                    PopupLiteral.Text = "<script>alert('Inserisci una quantità valida');</script>";
+                    ModalContent.Text = "Inserisci una quantità valida";
+                    myModal.Visible = true;
+             
                 }
             }
             else
             {
-                PopupLiteral.Text = "<script>alert('Errore nell\'ID del prodotto');</script>";
+                ModalContent.Text = "Errore nell\'ID del prodotto";
+                myModal.Visible = true;
             }
         } 
 
@@ -128,29 +133,8 @@ namespace EcommerceBW4
                         cmd.Parameters.AddWithValue("@Quantita", quantita);
                         decimal prezzo = AggiungiPrezzo(prodottoId);
                         cmd.Parameters.AddWithValue("@Prezzo", prezzo);     
-                        try
-                        {
-                            int rowsAffected = cmd.ExecuteNonQuery();
-                            if (rowsAffected > 0)
-                            { 
-                                PopupLiteral.Text = "<script>alert('Prodotto aggiunto al carrello!');</script>";
-                            }
-                            else
-                            {
-                                PopupLiteral.Text = "<script>alert('Nessun prodotto aggiunto al carrello');</script>";
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            PopupLiteral.Text = $"<script>alert('Si è verificato un errore nella funzione AggiungiAlCarrello: {ex.Message}');</script>";
-
-                        }
                     }
                 }
-            }
-            else
-            {
-                PopupLiteral.Text = "<script>alert('Devi effettuare l\'accesso per aggiungere il prodotto al carrello');</script>";
             }
         }
 
@@ -178,6 +162,10 @@ namespace EcommerceBW4
                     }
                 }
             }
+        }
+        protected void CloseButton_Click(object sender, EventArgs e)
+        {
+            myModal.Visible = false;
         }
 
     } 
