@@ -84,11 +84,11 @@ namespace EcommerceBW4
             int utenteId = Convert.ToInt32(Session["UserId"]);
 
             // Raccogli i dati dal form
-            string nomeDestinatario = nomeDestinatario.Text;
-            string indirizzoDestinatario = indirizzoDestinatario.Text;
-            string cittaDestinatario = cittaDestinatario.Text;
-            string capDestinatario = capDestinatario.Text;
-            string paeseDestinatario = paeseDestinatario.Text;
+            // string nomeDestinatario = nomeDestinatario.Text;
+            // string indirizzoDestinatario = indirizzoDestinatario.Text;
+            // string cittaDestinatario = cittaDestinatario.Text;
+            // string capDestinatario = capDestinatario.Text;
+            // string paeseDestinatario = paeseDestinatario.Text;
 
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
             int spedizioneId;

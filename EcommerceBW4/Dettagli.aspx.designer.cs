@@ -42,6 +42,24 @@ namespace EcommerceBW4
         protected global::System.Web.UI.WebControls.Label Descrizione;
 
         /// <summary>
+        /// Controllo MostraAltroButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button MostraAltroButton;
+
+        /// <summary>
+        /// Controllo DescrizioneEstesaDiv.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DescrizioneEstesaDiv;
+
+        /// <summary>
         /// Controllo DescrizioneEstesa.
         /// </summary>
         /// <remarks>
@@ -49,6 +67,15 @@ namespace EcommerceBW4
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label DescrizioneEstesa;
+
+        /// <summary>
+        /// Controllo NascondiButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button NascondiButton;
 
         /// <summary>
         /// Controllo QuantitaDisponibile.
