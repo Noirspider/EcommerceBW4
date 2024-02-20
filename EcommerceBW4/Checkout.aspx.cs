@@ -79,17 +79,15 @@ namespace EcommerceBW4
             }
 
             int utenteId = Convert.ToInt32(Session["UserId"]);
-            int carrelloId = Convert.ToInt32(Request.QueryString["carrelloId"]);
-            // aggiungere controllo per verificare che il carrello non sia vuoto
+            int carrelloId = GetCarrelloId(utenteId); // Assicurati che questa funzione ritorni l'ID del carrello attuale dell'utente.
 
-            /*if (IsCarrelloVuoto(carrelloId))
+            if (CarrelloVuoto(carrelloId)) // Assicurati che questa funzione verifichi se ci sono prodotti nel carrello.
             {
-                // Imposta una variabile di sessione per segnalare che il carrello è vuoto
-                Session["CarrelloVuoto"] = true;
-                // Reindirizza indietro al carrello
-                Response.Redirect("Carrello.aspx");
+                // Usa lo script per mostrare un messaggio di alert
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Il tuo carrello è vuoto! Aggiungi dei prodotti prima di procedere al checkout.');", true);
                 return;
-            }*/
+            }
+
 
             decimal totaleOrdine = CalcolaTotaleCarrello(carrelloId);
 
@@ -99,9 +97,9 @@ namespace EcommerceBW4
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 string querySpedizione = @"
-            INSERT INTO Spedizioni (UtenteID, NomeDestinatario, IndirizzoDestinatario, CittaDestinatario, CAPDestinatario, PaeseDestinatario, DataSpedizione)
-            OUTPUT INSERTED.SpedizioneID
-            VALUES (@UtenteID, @NomeDestinatario, @IndirizzoDestinatario, @CittaDestinatario, @CAPDestinatario, @PaeseDestinatario, GETDATE())";
+                        INSERT INTO Spedizioni (UtenteID, NomeDestinatario, IndirizzoDestinatario, CittaDestinatario, CAPDestinatario, PaeseDestinatario, DataSpedizione)
+                        OUTPUT INSERTED.SpedizioneID
+                        VALUES (@UtenteID, @NomeDestinatario, @IndirizzoDestinatario, @CittaDestinatario, @CAPDestinatario, @PaeseDestinatario, GETDATE())";
 
                 using (SqlCommand cmd = new SqlCommand(querySpedizione, conn))
                 {
@@ -117,9 +115,9 @@ namespace EcommerceBW4
                 }
 
                 string queryOrdine = @"
-            INSERT INTO Ordini (UtenteID, SpedizioneID, CarrelloID, DataOrdine, TotaleOrdine)
-            VALUES (@UtenteID, @SpedizioneID, @CarrelloID, GETDATE(), @TotaleOrdine);
-            SELECT SCOPE_IDENTITY();";
+                        INSERT INTO Ordini (UtenteID, SpedizioneID, CarrelloID, DataOrdine, TotaleOrdine)
+                        VALUES (@UtenteID, @SpedizioneID, @CarrelloID, GETDATE(), @TotaleOrdine);
+                        SELECT SCOPE_IDENTITY();";
 
                 using (SqlCommand cmd = new SqlCommand(queryOrdine, conn))
                 {
@@ -135,6 +133,24 @@ namespace EcommerceBW4
 
                 }
             }
+        }
+
+        private bool CarrelloVuoto(int carrelloId)
+        {
+            bool vuoto = true;
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT COUNT(*) FROM CarrelloDettaglio WHERE CarrelloID = @CarrelloID";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@CarrelloID", carrelloId);
+                    conn.Open();
+                    int count = (int)cmd.ExecuteScalar();
+                    vuoto = count == 0;
+                }
+            }
+            return vuoto;
         }
 
         // Metodo per svuotare il carrello dopo aver completato l'ordine
@@ -188,9 +204,9 @@ namespace EcommerceBW4
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 string query = @"
-            SELECT SUM(Quantita * Prezzo) AS TotaleCarrello
-            FROM CarrelloDettaglio
-            WHERE CarrelloID = @CarrelloID";
+                    SELECT SUM(Quantita * Prezzo) AS TotaleCarrello
+                    FROM CarrelloDettaglio
+                    WHERE CarrelloID = @CarrelloID";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
