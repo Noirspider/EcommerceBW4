@@ -10,11 +10,12 @@
     <link rel="stylesheet" href="./Content/Assets/css/Login.css" />
     <title>Log-in Form 2023</title>
     <script src="https://kit.fontawesome.com/2b9cdc1c9a.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css">
 </head>
 <body>
     <div class="overlay">
         <form id="form1" runat="server">
-            <div class="con">
+            <div class="con  position-relative">
                 <header class="head-form">
                     <h2>Log-In</h2>
                     <p>Log-in here using your username and password</p>
@@ -22,8 +23,10 @@
                 </header>
                 <br />
                 <div class="field-set">
-                    <asp:TextBox ID="txtEta" CssClass="form-input" TextMode="SingleLine" placeholder="Età" runat="server" />
-
+                    <asp:TextBox ID="txtEta" CssClass="form-input" TextMode="SingleLine" placeholder="Età" runat="server" Visible="false"/>
+                        <button class="btn btn-sm bg-transparent btn-pstn">
+                             <i class="bi bi-arrow-left"></i>
+                        </button>
                     <span class="input-item">
                         <i class="fa fa-user-circle"></i>
                     </span>
@@ -38,11 +41,11 @@
                         <i class="fa fa-eye" aria-hidden="true" id="eye"></i>
                     </span>
                     <br />
-                    <button class="log-in" runat="server" onserverclick="Login_Click">Log In</button>
+                    <button class="log-in btn-doblue" runat="server" onserverclick="Login_Click">Log In</button>
                 </div>
                 <div class="other">
-                    <button class="btn submits frgt-pass" runat="server" onserverclick="ForgotPassword_Click">Forgot Password</button>
-                    <button class="btn submits sign-up" runat="server" onserverclick="SignUp_Click">
+                    <button class="btn submits frgt-pass btn-doblue" runat="server" onserverclick="ForgotPassword_Click">Forgot Password</button>
+                    <button class="btn submits sign-up btn-doblue" runat="server" onserverclick="SignUp_Click" Visible="false">
                         Sign Up
                         <i class="fa fa-user-plus" aria-hidden="true"></i>
                     </button>

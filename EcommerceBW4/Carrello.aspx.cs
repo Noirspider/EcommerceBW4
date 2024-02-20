@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -125,7 +126,6 @@ namespace EcommerceBW4
                         }
                     }
                 }
-
                 else if (e.CommandName == "AddOne")
                 {
                     string query = @"
@@ -152,22 +152,22 @@ namespace EcommerceBW4
         // metodo per gestire il clicl sul pulsante "Svuota carrello"
         protected void BtnClearCart_Click(object sender, EventArgs e)
         {
+            // Controlla se l'ID utente è presente nella sessione
+            if (Session["UserId"] == null)
+            {
+                // Logga un errore o mostra un messaggio
+                throw new InvalidOperationException("Sessione utente non trovata.");
+            }
+
             int utenteId = Convert.ToInt32(Session["UserId"]);
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                string query = @"
-                DELETE FROM CarrelloDettaglio
-                WHERE CarrelloID IN (
-                SELECT CarrelloID
-                FROM Carrello
-                WHERE UtenteID = @UtenteID
-            )";
-
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlCommand cmd = new SqlCommand("SvuotaCarrello", conn))
                 {
+                    cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@UtenteID", utenteId);
                     cmd.ExecuteNonQuery();
                 }

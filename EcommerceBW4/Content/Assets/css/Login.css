@@ -93,11 +93,8 @@ header {
 
 /* Show/hide password Font Icon */
 #eye {
-    background: #8b8b8b;
-    color: #000000;
-    margin: 5.9px 0 0 0;
     margin-left: -20px;
-    padding: 15px 9px 19px 0px;
+    padding: 22px 9px 21px 4px;
     border-radius: 0px 5px 5px 0px;
     float: right;
     position: relative;
@@ -147,8 +144,6 @@ input:focus {
 button {
     display: inline-block;
     color: #000000;
-    width: 280px;
-    height: 50px;
     background: #8b8b8b;
     border-radius: 5px;
     outline: none;
@@ -159,6 +154,11 @@ button {
     margin: 7% auto;
     letter-spacing: 0.05em;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.btn-doblue {
+    width: 270px;
+    height: 50px;
 }
 
 .other {
@@ -175,7 +175,6 @@ button {
 .sign-up,
 .frgt-pass {
     background: #83fdba;
-    margin: 5% 2%;
 }
 
     .sign-up:hover,
@@ -209,4 +208,10 @@ button:hover {
 .error {
     color: red;
 font-size: 18px;
+}
+
+.btn-pstn {
+    position: absolute;
+    top:10px;
+    right:20px;
 }
