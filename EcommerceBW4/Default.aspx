@@ -18,7 +18,8 @@
                                             <h5 class="card-title "><%# Eval("Nome") %></h5>
                                             <p>Prezzo: <i><%#Eval("Prezzo") %>&euro;</i></p>
                                             <!-- Bottoni della card -->
-                                            <asp:LinkButton ID="ToDetail" runat="server" CommandArgument='<%# Eval("ProdottoID") %>' OnCommand="ToDetail_Command" CssClass="btn btn-light btn-custom"> 
+                                            <div class="d-flex justify-content-around">
+                                                <asp:LinkButton ID="ToDetail" runat="server" CommandArgument='<%# Eval("ProdottoID") %>' OnCommand="ToDetail_Command" CssClass="btn btn-light btn-custom"> 
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-lg" viewBox="0 0 16 16">
                                                   <path d="m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0"/>
                                                 </svg>
@@ -28,7 +29,7 @@
                                                     <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0M8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5z"/>
                                                 </svg>
                                             </asp:LinkButton>
-
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -55,6 +56,9 @@
                          <div class="carousel-item">
                            <img src="Content/Assets/images/murderisteryaddsquare.png" class="d-block w-100" alt="Banner3">
                          </div>
+                             <div class="carousel-item">
+                                 <img src="Content/Assets/images/biggamesquare.png" class="d-block w-100" alt="Banner3">
+                             </div>
                       </div>
                      </div>
                     </div>
