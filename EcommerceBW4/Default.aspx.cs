@@ -39,7 +39,7 @@ namespace EcommerceBW4
         protected void ToDetail_Command(object sender, CommandEventArgs e)
         {
             string productId = e.CommandArgument.ToString();
-            Response.Redirect($"DettaglioProdotto.aspx?id={productId}");
+            Response.Redirect($"Dettagli.aspx?id={productId}");
         }
 
         // metodo per gestire il clicl sul pulsante "Aggiungi al carrello"

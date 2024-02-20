@@ -51,6 +51,7 @@ namespace EcommerceBW4
                 }
             } 
         }
+        
         protected void AddCarrello_Click(object sender, EventArgs e)
         {   
             if (Session["UserId"] == null)
@@ -86,7 +87,7 @@ namespace EcommerceBW4
             }
         }
 
-
+        
         private void AggiungiAlCarrello(int prodottoId, int quantita)
         {
             int utenteId = Convert.ToInt32(Session["UserId"]); 
@@ -166,6 +167,5 @@ namespace EcommerceBW4
             }
         }
 
-
-    }
+    } 
 }
