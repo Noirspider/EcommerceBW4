@@ -25,7 +25,7 @@ namespace EcommerceBW4
                             using (SqlConnection connection = new SqlConnection(connectionString))
                             {
                                 connection.Open();
-                                string query =  @"SELECT p.Nome, p.Descrizione, p.Prezzo, p.ImmagineURL, d.DescrizioneEstesa, d.QuantitàDisponibile
+                                string query =  @"SELECT p.Nome, p.Descrizione, p.Prezzo, p.ImmagineURL, d.DescrizioneEstesa, d.QuantitaDisponibile
                                                 FROM Prodotti p
                                                 INNER JOIN DettagliProdotto d ON p.ProdottoID = d.ProdottoID
                                                 WHERE p.ProdottoID = @ProductId";
@@ -43,7 +43,7 @@ namespace EcommerceBW4
                                             DescrizioneEstesa.Text = reader["DescrizioneEstesa"].ToString();
                                             Prezzo.Text = Convert.ToDecimal(reader["Prezzo"]).ToString("0.00€");
                                             ImgUrl.ImageUrl = reader["ImmagineURL"].ToString();
-                                            QuantitaDisponibile.Text = reader["QuantitàDisponibile"].ToString();
+                                            QuantitaDisponibile.Text = reader["QuantitaDisponibile"].ToString();
                                         }
                                     }
                                 }
@@ -57,7 +57,7 @@ namespace EcommerceBW4
                 Response.Redirect("Login.aspx");
             }
         }
-      
+
         protected void AddCarrello_Click(object sender, EventArgs e)
         {
             if (int.TryParse(Request.QueryString["id"], out int prodottoId))
@@ -65,34 +65,37 @@ namespace EcommerceBW4
                 int quantita;
                 if (int.TryParse(QuantitaTextBox.Text, out quantita))
                 {
+                    int quantitaDisponibile = GetQuantitaDisponibile(prodottoId);
+                    if (quantita > quantitaDisponibile)
+                    {
+                        ModalContent.Text = "Quantità richiesta non disponibile.";
+                        myModal.Visible = true;
+                        return; 
+                    }
                     try
                     {
                         myModal.Visible = true;
                         ModalContent.Text = "PRODOTTO AGGIUNTO CON SUCCESSO AL CARRELLO!";
                         AggiungiAlCarrello(prodottoId, quantita);
-                        
                     }
                     catch (Exception ex)
                     {
-                        ModalContent.Text = "Si è verificato un errore durante l\'aggiunta del prodotto al carrello: {ex.Message}";
+                        ModalContent.Text = $"Si è verificato un errore durante l'aggiunta del prodotto al carrello: {ex.Message}";
                         myModal.Visible = true;
-                       
                     }
                 }
                 else
                 {
                     ModalContent.Text = "Inserisci una quantità valida";
                     myModal.Visible = true;
-             
                 }
             }
             else
             {
-                ModalContent.Text = "Errore nell\'ID del prodotto";
+                ModalContent.Text = "Errore nell'ID del prodotto";
                 myModal.Visible = true;
             }
-        } 
-
+        }
         private void AggiungiAlCarrello(int prodottoId, int quantita)
         {
             
@@ -132,14 +135,20 @@ namespace EcommerceBW4
                         cmd.Parameters.AddWithValue("@ProdottoID", prodottoId);
                         cmd.Parameters.AddWithValue("@Quantita", quantita);
                         decimal prezzo = AggiungiPrezzo(prodottoId);
-                        cmd.Parameters.AddWithValue("@Prezzo", prezzo);     
+                        cmd.Parameters.AddWithValue("@Prezzo", prezzo);
+                        cmd.ExecuteNonQuery();
+
+                        query = "UPDATE DettagliProdotto SET QuantitaDisponibile = QuantitaDisponibile - @Quantita WHERE ProdottoID = @ProdottoID";
+                        using (SqlCommand updateCmd = new SqlCommand(query, conn))
+                        {
+                            updateCmd.Parameters.AddWithValue("@ProdottoID", prodottoId);
+                            updateCmd.Parameters.AddWithValue("@Quantita", quantita);
+                            updateCmd.ExecuteNonQuery(); 
+                        }
                     }
                 }
             }
         }
-
-
-
         private decimal AggiungiPrezzo(int prodottoId)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
@@ -166,6 +175,26 @@ namespace EcommerceBW4
         protected void CloseButton_Click(object sender, EventArgs e)
         {
             myModal.Visible = false;
+        }
+        private int GetQuantitaDisponibile(int prodottoId)
+        {
+            int quantitaDisponibile = 0;
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "SELECT QuantitaDisponibile FROM DettagliProdotto WHERE ProdottoID = @ProdottoID";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ProdottoID", prodottoId);
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        quantitaDisponibile = Convert.ToInt32(result);
+                    }
+                }
+            }
+            return quantitaDisponibile;
         }
 
     } 
