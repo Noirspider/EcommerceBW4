@@ -63,9 +63,8 @@
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-            <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Applicazione ASP.NET by Team6</p>
+                <p>&copy; <%: DateTime.Now.Year %> - Applicazione ASP.NET by Team Ⅵ</p>
             </footer>
         </div>
     </form>

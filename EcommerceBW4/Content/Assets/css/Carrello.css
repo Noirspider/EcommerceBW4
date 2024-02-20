@@ -1,4 +1,27 @@
-﻿.cart-img {
+﻿body {
+    background-color: #000;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /*   the main font */
+    font-family: 'Abel', sans-serif;
+    opacity: .95;
+}
+
+h5 {
+    font-family: 'Playfair Display', serif;
+    color:white;
+}
+
+p {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color:white;
+}
+button {
+    font-family: inherit;
+    font-family: 'Playfair Display', serif;
+}
+
+
+.cart-img {
     height: 50px;
     width: 50px;
 }

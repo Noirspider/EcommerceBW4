@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Data.SqlClient;
 using System.Configuration;
+using System.Data.SqlClient;
+using System.Web.UI;
 
 
 namespace EcommerceBW4
 {
-    public partial class Dettagli : System.Web.UI.Page
+    public partial class Dettagli : Page
     {
 
         protected void Page_Load(object sender, EventArgs e)
@@ -49,11 +45,11 @@ namespace EcommerceBW4
                         }
                     }
                 }
-            } 
+            }
         }
         
         protected void AddCarrello_Click(object sender, EventArgs e)
-        {   
+        {
             if (Session["UserId"] == null)
             {
                 PopupLiteral.Text = "<script>alert('Devi effettuare l\'accesso per aggiungere il prodotto al carrello');</script>";
@@ -90,7 +86,7 @@ namespace EcommerceBW4
         
         private void AggiungiAlCarrello(int prodottoId, int quantita)
         {
-            int utenteId = Convert.ToInt32(Session["UserId"]); 
+            int utenteId = Convert.ToInt32(Session["UserId"]);
 
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -125,25 +121,25 @@ namespace EcommerceBW4
                     cmd.Parameters.AddWithValue("@CarrelloID", carrelloId);
                     cmd.Parameters.AddWithValue("@ProdottoID", prodottoId);
                     cmd.Parameters.AddWithValue("@Quantita", quantita);
-                    decimal prezzo = AggiungiPrezzo (prodottoId);
+                    decimal prezzo = AggiungiPrezzo(prodottoId);
                     cmd.Parameters.AddWithValue("@Prezzo", prezzo);
                     try
                     {
                         cmd.ExecuteNonQuery();
-                        
+
                         PopupLiteral.Text = "<script>alert('Prodotto aggiunto al carrello!');</script>";
                     }
                     catch (Exception ex)
                     {
                         PopupLiteral.Text = $"<script>alert('Si è verificato un errore nella funzione AggiungiAlCarrello: {ex.Message}');</script>";
-                        
+
                     }
                 }
             }
         }
 
-       
-        private decimal AggiungiPrezzo (int prodottoId)
+
+        private decimal AggiungiPrezzo(int prodottoId)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -160,8 +156,8 @@ namespace EcommerceBW4
                     }
                     else
                     {
-                        
-                        return 0; 
+
+                        return 0;
                     }
                 }
             }
