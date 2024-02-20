@@ -10,12 +10,12 @@
                         <asp:Repeater ID="prodottiRepeater" runat="server">
                             <ItemTemplate>
                                 <div class="col mb-4">
-                                    <div class="card text-white bg-black mb-3 h-100" style="box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);">
+                                    <div class="card card-custom" style="box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);">
                                         <div style="max-width: 100%; max-height: 10rem; overflow: hidden;">
                                             <img src='<%# Eval("ImmagineURL") %>' class="card-img-top w-100 h-100" alt="ProductImg">
                                         </div>
                                         <div class="card-body">
-                                            <h5 class="card-title"><%# Eval("Nome") %></h5>
+                                            <h5 class="card-title "><%# Eval("Nome") %></h5>
                                             <p>Prezzo: <i><%#Eval("Prezzo") %>&euro;</i></p>
                                             <!-- Bottoni della card -->
                                             <asp:LinkButton ID="ToDetail" runat="server" CommandArgument='<%# Eval("ProdottoID") %>' OnCommand="ToDetail_Command" CssClass="btn btn-light btn-custom"> 
@@ -41,7 +41,7 @@
             <!-- Side per pubblicità -->
             <div class="col-md-2 d-flex justify-content-center sticky-top ">
                 <div class="aligh-content-center" style="text-align:center">
-                    <h6>Benvenuto <span style="color: #5cdb95" ID="helloUser" runat="server"><%# Session["Username"] %></span>,</h6>
+                    <h6>Benvenuto <span ID="helloUser" runat="server" class="welcome-message"><%# Session["Username"] %></span>,</h6>
                     <p>Dai un'occhiata ai nostri partner!</p>
                     <div>
                        <div id="AdscCarousel" class="carousel slide" data-bs-ride="carousel">
