@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Web.UI.WebControls;
 
 namespace EcommerceBW4
 {
@@ -33,6 +34,8 @@ namespace EcommerceBW4
                             DropDownProdotto.DataTextField = "Nome";
                             DropDownProdotto.DataValueField = "ProdottoID";
                             DropDownProdotto.DataBind();
+
+                            DropDownProdotto.Items.Insert(0, new ListItem("Scegli il tuo SpyGadget:", ""));
                         }
                     }
                 }
@@ -44,8 +47,14 @@ namespace EcommerceBW4
             }
         }
 
+        protected void DropDownProdottoBoth(object sender, EventArgs e)
+        {
+            DropDownProdotto_SelectedIndexChanged(sender, e);
+            SecondCard(sender, e);
 
+        }
         protected void DropDownProdotto_SelectedIndexChanged(object sender, EventArgs e)
+
         {
             string selectedValue = DropDownProdotto.SelectedValue;
 
@@ -81,7 +90,8 @@ namespace EcommerceBW4
                 }
                 catch (Exception ex)
                 {
-                    // Gestisci l'errore
+
+                    Console.WriteLine($"Si è verificato un errore: {ex.Message}");
                 }
             }
             else
@@ -90,9 +100,53 @@ namespace EcommerceBW4
             }
         }
 
+        protected void SecondCard(object sender, EventArgs e)
+        {
+            {
+                string selectedValue = DropDownProdotto.SelectedValue;
 
+                if (!string.IsNullOrEmpty(selectedValue))
+                {
+                    try
+                    {
+                        string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        {
+                            connection.Open();
+                            string query = "SELECT Nome, Prezzo FROM Ordini WHERE ProdottoID = @ProdottoID";
 
+                            using (SqlCommand cmd = new SqlCommand(query, connection))
+                            {
+                                cmd.Parameters.AddWithValue("@ProdottoID", selectedValue);
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    if (reader.Read())
+                                    {
+
+                                        Label1.Text = reader["UtenteID"].ToString();
+
+                                        Label3.Text = reader["SpedizioneID"].ToString();
+                                        Card1.Visible = true;
+                                    }
+                                    else
+                                    {
+                                        Card1.Visible = false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                        Console.WriteLine($"Si è verificato un errore: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    Card1.Visible = false;
+                }
+            }
+        }
     }
 }
-
-
