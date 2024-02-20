@@ -21,21 +21,18 @@
     }
 
 /* Personalizzazione dei bottoni */
-.btn-custom {
+.btn-custom,
+.btn-custom:hover {
     background-color: #5cdb95;
-    color: white;
-    border-color: #5cdb95;
+    border: none;
 }
 
-    .btn-custom:hover,
-    .btn-custom:focus {
-        background-color: #3daea9;
-        border-color: #3daea9;
-        color: white;
+    .btn-custom svg {
+        background-color: black;
     }
 
-/* Personalizzazione del messaggio di benvenuto */
-.welcome-message {
-    color: #5cdb95;
-    font-weight: bold;
-}
+    /* Personalizzazione del messaggio di benvenuto */
+    .welcome-message {
+        color: #5cdb95;
+        font-weight: 600;
+    }
