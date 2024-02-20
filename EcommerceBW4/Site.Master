@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="./Content/Assets/css/Carrello.css" />
     <link rel="stylesheet" href="./Content/Assets/css/Checkout.css" />
     <link rel="stylesheet" href="./Content/Assets/css/Dettagli.css" />
+    <link rel="stylesheet" href="./Content/assets/css/Default.css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
