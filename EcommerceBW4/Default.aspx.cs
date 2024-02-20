@@ -25,6 +25,11 @@ namespace EcommerceBW4
                     prodottiRepeater.DataSource = reader;
                     prodottiRepeater.DataBind();
 
+
+                    // Ottiene il nome utente da sessione + popola dinamicamente
+                    string username = Session["Username"].ToString();
+                    helloUser.InnerText = username;
+
                     reader.Close();
                     conn.Close();
                 }
