@@ -10,7 +10,7 @@
                         <asp:Repeater ID="prodottiRepeater" runat="server">
                             <ItemTemplate>
                                 <div class="col mb-4">
-                                    <div class="card card-custom" style="box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);">
+                                    <div class="card card-custom h-100" style="box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);">
                                         <div style="max-width: 100%; max-height: 10rem; overflow: hidden;">
                                             <img src='<%# Eval("ImmagineURL") %>' class="card-img-top w-100 h-100" alt="ProductImg">
                                         </div>

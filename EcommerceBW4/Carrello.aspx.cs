@@ -24,6 +24,14 @@ namespace EcommerceBW4
             {
                 Response.Redirect("Login.aspx");
             }
+
+            if (Session["CarrelloVuoto"] != null && (bool)Session["CarrelloVuoto"])
+            {
+                // Mostra l'alert di Bootstrap per il carrello vuoto
+                ClientScript.RegisterStartupScript(this.GetType(), "CarrelloVuoto", "showBootstrapAlert();", true);
+                // Pulisci la variabile di sessione
+                Session.Remove("CarrelloVuoto");
+            }
         }
 
         private void BindCarrello()

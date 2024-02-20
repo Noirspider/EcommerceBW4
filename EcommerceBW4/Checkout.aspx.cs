@@ -80,6 +80,17 @@ namespace EcommerceBW4
 
             int utenteId = Convert.ToInt32(Session["UserId"]);
             int carrelloId = Convert.ToInt32(Request.QueryString["carrelloId"]);
+            // aggiungere controllo per verificare che il carrello non sia vuoto
+
+            /*if (IsCarrelloVuoto(carrelloId))
+            {
+                // Imposta una variabile di sessione per segnalare che il carrello è vuoto
+                Session["CarrelloVuoto"] = true;
+                // Reindirizza indietro al carrello
+                Response.Redirect("Carrello.aspx");
+                return;
+            }*/
+
             decimal totaleOrdine = CalcolaTotaleCarrello(carrelloId);
 
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
@@ -118,9 +129,26 @@ namespace EcommerceBW4
                     cmd.Parameters.AddWithValue("@TotaleOrdine", totaleOrdine);
 
                     int ordineId = Convert.ToInt32(cmd.ExecuteScalar());
+                    Session.Remove("CarrelloVuoto");
                     SvuotaCarrello(GetCarrelloId(Convert.ToInt32(Session["UserId"]))); // Svuota il carrello
                     Response.Redirect("OrderConfirmation.aspx?OrdineID=" + ordineId);
 
+                }
+            }
+        }
+
+        // Metodo per svuotare il carrello dopo aver completato l'ordine
+        private void SvuotaCarrello(int carrelloId)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("SvuotaCarrello", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@UtenteID", Convert.ToInt32(Session["UserId"]));
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
@@ -150,22 +178,6 @@ namespace EcommerceBW4
             }
 
             return carrelloId;
-        }
-
-        // Metodo per svuotare il carrello dopo aver completato l'ordine
-        private void SvuotaCarrello(int carrelloId)
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SvuotaCarrello", conn))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@UtenteID", Convert.ToInt32(Session["UserId"]));
-                    cmd.ExecuteNonQuery();
-                }
-            }
         }
 
         // Metodo per calcolare il totale del carrello in base all'ID del carrello
