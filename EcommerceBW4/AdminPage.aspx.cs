@@ -113,19 +113,18 @@ namespace EcommerceBW4
                         using (SqlConnection connection = new SqlConnection(connectionString))
                         {
                             connection.Open();
-                            string query = "SELECT Nome, Prezzo FROM Ordini WHERE ProdottoID = @ProdottoID";
+                            string query = "SELECT NomeDestinatario, IndirizzoDestinatario FROM Spedizioni WHERE ProdottoID = @ProdottoID";
 
                             using (SqlCommand cmd = new SqlCommand(query, connection))
                             {
-                                cmd.Parameters.AddWithValue("@ProdottoID", selectedValue);
+                                cmd.Parameters.AddWithValue("ProdottoID", selectedValue);
                                 using (SqlDataReader reader = cmd.ExecuteReader())
                                 {
                                     if (reader.Read())
                                     {
 
-                                        Label1.Text = reader["UtenteID"].ToString();
-
-                                        Label3.Text = reader["SpedizioneID"].ToString();
+                                        Label1.Text = reader["NomeDestinatario"].ToString();
+                                        Label3.Text = reader["IndirizzoDestinatario"].ToString();
                                         Card1.Visible = true;
                                     }
                                     else
