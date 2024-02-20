@@ -15,6 +15,7 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link rel="stylesheet" href="./Content/Assets/css/Carrello.css" />
+    <link rel="stylesheet" href="./Content/Assets/css/Checkout.css" />
     <link rel="stylesheet" href="./Content/Assets/css/Dettagli.css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 

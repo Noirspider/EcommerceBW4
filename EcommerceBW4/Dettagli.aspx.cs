@@ -98,8 +98,6 @@ namespace EcommerceBW4
         }
         private void AggiungiAlCarrello(int prodottoId, int quantita)
         {
-            
-
             if (Session["UserId"] != null && int.TryParse(Session["UserId"].ToString(), out int utenteId))
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
@@ -114,11 +112,10 @@ namespace EcommerceBW4
                         object result = cmd.ExecuteScalar();
                         if (result != null)
                         {
-                            System.Diagnostics.Debug.WriteLine("Errore 2");
                             carrelloId = Convert.ToInt32(result);
                         }
                         else
-                        {        
+                        {
                             query = "INSERT INTO Carrello (UtenteID, DataOra) VALUES (@UtenteID, @DataOra); SELECT SCOPE_IDENTITY();";
                             using (SqlCommand insertCmd = new SqlCommand(query, conn))
                             {
@@ -128,27 +125,42 @@ namespace EcommerceBW4
                             }
                         }
                     }
-                    query = "INSERT INTO CarrelloDettaglio (CarrelloID, ProdottoID, Quantita, Prezzo) VALUES (@CarrelloID, @ProdottoID, @Quantita, @Prezzo)";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    query = "SELECT Quantita FROM CarrelloDettaglio WHERE CarrelloID = @CarrelloID AND ProdottoID = @ProdottoID";
+                    using (SqlCommand checkCmd = new SqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@CarrelloID", carrelloId);
-                        cmd.Parameters.AddWithValue("@ProdottoID", prodottoId);
-                        cmd.Parameters.AddWithValue("@Quantita", quantita);
-                        decimal prezzo = AggiungiPrezzo(prodottoId);
-                        cmd.Parameters.AddWithValue("@Prezzo", prezzo);
-                        cmd.ExecuteNonQuery();
-
-                        query = "UPDATE DettagliProdotto SET QuantitaDisponibile = QuantitaDisponibile - @Quantita WHERE ProdottoID = @ProdottoID";
-                        using (SqlCommand updateCmd = new SqlCommand(query, conn))
+                        checkCmd.Parameters.AddWithValue("@CarrelloID", carrelloId);
+                        checkCmd.Parameters.AddWithValue("@ProdottoID", prodottoId);
+                        object result = checkCmd.ExecuteScalar();
+                        if (result != null)
                         {
-                            updateCmd.Parameters.AddWithValue("@ProdottoID", prodottoId);
-                            updateCmd.Parameters.AddWithValue("@Quantita", quantita);
-                            updateCmd.ExecuteNonQuery(); 
+                            int quantitaPrecedente = Convert.ToInt32(result);
+                            query = "UPDATE CarrelloDettaglio SET Quantita = Quantita + @Quantita WHERE CarrelloID = @CarrelloID AND ProdottoID = @ProdottoID";
+                            using (SqlCommand updateCmd = new SqlCommand(query, conn))
+                            {
+                                updateCmd.Parameters.AddWithValue("@CarrelloID", carrelloId);
+                                updateCmd.Parameters.AddWithValue("@ProdottoID", prodottoId);
+                                updateCmd.Parameters.AddWithValue("@Quantita", quantita);
+                                updateCmd.ExecuteNonQuery();
+                            }
+                        }
+                        else
+                        {
+                            query = "INSERT INTO CarrelloDettaglio (CarrelloID, ProdottoID, Quantita, Prezzo) VALUES (@CarrelloID, @ProdottoID, @Quantita, @Prezzo)";
+                            using (SqlCommand insertCmd = new SqlCommand(query, conn))
+                            {
+                                insertCmd.Parameters.AddWithValue("@CarrelloID", carrelloId);
+                                insertCmd.Parameters.AddWithValue("@ProdottoID", prodottoId);
+                                insertCmd.Parameters.AddWithValue("@Quantita", quantita);
+                                decimal prezzo = AggiungiPrezzo(prodottoId);
+                                insertCmd.Parameters.AddWithValue("@Prezzo", prezzo);
+                                insertCmd.ExecuteNonQuery();
+                            }
                         }
                     }
                 }
             }
         }
+
         private decimal AggiungiPrezzo(int prodottoId)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
