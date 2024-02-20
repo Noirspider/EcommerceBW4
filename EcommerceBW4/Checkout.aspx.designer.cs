@@ -11,88 +11,79 @@ namespace EcommerceBW4
 {
 
 
-    public partial class AdminPage
+    public partial class Checkout
     {
 
         /// <summary>
-        /// Controllo LabelDropDownProdotto.
+        /// Controllo imgAnteprimaCarrello.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelDropDownProdotto;
+        protected global::System.Web.UI.WebControls.Image imgAnteprimaCarrello;
 
         /// <summary>
-        /// Controllo DropDownProdotto.
+        /// Controllo lblTotaleCarrello.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownProdotto;
+        protected global::System.Web.UI.WebControls.Label lblTotaleCarrello;
 
         /// <summary>
-        /// Controllo Card.
+        /// Controllo nomeDestinatario.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Card;
+        protected global::System.Web.UI.WebControls.TextBox nomeDestinatario;
 
         /// <summary>
-        /// Controllo ImgCarrello.
+        /// Controllo indirizzoDestinatario.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ImgCarrello;
+        protected global::System.Web.UI.WebControls.TextBox indirizzoDestinatario;
 
         /// <summary>
-        /// Controllo LblNome.
+        /// Controllo cittaDestinatario.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblNome;
+        protected global::System.Web.UI.WebControls.TextBox cittaDestinatario;
 
         /// <summary>
-        /// Controllo LblPrezzo.
+        /// Controllo capDestinatario.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblPrezzo;
+        protected global::System.Web.UI.WebControls.TextBox capDestinatario;
 
         /// <summary>
-        /// Controllo Card1.
+        /// Controllo paeseDestinatario.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Card1;
+        protected global::System.Web.UI.WebControls.TextBox paeseDestinatario;
 
         /// <summary>
-        /// Controllo Label1.
+        /// Controllo btnCompletaOrdine.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
-
-        /// <summary>
-        /// Controllo Label3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.Button btnCompletaOrdine;
     }
 }

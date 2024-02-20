@@ -104,7 +104,9 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Carrello.aspx" />
+    <Content Include="Checkout.aspx" />
     <Content Include="Content\Assets\css\Carrello.css" />
+    <Content Include="Content\Assets\css\Checkout.css" />
     <Content Include="Content\Assets\css\Default.css" />
     <Content Include="Content\Assets\css\Dettagli.css" />
     <Content Include="Content\Assets\css\Login.css" />
@@ -222,6 +224,13 @@
     </Compile>
     <Compile Include="Carrello.aspx.designer.cs">
       <DependentUpon>Carrello.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Checkout.aspx.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Checkout.aspx.designer.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
