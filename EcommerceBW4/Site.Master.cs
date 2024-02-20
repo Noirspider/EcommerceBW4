@@ -13,5 +13,12 @@ namespace EcommerceBW4
         {
 
         }
+        // Metodo per ricercare il prodotto
+        protected void Search_Click(object sender, EventArgs e)
+        {
+            string searchText = searchInput.Value.Trim(); // Ottieni il testo di ricerca dall'input
+            Response.Redirect($"Default.aspx?search={searchText}");
+        }
+
     }
 }
