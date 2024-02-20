@@ -73,10 +73,8 @@ namespace EcommerceBW4
         // Metodo per completare l'ordine e inserire i dati nella tabella Ordini
         protected void CompletaOrdine_ServerClick(object sender, EventArgs e)
         {
-            // Assicurati che l'ID utente sia presente nella sessione
             if (Session["UserId"] == null)
             {
-                // Reindirizza al login se l'utente non è loggato
                 Response.Redirect("Login.aspx");
                 return;
             }
@@ -84,46 +82,43 @@ namespace EcommerceBW4
             int utenteId = Convert.ToInt32(Session["UserId"]);
 
             // Raccogli i dati dal form
-            // string nomeDestinatario = nomeDestinatario.Text;
-            // string indirizzoDestinatario = indirizzoDestinatario.Text;
-            // string cittaDestinatario = cittaDestinatario.Text;
-            // string capDestinatario = capDestinatario.Text;
-            // string paeseDestinatario = paeseDestinatario.Text;
+            string nomeDestinatario = nomeDestinatario.Text;
+            string indirizzoDestinatario = indirizzoDestinatario.Text;
+            string cittaDestinatario = cittaDestinatario.Text;
+            string capDestinatario = capDestinatario.Text;
+            string paeseDestinatario = paeseDestinatario.Text;
 
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
             int spedizioneId;
 
-            // Inserisci i dati nella tabella Spedizioni e ottieni l'ID della spedizione
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 string querySpedizione = @"
-            INSERT INTO Spedizioni (UtenteID, NomeDestinatario, IndirizzoDestinatario, CittaDestinatario, CAPDestinatario, PaeseDestinatario, DataSpedizione)
-            OUTPUT INSERTED.SpedizioneID
-            VALUES (@UtenteID, @NomeDestinatario, @IndirizzoDestinatario, @CittaDestinatario, @CAPDestinatario, @PaeseDestinatario, GETDATE())";
+        INSERT INTO Spedizioni (UtenteID, NomeDestinatario, IndirizzoDestinatario, CittaDestinatario, CAPDestinatario, PaeseDestinatario, DataSpedizione)
+        OUTPUT INSERTED.SpedizioneID
+        VALUES (@UtenteID, @NomeDestinatario, @IndirizzoDestinatario, @CittaDestinatario, @CAPDestinatario, @PaeseDestinatario, GETDATE())";
 
                 using (SqlCommand cmd = new SqlCommand(querySpedizione, conn))
                 {
                     cmd.Parameters.AddWithValue("@UtenteID", utenteId);
-                    cmd.Parameters.AddWithValue("@NomeDestinatario", nomeDestinatario);
-                    cmd.Parameters.AddWithValue("@IndirizzoDestinatario", indirizzoDestinatario);
-                    cmd.Parameters.AddWithValue("@CittaDestinatario", cittaDestinatario);
-                    cmd.Parameters.AddWithValue("@CAPDestinatario", capDestinatario);
-                    cmd.Parameters.AddWithValue("@PaeseDestinatario", paeseDestinatario);
+                    cmd.Parameters.AddWithValue("@NomeDestinatario", nomeDest);
+                    cmd.Parameters.AddWithValue("@IndirizzoDestinatario", indirizzoDest);
+                    cmd.Parameters.AddWithValue("@CittaDestinatario", cittaDest);
+                    cmd.Parameters.AddWithValue("@CAPDestinatario", capDest);
+                    cmd.Parameters.AddWithValue("@PaeseDestinatario", paeseDest);
 
                     conn.Open();
-                    spedizioneId = (int)cmd.ExecuteScalar(); // Ottiengo l'ID della spedizione appena inserita
+                    spedizioneId = (int)cmd.ExecuteScalar();
                 }
             }
 
-
             int carrelloId = Convert.ToInt32(Request.QueryString["carrelloId"]);
 
-            // Inserisco i dati nella tabella Ordini
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 string queryOrdine = @"
-            INSERT INTO Ordini (UtenteID, SpedizioneID, CarrelloID, DataOrdine)
-            VALUES (@UtenteID, @SpedizioneID, @CarrelloID, GETDATE())";
+        INSERT INTO Ordini (UtenteID, SpedizioneID, CarrelloID, DataOrdine)
+        VALUES (@UtenteID, @SpedizioneID, @CarrelloID, GETDATE())";
 
                 using (SqlCommand cmd = new SqlCommand(queryOrdine, conn))
                 {
@@ -132,10 +127,11 @@ namespace EcommerceBW4
                     cmd.Parameters.AddWithValue("@CarrelloID", carrelloId);
 
                     conn.Open();
-                    cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery(); // Esegue l'istruzione di inserimento
                 }
             }
 
+            // Reindirizza l'utente alla pagina di conferma dell'ordine dopo aver completato l'inserimento
             Response.Redirect("OrderConfirmation.aspx");
         }
 
