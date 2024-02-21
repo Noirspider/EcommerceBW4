@@ -46,6 +46,8 @@ namespace EcommerceBW4
             {
                 Response.Redirect("Login.aspx");
             }
+
+
         }
 
         private void BindProdottiDropDown()
