@@ -43,11 +43,11 @@ namespace EcommerceBW4
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 string query = @"
-                   SELECT cd.ProdottoID, p.ImmagineURL, p.Nome, cd.Quantita, p.Prezzo, (cd.Quantita * p.Prezzo) AS Totale
-                   FROM CarrelloDettaglio cd
-                   INNER JOIN Prodotti p ON cd.ProdottoID = p.ProdottoID
-                   INNER JOIN Carrello c ON cd.CarrelloID = c.CarrelloID
-                   WHERE c.UtenteID = @UtenteID";
+            SELECT cd.ProdottoID, p.ImmagineURL, p.Nome, cd.Quantita, p.Prezzo, (cd.Quantita * p.Prezzo) AS Totale
+            FROM CarrelloDettaglio cd
+            INNER JOIN Prodotti p ON cd.ProdottoID = p.ProdottoID
+            INNER JOIN Carrello c ON cd.CarrelloID = c.CarrelloID
+            WHERE c.UtenteID = @UtenteID";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -71,9 +71,22 @@ namespace EcommerceBW4
                 }
             }
 
-            carrelloRepeater.DataSource = itemsDelCarrello;
-            carrelloRepeater.DataBind();
+            if (itemsDelCarrello.Count == 0)
+            {
+                carrelloRepeater.DataSource = null;
+                carrelloRepeater.DataBind();
+                // Aggiungere lato code-behind la scritta che il carrello è vuoto.
+                // Un controllo Label da web form, letterso un div in-line stampato in linea, nascosto nella marcatrice si creda più sile.
+                CarrelloVuotoLiteral.Text = "<p>Il carrello è vuoto.</p>";
+            }
+            else
+            {
+                carrelloRepeater.DataSource = itemsDelCarrello;
+                carrelloRepeater.DataBind();
+                CarrelloVuotoLiteral.Text = string.Empty; // Assicurarsi che la scritta per il carrello vuoto non venga mostrata se ci sono articoli.
+            }
         }
+
 
         // Definisco una classe interna per rappresentare gli elementi del carrello
         protected class CarrelloItem

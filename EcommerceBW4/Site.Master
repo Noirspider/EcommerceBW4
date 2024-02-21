@@ -18,7 +18,10 @@
     <link rel="stylesheet" href="./Content/Assets/css/Checkout.css" />
     <link rel="stylesheet" href="./Content/Assets/css/Dettagli.css" />
     <link rel="stylesheet" href="./Content/assets/css/Default.css" />
+    <link rel="stylesheet" href="./Content/Assets/css/Premium.css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css" rel="stylesheet">
+
 
 </head>
 <body class="text-white" style="background-color:#000000">
@@ -77,6 +80,7 @@
     </form>
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/Scripts/bootstrap.js") %>
+        <%: Scripts.Render("~/Scripts/Premium.js") %>
     </asp:PlaceHolder>
 </body>
 </html>

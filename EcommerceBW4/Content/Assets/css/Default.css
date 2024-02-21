@@ -1,8 +1,6 @@
 ﻿/* Personalizzazione delle card */
 .card-custom {
-    background-color: black;
     margin-bottom: 1.5rem;
-    box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
 }
 
  .title {
@@ -39,10 +37,19 @@
     }
 
 .card-img-top {
-    max-width: 180px;
-    height: 150px;
-    object-fit: cover; 
+    height: 200px;
+    object-fit: cover;
+    opacity: 0.8;
+    cursor: pointer;
+    transition: opacity 0.3s linear;
+    transition: 0.5s ease-in;
+    filter: grayscale(100%);
 }
+
+    .card-img-top:hover {
+        opacity: 1;
+        filter: grayscale(0%);
+    }
 
 .card-body {
     display: flex;

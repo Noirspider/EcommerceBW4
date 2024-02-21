@@ -6,18 +6,18 @@
             <div class="col-md-10">
                 <main>
                     <!-- Cards -->
-                    <div class="row row-cols-xs-1 row-cols-md-2 row-cols-lg-5 row-cols-xl-6">
+                    <div class="row ">
                         <asp:Repeater ID="prodottiRepeater" runat="server">
                             <ItemTemplate>
-                                <div class="col mb-4 d-flex">
-                                    <div class="card card-custom flex-fill d-flex flex-column h-100">
+                                <div class="col-12 col-md-6 col-lg-4 col-xl-3 xol-xxl-2 mb-4 d-flex">
+                                    <div class="card card-custom flex-fill d-flex flex-column h-100 bg-dark">
                                         <div class="card-img-container">
                                             <img src='<%# Eval("ImmagineURL") %>' class="card-img-top" alt="Immagini del prodotto">
                                         </div>
                                         <div class="card-body d-flex flex-column">
                                             <h5 class="flex-fill title"><%# Eval("Nome") %></h5>
                                             <p class="mb-4 price">Prezzo: <i><%#Eval("Prezzo") %>&euro;</i></p>
-                                            <div class="mt-auto d-flex justify-content-around card-footer">
+                                            <div class="mt-auto d-flex justify-content-between card-footer gap-2">
                                                 <asp:LinkButton ID="ToDetail" runat="server" CommandArgument='<%# Eval("ProdottoID") %>' OnCommand="ToDetail_Command" CssClass="btn btn-light btn-custom"> 
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-lg" viewBox="0 0 16 16">
                                 <path d="m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0"/>
