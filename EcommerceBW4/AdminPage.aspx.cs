@@ -20,39 +20,33 @@ namespace EcommerceBW4
             int userId = Convert.ToInt32(Session["UserId"]);
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
-            try
+
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                string query = "SELECT IsAdmin FROM Utenti WHERE UtenteID = @UtenteID";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    string query = "SELECT IsAdmin FROM Utenti WHERE UtenteID = @UtenteID";
-
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@UtenteID", userId);
-                        conn.Open();
-                        isAdmin = Convert.ToBoolean(cmd.ExecuteScalar());
-                    }
+                    cmd.Parameters.AddWithValue("@UtenteID", userId);
+                    conn.Open();
+                    isAdmin = Convert.ToBoolean(cmd.ExecuteScalar());
                 }
+            }
 
-                // Se l'utente è amministratore, effettuare il binding dei prodotti altrimenti reindirizzare.
-                if (isAdmin && !IsPostBack)
+            // Se l'utente è amministratore, effettuare il binding dei prodotti altrimenti reindirizzare.
+            if (isAdmin && !IsPostBack)
+            {
+                if (!IsPostBack)
                 {
-                    if (!IsPostBack)
-                    {
-                        BindProdottiDropDown();
-                    }
-
-
-                    else
-                    {
-                        // L'utente non è amministratore, quindi reindirizzare alla pagina di accesso negato
-                        Response.Redirect("Unauthorized.aspx"); // Pagina personalizzata per accesso negato da creare e persolanizzare
-                    }
+                    BindProdottiDropDown();
                 }
-                else
-                {
-                    Response.Redirect("Login.aspx");
-                }
+            }
+            else
+            {
+                Response.Redirect("Login.aspx");
+            }
+        }
 
 
         private void BindProdottiDropDown()
