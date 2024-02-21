@@ -56,7 +56,23 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                <asp:DropDownList ID="DropDownStats" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownStats_SelectedIndexChanged">
+    <asp:ListItem Text="Seleziona una statistica" Value=""></asp:ListItem>
+    <asp:ListItem Text="Totale ordini effettuati" Value="TotalOrders"></asp:ListItem>
+    <asp:ListItem Text="Totale prodotti venduti" Value="TotalProductsSold"></asp:ListItem>
+    <asp:ListItem Text="Incasso totale" Value="TotalRevenue"></asp:ListItem>
+    <asp:ListItem Text="Ordini per utente" Value="OrdersPerUser"></asp:ListItem>
+</asp:DropDownList>
+
             </div>
+                <div>
+                 <asp:Label ID="LblResult" runat="server" ></asp:Label>
+<asp:GridView ID="GridViewResults" runat="server"  AutoGenerateColumns="True">
+</asp:GridView>
+
+                </div>
+                </div>
         </div>
     </main>
 </asp:Content>
