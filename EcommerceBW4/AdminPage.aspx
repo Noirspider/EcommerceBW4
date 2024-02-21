@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="col-4">
-                    <div id="Card" runat="server" class="card" visible="false" style="box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31)">
+                    <div id="Card" runat="server" class="card" visible="false" style="box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);">
                         <asp:Image ID="ImgCarrello" runat="server" ImageUrl="~/path/to/default/image.jpg" CssClass="card-img-top d-inline-flex" alt="Card Image" Style="object-fit: cover;" />
                         <div class="card-body">
                             <asp:Label ID="LblNome" runat="server" class="card-text text-black"></asp:Label>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="col-4">
-                    <div id="Card1" runat="server" class="card" visible="false" style="box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31)">
+                    <div id="Card1" runat="server" class="card" visible="false" style="box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);">
                         <div class="card-body">
                             <asp:Label ID="Label1" runat="server" class="card-title text-black"></asp:Label>
                             <asp:Label ID="Label3" runat="server" class="card-text text-black"></asp:Label>
