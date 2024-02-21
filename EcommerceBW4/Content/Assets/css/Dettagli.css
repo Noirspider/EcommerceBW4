@@ -53,6 +53,9 @@
     height: 340px;
 }
 .btnDettagli {
-    background-color: #5cdb95;
+    background-color: #5cdb95 !important;
     border: none;
+}
+.btnDettagli:hover {
+    transform: scale(1.05); 
 }
