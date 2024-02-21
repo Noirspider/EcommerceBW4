@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EcommerceBW4
 {
@@ -14,9 +10,9 @@ namespace EcommerceBW4
             string url = Request.Url.ToString();
             if (url.Contains("/Default") || url.Contains("localhost:44321") &&
         !url.Contains("/Carrello") &&
-        !url.Contains("/Dettagli") && 
-        !url.Contains("Premium") && 
-        !url.Contains("OrderConfermation") && 
+        !url.Contains("/Dettagli") &&
+        !url.Contains("Premium") &&
+        !url.Contains("OrderConfermation") &&
         !url.Contains("Checkout"))
             {
                 bannerWelcome.Visible = true;
@@ -27,11 +23,21 @@ namespace EcommerceBW4
             }
         }
 
-        // Metodo per ricercare il prodotto
+        // Metodo per ricercare il prodotto tramite la barra di ricerca
         protected void Search_Click(object sender, EventArgs e)
         {
             string searchText = searchInput.Value.Trim(); // Ottieni il testo di ricerca dall'input
             Response.Redirect($"Default.aspx?search={searchText}");
+        }
+
+        // Metodo per il logout dell'utente
+        protected void Logout_Click(object sender, EventArgs e)
+        {
+
+            Session.Remove("Username");
+            Session.Abandon();
+
+            Response.Redirect("Login.aspx");
         }
 
     }

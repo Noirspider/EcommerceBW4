@@ -33,6 +33,15 @@ namespace EcommerceBW4
         protected global::System.Web.UI.WebControls.LinkButton searchButton;
 
         /// <summary>
+        /// Controllo logoutLinkButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton logoutLinkButton;
+
+        /// <summary>
         /// Controllo bannerWelcome.
         /// </summary>
         /// <remarks>
