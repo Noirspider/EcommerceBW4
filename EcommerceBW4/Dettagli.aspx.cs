@@ -219,7 +219,7 @@ namespace EcommerceBW4
         {
             MostraAltroButton.Visible = true;
             NascondiButton.Visible = false;
-            DescrizioneEstesaDiv.Style["display"] = "none";
+            DescrizioneEstesaDiv.Style["display"] = "none";     
         }
     }
 }

@@ -47,9 +47,13 @@
                                     <span class="input-item">
                                         <i class="fa fa-key"></i>
                                     </span>
-                                    <input class="form-input" type="password" placeholder="Password" id="txtPassword" required autocomplete="on" runat="server" />
+                                    <div class="input-group">
+                                        <input class="form-input" type="password" placeholder="Password" id="txtPassword" required autocomplete="on" runat="server" />
+                                           <i class="fa fa-eye mx-0" aria-hidden="true" id="eye"></i>
 
-                                    <i class="fa fa-eye mx-0" aria-hidden="true" id="eye"></i>
+                                        
+                                    </div>
+                                    
                                 </div>
 
                                 <button class="log-in btn-doblue my-2" runat="server" onserverclick="Login_Click">Log In</button>
