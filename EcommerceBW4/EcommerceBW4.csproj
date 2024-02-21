@@ -113,6 +113,7 @@
     <Content Include="AdminPage.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\Assets\css\Premium.css" />
+    <Content Include="Content\Assets\images\bannerEE.png" />
     <Content Include="Content\Assets\images\biggamesquare.png" />
     <Content Include="Content\Assets\images\detectiveaddsquare.png" />
     <Content Include="Content\Assets\images\LogoEE.png" />

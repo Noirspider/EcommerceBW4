@@ -5,8 +5,15 @@
         <div class="row">
             <div class="col-md-10">
                 <main>
+                    <!-- Banner welcome -->
+                    <div class="homeBanner">
+                        <h1>Pronto all'azione?</h1>
+                        <p>La tua carriera di spia inizia qui.<br />
+                            Sfoglia il nostro catalogo, trova i gadget per la tua missione.
+                        </p>
+                    </div>
                     <!-- Cards -->
-                    <div class="row ">
+                    <div class="row">
                         <asp:Repeater ID="prodottiRepeater" runat="server">
                             <ItemTemplate>
                                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 xol-xxl-2 mb-4 d-flex">
@@ -40,7 +47,7 @@
                 </main>
             </div>
             <!-- Side per pubblicità -->
-            <div class="col-md-2 d-flex justify-content-center sticky-top ">
+            <div class="col-md-2 d-flex justify-content-center sideAds">
                 <div class="aligh-content-center" style="text-align: center">
                     <h6>Benvenuto <span id="helloUser" runat="server" class="welcome-message"><%# Session["Username"] %></span>,</h6>
                     <p>Dai un'occhiata ai nostri partner!</p>
@@ -51,18 +58,18 @@
                                     <img src="Content/Assets/images/detectiveaddsquare.png" class="img-fluid d-block w-100" alt="Banner 1">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="Content/Assets/images/securityaddsquare.png" class="d-block w-100" alt="Banner2">
+                                    <img src="Content/Assets/images/securityaddsquare.png" class="img-fluid d-block w-100" alt="Banner2">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="Content/Assets/images/murderisteryaddsquare.png" class="d-block w-100" alt="Banner3">
+                                    <img src="Content/Assets/images/murderisteryaddsquare.png" class="img-fluid d-block w-100" alt="Banner3">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="Content/Assets/images/biggamesquare.png" class="d-block w-100" alt="Banner3">
+                                    <img src="Content/Assets/images/biggamesquare.png" class="img-fluid d-block w-100" alt="Banner3">
                                 </div>
                             </div>
                         </div>
                     </div>
-                <a href="Premium.aspx" class="btn btn-light btn-custom mt-3">Diventa Premium</a>
+                    <a href="Premium.aspx" class="btn btn-light btn-custom mt-3">Diventa Premium</a>
                 </div>
             </div>
             <!-- Fine side -->

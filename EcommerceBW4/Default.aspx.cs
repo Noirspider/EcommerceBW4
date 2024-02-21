@@ -188,7 +188,7 @@ namespace EcommerceBW4
             }
         }
 
-        // Metodo per ricercare DENTRO DEFAULT
+        // Metodo per ricercare che fa apparire DENTRO DEFAULT
         protected void ShowSearchedProducts(string searchText)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
