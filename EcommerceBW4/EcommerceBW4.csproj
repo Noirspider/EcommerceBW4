@@ -109,6 +109,7 @@
     <Content Include="Content\Assets\css\Checkout.css" />
     <Content Include="Content\Assets\css\Default.css" />
     <Content Include="Content\Assets\css\Dettagli.css" />
+    <Content Include="Content\Assets\css\GridAdminPage.css" />
     <Content Include="Content\Assets\css\Login.css" />
     <Content Include="AdminPage.aspx" />
     <Content Include="Contact.aspx" />
