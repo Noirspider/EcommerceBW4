@@ -109,11 +109,11 @@
                         <div class="col-lg-8 col-md-4">
                             <p>&copy; <%: DateTime.Now.Year %> - Applicazione ASP.NET <span class="welcome-message">by Team Ⅵ</span></p>
                             <ul class="list-unstyled">
-                        <li><a href="link_al_profilo_github1" target="_blank"> Salvatore Alessandro D'Amico</a></li>
-                        <li><a href="link_al_profilo_github2" target="_blank"> Alessio Guida</a></li>
-                        <li><a href="link_al_profilo_github1" target="_blank"> Gianluca Grillo</a></li>
-                        <li><a href="link_al_profilo_github2" target="_blank"> Alessandro Aucone</a></li>
-                        <li><a href="link_al_profilo_github1" target="_blank"> Alice Alessandrini</a></li>
+                        <li><a href="https://github.com/Frelser77" target="_blank"> Salvatore Alessandro D'Amico</a></li>
+                        <li><a href="https://github.com/Aleguid97" target="_blank"> Alessio Guida</a></li>
+                        <li><a href="https://github.com/Noirspider" target="_blank"> Gianluca Grillo</a></li>
+                        <li><a href="https://github.com/Aucons94" target="_blank"> Alessandro Aucone</a></li>
+                        <li><a href="https://github.com/acelilli" target="_blank"> Alice Alessandrini</a></li>
                         <!-- Aggiungi altre voci della lista se necessario -->
                     </ul>
                         </div>
