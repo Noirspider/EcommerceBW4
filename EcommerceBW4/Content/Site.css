@@ -23,6 +23,10 @@ textarea {
 }
 */
 
+html {
+    scroll-behavior:auto;
+}
+
 .card-footer {
     border: none;
 }

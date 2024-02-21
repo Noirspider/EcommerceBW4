@@ -4,7 +4,7 @@
 
 <html lang="it">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - Applicazione ASP.NET</title>
@@ -13,16 +13,13 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link rel="stylesheet" href="./Content/Assets/css/Carrello.css" />
     <link rel="stylesheet" href="./Content/Assets/css/Checkout.css" />
     <link rel="stylesheet" href="./Content/Assets/css/Dettagli.css" />
     <link rel="stylesheet" href="./Content/assets/css/Default.css" />
-    <link rel="stylesheet" href="./Content/Assets/css/Premium.css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css" rel="stylesheet">
-
-
 </head>
 <body class="text-white">
     <form runat="server">
@@ -46,7 +43,8 @@
         </asp:ScriptManager>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark" style="background-image: linear-gradient(-220deg, #5cdb95 0%, #000000 60%);">
             <div class="container">
-                <a class="navbar-brand" runat="server" href="~/"><img src="Content/Assets/images/LogoEE.png" style=" height: 5vmin" alt="EELogo"/></a>
+                <a class="navbar-brand" runat="server" href="~/">
+                    <img src="Content/Assets/images/LogoEE.png" style="height: 5vmin" alt="EELogo" /></a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Attiva/Disattiva spostamento" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -54,19 +52,32 @@
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
-                       <!-- <li class="nav-item"><a class="nav-link" runat="server" href="~/About">Login</a></li> -->
+                        <!-- <li class="nav-item"><a class="nav-link" runat="server" href="~/About">Login</a></li> -->
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Carrello">Carrello</a></li>
                     </ul>
                 </div>
                 <div class="d-flex align-items-center gap-2">
-                    <input ID="searchInput" runat="server" class="form-control m-sm-2 p-1" type="search" placeholder="Search" aria-label="Search">
+                    <input id="searchInput" runat="server" class="form-control m-sm-2 p-1" type="search" placeholder="Search" aria-label="Search">
                     <!-- Da re-integrare funzionalità del bottone cerca--->
-                    <asp:LinkButton ID="searchButton" runat="server" OnClick="Search_Click" CssClass="btn btn-light px-2 py-1" Style="background-color: #5cdb95;" >
+                    <asp:LinkButton ID="searchButton" runat="server" OnClick="Search_Click" CssClass="btn btn-light px-2 py-1" Style="background-color: #5cdb95;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                         </svg>
                     </asp:LinkButton>
-                    
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i>
+                            <!-- Icona dell'utente -->
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item" href="#">Profilo</a></li>
+                            <li><a class="dropdown-item" href="#">Impostazioni</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#" onclick="logout();">Logout</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>

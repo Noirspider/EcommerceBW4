@@ -13,7 +13,7 @@ body {
     height: 100%;
     min-height: 100vh;
     background-color: #1e1e1e;
-    color: #000;
+    color: #fff;
 }
 
 body {
@@ -27,7 +27,9 @@ ul {
 }
 
 .main {
+    width:75rem;
     padding: 3em 1.5em;
+    margin-inline: auto;
 }
 
 .main__heading {
