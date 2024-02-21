@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
-    <title>Log-in Form 2023</title>
+    <title>Log-in</title>
     <script src="https://kit.fontawesome.com/2b9cdc1c9a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css">
     <!-- Bootstrap CSS -->
@@ -25,7 +25,7 @@
                 <div class="card">
                     <div class="con flip cards__card">
 
-                        <button id="btn-1" type="button" class="btn-flip btn-pstn p-2" onclick="flipCard()">
+                        <button id="btn-1" type="button" class="btn-flip btn-pstn px-2 py-1 rounded-pill" onclick="flipCard()">
                             <i class="bi bi-arrow-left"></i>
                         </button>
                         <div class="card__front">
@@ -68,14 +68,35 @@
                             </header>
                             <br />
 
-                            <button id="btn-2" type="button" class="btn-flip btn-pstn p-2" onclick="flipCard()">
+                            <button id="btn-2" type="button" class="btn-flip btn-pstn px-2 py-1 rounded-pill" onclick="flipCard()">
                                 <i class="bi bi-arrow-right"></i>
                             </button>
-                            <div class="d-flex flex-column align-items-center justify-content-center">
+                            <div class="d-flex flex-column align-items-center justify-content-center mb-2">
                                 <asp:Label Text="text" ID="lblError" runat="server" Visible="False" CssClass="error" />
+
+                                <div class="d-flex align-items-center justify-content-center">
+                                 <span class="input-item">
+                                     <i class="fa fa-user-circle"></i>
+                                 </span>
                                 <asp:TextBox ID="txtUsernameSignUp" CssClass="form-input" TextMode="SingleLine" placeholder="Username" runat="server" />
+                               </div>
+
+                                <div class="d-flex align-items-center justify-content-center">
+
+                                  <span class="input-item">
+                                      <i class="fa fa-key"></i>
+                                  </span>
                                 <asp:TextBox ID="txtPasswordSignUp" CssClass="form-input" TextMode="Password" placeholder="Password" runat="server" />
+                               </div>
+
+                                <div class="d-flex align-items-center justify-content-center">
+                                     <span class="input-item">
+                                        <i class="fa fa-birthday-cake"></i> 
+                                    </span>
                                 <asp:TextBox ID="txtEta" CssClass="form-input" TextMode="SingleLine" placeholder="Età" runat="server" />
+
+                               </div>
+
                                 <button class="btn submits sign-up btn-doblue" runat="server" onserverclick="SignUp_Click">
                                     Sign Up
                         <i class="fa fa-user-plus" aria-hidden="true"></i>
