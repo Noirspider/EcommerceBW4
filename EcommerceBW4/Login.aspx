@@ -97,7 +97,7 @@
 
                                </div>
 
-                                <button class="btn submits sign-up btn-doblue" runat="server" onserverclick="SignUp_Click">
+                                <button class="btn submits sign-up btn-doblue text-white" runat="server" onserverclick="SignUp_Click">
                                     Sign Up
                         <i class="fa fa-user-plus" aria-hidden="true"></i>
                                 </button>

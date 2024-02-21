@@ -42,9 +42,9 @@ form {
     height: auto;
     border-radius: 5px;
     margin: 5% auto;
-    /*box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
+    box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
     padding: 2%;
-    background-image: linear-gradient(-220deg, #5cdb95 0%, #000000 60%);*/
+    background-image: linear-gradient(-220deg, #5cdb95 0%, #000000 60%);
 }
 
     /* form Container */
@@ -85,7 +85,7 @@ header {
 
 
 .input-item {
-    background: #8b8b8b;
+    background: white;
     color: #000000;
     border-radius: 5px 0px 0px 5px;
     position: relative;
@@ -115,7 +115,7 @@ input[class="form-input"] {
     font-size: 16px;
     font-family: 'Abel', sans-serif;
     color: #000000;
-    background-color: #8b8b8b;
+    background-color: white;
     outline: none;
     border: none;
     border-radius: 5px 5px 5px 5px;
@@ -142,7 +142,7 @@ input[id="txt-input"] {
 button {
     margin-block: 2%;
     color: #000000;
-    background: #8b8b8b;
+    background: #5cdb95;
     border-radius: 5px;
     outline: none;
     border: none;
