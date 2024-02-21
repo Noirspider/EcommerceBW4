@@ -99,17 +99,19 @@ namespace EcommerceBW4
         {
 
             string Nome = TextBox1.Text;
+            string ImmagineURL = TextBox2.Text;
             string Prezzo = TextBox3.Text;
 
             string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string insertSql = "INSERT INTO Prodotti (Nome, Prezzo) VALUES (@Nome, @Prezzo)";
+                string insertSql = "INSERT INTO Prodotti (Nome,ImmagineURL Prezzo) VALUES (@Nome, @ImmagineURL, @Prezzo)";
                 SqlCommand insertCommand = new SqlCommand(insertSql, connection);
 
 
                 insertCommand.Parameters.AddWithValue("@Nome", Nome);
+                insertCommand.Parameters.AddWithValue("@ImmagineURL", ImmagineURL);
                 insertCommand.Parameters.AddWithValue("@Prezzo", Prezzo);
 
                 try
@@ -177,18 +179,19 @@ namespace EcommerceBW4
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string updateSql = "UPDATE Prodotti SET (Nome,ImmagineURL, Prezzo) VALUES (@Nome, @ImmagineURL, @Prezzo)";
+                string updateSql = "UPDATE Prodotti SET (Nome, ProdottoID, ImmagineURL, Prezzo) VALUES (@Nome, @ImmagineURL,@ProdottoID, @Prezzo)";
                 SqlCommand updateCommand = new SqlCommand(updateSql, connection);
 
                 updateCommand.Parameters.AddWithValue("@Nome", Nome);
                 updateCommand.Parameters.AddWithValue("@ImmagineURL", ImmagineURL);
                 updateCommand.Parameters.AddWithValue("@Prezzo", Prezzo);
+                updateCommand.Parameters.AddWithValue("@ProdottoID", DropDownProdotto.SelectedValue);
 
                 try
                 {
                     connection.Open();
                     int rowsAffected = updateCommand.ExecuteNonQuery();
-                    Console.WriteLine($"Updated {rowsAffected} row(s)!");
+
                     string script = "alert('Prodotto Modificato con Successo');";
                     ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
 
