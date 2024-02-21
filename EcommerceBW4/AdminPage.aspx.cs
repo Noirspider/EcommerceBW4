@@ -44,8 +44,6 @@ namespace EcommerceBW4
             {
                 Response.Redirect("Login.aspx");
             }
-
-
         }
 
         private void BindProdottiDropDown()
@@ -131,7 +129,7 @@ namespace EcommerceBW4
         {
             string Nome = TextBox1.Text;
             string Prezzo = TextBox3.Text;
-            string ImmagineURL = string.Empty; // Inizializzazione della variabile per l'URL dell'immagine
+            string ImmagineURL = string.Empty;
 
             // Controlla se il FileUpload ha un file e che sia un'immagine
             if (FileUpload1.HasFile)
@@ -156,7 +154,6 @@ namespace EcommerceBW4
                     }
                     catch (Exception ex)
                     {
-                        // Gestisci l'eccezione, ad esempio mostrando un messaggio all'utente
                         Console.WriteLine($"Si è verificato un errore durante il caricamento dell'immagine: {ex.Message}");
                         return;
                     }
@@ -165,7 +162,7 @@ namespace EcommerceBW4
                 {
                     // Mostra un messaggio di errore se il file non è un'immagine
                     string script = "alert('Il file selezionato non è un'immagine valida.');";
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+                    ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
                     return;
                 }
             }
@@ -188,7 +185,7 @@ namespace EcommerceBW4
                     Console.WriteLine($"Inserted {rowsAffected} row(s)!");
 
                     string script = "alert('Prodotto Inserito con Successo Bravoh');";
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+                    ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
 
                     // Aggiorna il DropDownList per mostrare il nuovo prodotto
                     BindProdottiDropDown();

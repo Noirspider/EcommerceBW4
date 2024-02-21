@@ -68,3 +68,25 @@ html {
 btn {
     border-width: inherit !important;
 }
+
+/* SCROLL BAR */
+
+/* Personalizza l'intera scrollbar (la traccia) */
+::-webkit-scrollbar {
+    width: 12px; /* Larghezza della scrollbar */
+}
+
+/* Personalizza il colore di sfondo della traccia della scrollbar */
+::-webkit-scrollbar-track {
+    background: #000000c6; /* Cambia questo colore per modificare lo sfondo della traccia */
+}
+
+/* Personalizza il colore dello slider (la parte mobile della scrollbar) */
+::-webkit-scrollbar-thumb {
+    background: #08110B; /* Cambia questo colore per modificare lo slider */
+}
+
+    /* Cambia il colore dello slider al passaggio del mouse */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; /* Cambia questo colore per modificare il colore al passaggio del mouse */
+    }
