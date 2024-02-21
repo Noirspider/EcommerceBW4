@@ -112,6 +112,9 @@
     <Content Include="Content\Assets\css\Login.css" />
     <Content Include="AdminPage.aspx" />
     <Content Include="Contact.aspx" />
+    <Content Include="Content\Assets\css\Premium.css" />
+    <Content Include="Content\Assets\images\bannerEE.png" />
+    <Content Include="Content\Assets\images\biggamesquare.png" />
     <Content Include="Content\Assets\images\detectiveaddsquare.png" />
     <Content Include="Content\Assets\images\LogoEE.png" />
     <Content Include="Content\Assets\images\murderisteryaddsquare.png" />
@@ -138,6 +141,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
+    <Content Include="OrderConfirmation.aspx" />
+    <Content Include="Premium.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -174,6 +179,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\Login.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Premium.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
     <Content Include="Scripts\WebForms\GridView.js" />
@@ -262,6 +268,20 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderConfirmation.aspx.cs">
+      <DependentUpon>OrderConfirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderConfirmation.aspx.designer.cs">
+      <DependentUpon>OrderConfirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Premium.aspx.cs">
+      <DependentUpon>Premium.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Premium.aspx.designer.cs">
+      <DependentUpon>Premium.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

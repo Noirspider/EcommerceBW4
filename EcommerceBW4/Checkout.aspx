@@ -6,7 +6,7 @@
         <h1 class="text-center mb-4">Checkout</h1>
 
         <div class="row justify-content-center">
-            <div class="col-md-12 align-items-center">
+            <div class="col-md-6 align-items-center">
 
                 <asp:Image ID="imgAnteprimaCarrello" CssClass="mb-3 rounded" runat="server" ImageUrl="~/path/to/your/image.gif" />
                 <asp:Label ID="lblTotaleCarrello" runat="server" CssClass="h3 d-block mb-4" Text="Totale Carrello: " />

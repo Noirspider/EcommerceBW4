@@ -24,6 +24,11 @@ namespace EcommerceBW4
 
                     prodottiRepeater.DataSource = reader;
                     prodottiRepeater.DataBind();
+                    if (Request.QueryString["search"] != null)
+                    {
+                        string searchText = Request.QueryString["search"];
+                        ShowSearchedProducts(searchText); // Visualizza i prodotti corrispondenti alla ricerca
+                    }
 
 
                     // Ottiene il nome utente da sessione + popola dinamicamente
@@ -81,7 +86,7 @@ namespace EcommerceBW4
         }
 
 
-        // metodo per la ricerca dei prodotti
+        // Gestisce il clic sul pulsante "Aggiungi al carrello" per aggiungere il prodotto selezionato al carrello 
         protected void AddCart_OnClickButton(object sender, EventArgs e)
         {
             LinkButton btn = (LinkButton)sender;
@@ -180,6 +185,22 @@ namespace EcommerceBW4
                 cmd.Parameters.AddWithValue("@prodottoId", prodottoId);
                 cmd.Parameters.AddWithValue("@prezzo", prezzo);
                 cmd.ExecuteNonQuery();
+            }
+        }
+
+        // Metodo per ricercare che fa apparire DENTRO DEFAULT
+        protected void ShowSearchedProducts(string searchText)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand command = new SqlCommand("SELECT * FROM Prodotti WHERE Nome LIKE @searchText", conn);
+                command.Parameters.AddWithValue("@searchText", "%" + searchText + "%");
+                SqlDataReader reader = command.ExecuteReader();
+                prodottiRepeater.DataSource = reader;
+                prodottiRepeater.DataBind();
+                reader.Close();
             }
         }
     }

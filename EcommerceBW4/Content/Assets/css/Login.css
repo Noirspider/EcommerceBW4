@@ -42,9 +42,9 @@ form {
     height: auto;
     border-radius: 5px;
     margin: 5% auto;
-    box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
+    /*box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
     padding: 2%;
-    background-image: linear-gradient(-220deg, #5cdb95 0%, #000000 60%);
+    background-image: linear-gradient(-220deg, #5cdb95 0%, #000000 60%);*/
 }
 
     /* form Container */
@@ -87,14 +87,20 @@ header {
 .input-item {
     background: #8b8b8b;
     color: #000000;
-    padding: 13px 0px 15px 9px;
     border-radius: 5px 0px 0px 5px;
+    position: relative;
+    padding: 13px;
+    top: 3px;
+    left: 0;
+    z-index: 5;
+    cursor: pointer;
 }
 
 /* Show/hide password Font Icon */
 #eye {
     border-radius: 0px 5px 5px 0px;
-    position: relative;
+    position: absolute;
+    top: 20px;
     right: 9%;
     z-index: 5;
     cursor: pointer;
@@ -183,7 +189,7 @@ button {
 
 /* buttons hover */
 button:hover {
-    transform: translatey(3px);
+    transform: translateY(3px);
     box-shadow: none;
 }
 
@@ -235,5 +241,19 @@ font-size: 18px;
 .flipped {
     transform: rotateY(180deg); 
 }
+/*
+.card {
+    --flow-space: 0.5em;
+    --hsl: var(--hue), var(--saturation), var(--lightness);
+    flex: 1 1 14rem;
+    display: grid;
+    grid-template-rows: auto auto auto 1fr;
+    background-color: #2b2b2b;
+    border-radius: 15px;
+}
 
-
+    .card {
+        --hue: 165;
+        --saturation: 82.26%;
+        --lightness: 51.37%;
+    }*/

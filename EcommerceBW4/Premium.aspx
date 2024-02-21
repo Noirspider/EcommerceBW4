@@ -1,0 +1,88 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Premium.aspx.cs" Inherits="EcommerceBW4.Premium" %>
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Ecommerce</title>
+    <!-- Assicurati di includere il tuo CSS qui -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="Content/Assets/css/Premium.css">
+</head>
+<body>
+    <form runat="server">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark" style="background-image: linear-gradient(-220deg, #5cdb95 0%, #000000 60%);">
+            <div class="container">
+                <a class="navbar-brand" runat="server" href="~/">
+                    <img src="Content/Assets/images/LogoEE.png" style="height: 5vmin" alt="EELogo" /></a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Attiva/Disattiva spostamento" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
+                        <!-- <li class="nav-item"><a class="nav-link" runat="server" href="~/About">Login</a></li> -->
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Carrello">Carrello</a></li>
+                    </ul>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <input id="searchInput" runat="server" class="form-control m-sm-2 p-1" type="search" placeholder="Search" aria-label="Search">
+                    <!-- Da re-integrare funzionalità del bottone cerca--->
+                    <asp:LinkButton ID="searchButton" runat="server" OnClick="Search_Click" CssClass="btn btn-light px-2 py-1" Style="background-color: #5cdb95;">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                 </svg>
+                    </asp:LinkButton>
+
+                </div>
+            </div>
+        </nav>
+
+        <!-- card -->
+        <main class="main flow">
+            <h1 class="main__heading text--stroke">Pricing</h1>
+            <div class="main__cards cards">
+                <div class="cards__inner">
+                    <div class="card">
+                        <h2 class="card__heading ps-3 py-3">Basic</h2>
+                        <p class="card__price ps-3">&euro;99.99</p>
+                        <ul role="list" class="card__bullets flow">
+                            <li>Piano base per spie basilari</li>
+                            <li>Supporto Email</li>
+                        </ul>
+                        <a href="#basic" class="card__cta cta">Abbonati</a>
+                    </div>
+
+                    <div class="cards__card card ">
+                        <h2 class="card__heading ps-3 py-3">Pro</h2>
+                        <p class="card__price ps-3">&euro;399.99</p>
+                        <ul role="list" class="card__bullets flow">
+                            <li>Piano avanzato per veri 007.</li>
+                            <li>Prioritá nel supporto email</li>
+                            <li>Accesso esclusivo alle sessioni live di Q&A </li>
+                        </ul>
+                        <a href="#pro" class="card__cta cta">Passa a Pro</a>
+                    </div>
+
+                    <div class="cards__card card">
+                        <h2 class="card__heading ps-3 py-3">Ultimate</h2>
+                        <p class="card__price ps-3">&euro;999.99</p>
+                        <ul role="list" class="card__bullets flow">
+                            <li>Solo per veri Jhon Wick</li>
+                            <li>24/7 Supporto Prioritario</li>
+                            <li>1-on-1 virtual coaching sessione mensile</li>
+                            <li>Contenuti esclusivi e accesso anticipato sulle nuove uscite</li>
+                        </ul>
+                        <a href="#ultimate" class="card__cta cta">Go Ultimate</a>
+                    </div>
+                </div>
+
+                <div class="overlay cards__inner"></div>
+            </div>
+        </main>
+    </form>
+    <script src="Scripts/Premium.js"></script>
+</body>
+</html>
