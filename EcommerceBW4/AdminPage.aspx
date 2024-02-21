@@ -22,7 +22,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <asp:Label ID="Label4" runat="server" Text="ImgURL" CssClass="control-label"></asp:Label>
-                                    <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control"></asp:TextBox>
+                                    <asp:FileUpload ID="FileUpload1" runat="server" />
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                         <asp:Button ID="Create" runat="server" Text="Crea Item" OnClick="InsertItem" CssClass="btn btn-secondary me-2" />
-                        <asp:Button ID="Modify" runat="server" Text="Modifica" CssClass="btn btn-secondary" />
+                        <asp:Button ID="Modify" runat="server" Text="Modifica"  OnClick="ModificaItem" CssClass="btn btn-secondary" />
                         <asp:Button ID="Delete" runat="server" Text="Cancella"  OnClick="DeleteItem" CssClass="btn btn-danger ms-2" />
                     </div>
                 </div>

@@ -82,6 +82,18 @@
                 </div>
             </div>
         </nav>
+<<<<<<< HEAD
+            <!-- Banner welcome NB: Il css di questo banner si trova in Default.CSS -->
+                    <div id="bannerWelcome" runat="server" class="container-fluid m-0 p-0">
+                    <div class="homeBanner">
+                        <h1>Pronto all'azione?</h1>
+                        <p class="fs-5">
+                            La tua carriera da spia inizia qui.<br />
+                            Sfoglia il nostro catalogo, trova i gadget per la tua missione.
+                        </p>
+                    </div>
+                    </div>
+=======
         <!-- Banner welcome NB: Il css di questo banner si trova in Default.CSS -->
         <div id="bannerWelcome" runat="server" class="container-fluid m-0 p-0">
             <div class="homeBanner">
@@ -92,6 +104,7 @@
                 </p>
             </div>
         </div>
+>>>>>>> a99ec65843a662da3edab51e294bc971bcf99d21
         <!-- Contenuto custom da qui -->
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
