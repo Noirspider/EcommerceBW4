@@ -20,8 +20,6 @@ namespace EcommerceBW4
             int userId = Convert.ToInt32(Session["UserId"]);
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
-
-
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 string query = "SELECT IsAdmin FROM Utenti WHERE UtenteID = @UtenteID";
@@ -34,15 +32,12 @@ namespace EcommerceBW4
                 }
             }
 
-            // Se l'utente è amministratore, effettuare il binding dei prodotti altrimenti reindirizzare.
+            // Se l'utente è amministratore e non è un postback, effettuare il binding dei prodotti.
             if (isAdmin && !IsPostBack)
             {
-                if (!IsPostBack)
-                {
-                    BindProdottiDropDown();
-                }
+                BindProdottiDropDown();
             }
-            else
+            else if (!isAdmin)
             {
                 Response.Redirect("Login.aspx");
             }
@@ -181,7 +176,8 @@ namespace EcommerceBW4
                         int rowsAffected = deleteCommand.ExecuteNonQuery();
 
                         string script = "alert('Prodotto eliminato con successo! Bravoh');";
-                        ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+                        ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
+                        BindProdottiDropDown();
 
                         if (rowsAffected > 0)
                         {
@@ -194,7 +190,7 @@ namespace EcommerceBW4
                     {
                         Console.WriteLine($"Error: {ex.Message}");
                         string script = "alert('Non hai eliminato un CAZZO DI NIENTE!!!!!');";
-                        ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+                        ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
                     }
                 }
             }
