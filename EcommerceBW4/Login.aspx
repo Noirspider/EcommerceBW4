@@ -59,12 +59,16 @@
                                 <button class="log-in btn-doblue my-2" runat="server" onserverclick="Login_Click">Log In</button>
 
                                 <button class="btn submits frgt-pass btn-doblue my-2 text-light" runat="server" onserverclick="ForgotPassword_Click">Forgot Password</button>
+
+                                <asp:Label Text="text" ID="lblError" runat="server" Visible="False" CssClass="error" />
+
                             </div>
                         </div>
                         <div class="card__back" style="display: none;">
                             <header class="head-form">
                                 <h2>Sign Up</h2>
-                                <p>Insert username and password and click Sign Up, Age is required</p>
+                                <p>Insert username and password and click Sign Up</p>
+                                <p class="fs-4 fw-semibold"> Age is required!</p>
                             </header>
                             <br />
 
@@ -72,7 +76,6 @@
                                 <i class="bi bi-arrow-right"></i>
                             </button>
                             <div class="d-flex flex-column align-items-center justify-content-center mb-2">
-                                <asp:Label Text="text" ID="lblError" runat="server" Visible="False" CssClass="error" />
 
                                 <div class="d-flex align-items-center justify-content-center">
                                  <span class="input-item">
