@@ -23,6 +23,45 @@ textarea {
 }
 */
 
+html {
+    scroll-behavior:auto;
+}
+
 .card-footer {
     border: none;
 }
+
+.dropdown-menu.show {
+    background: #3A895D;
+    display: block;
+    top: 55px;
+    right: -60px;
+}
+
+.dropdown-item {
+    color: white;
+    background-color: transparent;
+}
+
+    .dropdown-item:hover, .dropdown-item:focus {
+        color: white;
+        background-color: #11281ca3;
+    }
+
+.bg-drop {
+    background-color: #57D08D;
+}
+
+    .bg-drop:hover {
+        background-color: #11281C !IMPORTANT;
+    }
+
+.srch-bg {
+    background-color: #5cdb95;
+}
+
+    .srch-bg:hover {
+        color: white;
+        background-color: #11281C !IMPORTANT;
+    }
+

@@ -46,6 +46,13 @@
     overflow: auto;
     animation: entrata 0.5s forwards;
 }
-.ColoreSfondoDettagli {
+.coloreSfondoDettagli {
     background-color: #2b2b2b;
+}
+.imgDettagli {
+    height: 340px;
+}
+.btnDettagli {
+    background-color: #5cdb95;
+    border: none;
 }

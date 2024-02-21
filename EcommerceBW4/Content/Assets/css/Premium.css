@@ -27,9 +27,9 @@ ul {
 }
 
 .main {
+    width:75rem;
     padding: 3em 1.5em;
-    width: 75rem;
-    margin-inline:auto;
+    margin-inline: auto;
 }
 
 .main__heading {
