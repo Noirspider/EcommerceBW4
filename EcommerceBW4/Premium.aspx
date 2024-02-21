@@ -5,7 +5,7 @@
         <h1 class="main__heading">Pricing</h1>
         <div class="main__cards cards">
             <div class="cards__inner">
-                <div class="cards__card card">
+                <div class="card">
                     <h2 class="card__heading">Basic</h2>
                     <p class="card__price">&#8377;99.99</p>
                     <ul role="list" class="card__bullets flow">

@@ -24,7 +24,7 @@
 
 
 </head>
-<body class="text-white" style="background-color:#000000">
+<body class="text-white">
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
