@@ -46,22 +46,22 @@ namespace EcommerceBW4
                 }
                 else
                 {
-                    // L'utente non è amministratore, quindi reindirizzare o gestire di conseguenza
-                    Response.Redirect("Unauthorized.aspx"); // Pagina personalizzata per accesso negato
+                    // L'utente non è amministratore, quindi reindirizzare alla pagina di accesso negato
+                    Response.Redirect("Unauthorized.aspx"); // Pagina personalizzata per accesso negato da creare e persolanizzare
                 }
-            }
             else
-            {
-                Response.Redirect("Login.aspx");
-            }
+                {
+                    Response.Redirect("Login.aspx");
+                }
 
+            }
         }
 
         private void BindProdottiDropDown()
         {
             try
             {
-                string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+                string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -147,7 +147,7 @@ namespace EcommerceBW4
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string insertSql = "INSERT INTO Prodotti (Nome,ImmagineURL Prezzo) VALUES (@Nome, @ImmagineURL, @Prezzo)";
+                string insertSql = "INSERT INTO Prodotti (Nome,ImmagineURL, Prezzo) VALUES (@Nome, @ImmagineURL, @Prezzo)";
                 SqlCommand insertCommand = new SqlCommand(insertSql, connection);
 
 
@@ -220,7 +220,7 @@ namespace EcommerceBW4
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string updateSql = "UPDATE Prodotti SET (Nome, ProdottoID, ImmagineURL, Prezzo) VALUES (@Nome, @ImmagineURL,@ProdottoID, @Prezzo)";
+                string updateSql = "UPDATE Prodotti SET Nome = @Nome, ImmagineURL = @ImmagineURL, Prezzo = @Prezzo WHERE ProdottoID = @ProdottoID";
                 SqlCommand updateCommand = new SqlCommand(updateSql, connection);
 
                 updateCommand.Parameters.AddWithValue("@Nome", Nome);
