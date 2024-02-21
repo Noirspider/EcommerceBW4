@@ -9,16 +9,19 @@ namespace EcommerceBW4
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            bool isLogged = Session["UserId"] != null;
-            bool isAdmin = false;
-
-            if (isLogged)
+            if (Session["UserId"] == null)
             {
-                // Recupero l'ID utente dalla sessione
-                int userId = Convert.ToInt32(Session["UserId"]);
+                Response.Redirect("Login.aspx");
+                return;
+            }
 
-                string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            // Procedere solo se l'utente è loggato.
+            bool isAdmin = false;
+            int userId = Convert.ToInt32(Session["UserId"]);
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
+            try
+            {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     string query = "SELECT IsAdmin FROM Utenti WHERE UtenteID = @UtenteID";
@@ -27,17 +30,12 @@ namespace EcommerceBW4
                     {
                         cmd.Parameters.AddWithValue("@UtenteID", userId);
                         conn.Open();
-
-                        // Esegui il comando e recupera il valore
-                        object result = cmd.ExecuteScalar();
-                        if (result != null)
-                        {
-                            isAdmin = Convert.ToBoolean(result);
-                        }
+                        isAdmin = Convert.ToBoolean(cmd.ExecuteScalar());
                     }
                 }
 
-                if (isAdmin)
+                // Se l'utente è amministratore, effettuare il binding dei prodotti altrimenti reindirizzare.
+                if (isAdmin && !IsPostBack)
                 {
                     if (!IsPostBack)
                     {
@@ -56,8 +54,6 @@ namespace EcommerceBW4
                     Response.Redirect("Login.aspx");
                 }
 
-            }
-        }
 
         private void BindProdottiDropDown()
         {
