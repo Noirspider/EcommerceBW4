@@ -62,3 +62,9 @@
         color: #ffffffde !important;
         border: none;
     }
+    background-color: #5cdb95 !important;
+    border: none;
+}
+.btnDettagli:hover {
+    transform: scale(1.05); 
+}
