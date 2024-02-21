@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" EnableViewState="true" CodeBehind="Dettagli.aspx.cs" Inherits="EcommerceBW4.Dettagli" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="card my-3 coloreSfondoDettagli">
+    <div class="card my-3 bg-transparent">
         <div class="row g-0 d-flex">
             <div class="col-md-3 d-flex align-items-center justify-content-center">
                 <asp:Image ID="ImgUrl" runat="server" CssClass="img-fluid rounded m-0 imgDettagli"/>
@@ -13,7 +13,7 @@
                     <asp:Button ID="MostraAltroButton" runat="server" Text="altro..." OnClick="MostraDettagli" CssClass="btn text-primary p-0" style="background: none; border: none;" />
                     <div id="DescrizioneEstesaDiv" runat="server" style="display: none;">
                         <p class="m-0">
-                            <asp:Label ID="DescrizioneEstesa" class="card-text text-dark" runat="server"></asp:Label></p>
+                            <asp:Label ID="DescrizioneEstesa" class="card-text text-light" runat="server"></asp:Label></p>
                     </div>
                     <asp:Button ID="NascondiButton" runat="server" Text="meno" OnClick="NascondiDettagli" CssClass="btn text-primary p-0" style="background: none; border: none;" Visible="false" />
                     <p class="mt-2">Quantità disponibile: <br /><asp:Label ID="QuantitaDisponibile" class="card-text" runat="server"></asp:Label></p>
