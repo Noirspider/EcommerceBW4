@@ -6,8 +6,8 @@
         <div class="main__cards cards">
             <div class="cards__inner">
                 <div class="card">
-                    <h2 class="card__heading">Basic</h2>
-                    <p class="card__price">&#8377;99.99</p>
+                    <h2 class="card__heading ps-3 py-3">Basic</h2>
+                    <p class="card__price ps-3">&#8377;99.99</p>
                     <ul role="list" class="card__bullets flow">
                         <li>Piano base per spie basilari</li>
                         <li>Supporto Email</li>
@@ -15,9 +15,9 @@
                     <a href="#basic" class="card__cta cta">Abbonati</a>
                 </div>
 
-                <div class="cards__card card">
-                    <h2 class="card__heading">Pro</h2>
-                    <p class="card__price">&#8377;399.99</p>
+                <div class="cards__card card ">
+                    <h2 class="card__heading ps-3 py-3">Pro</h2>
+                    <p class="card__price ps-3">&#8377;399.99</p>
                     <ul role="list" class="card__bullets flow">
                         <li>Piano avanzato per veri 007.</li>
                         <li>Prioritá nel supporto email</li>
@@ -27,8 +27,8 @@
                 </div>
 
                 <div class="cards__card card">
-                    <h2 class="card__heading">Ultimate</h2>
-                    <p class="card__price">&#8377;999.99</p>
+                    <h2 class="card__heading ps-3 py-3">Ultimate</h2>
+                    <p class="card__price ps-3">&#8377;999.99</p>
                     <ul role="list" class="card__bullets flow">
                         <li>Solo per veri Jhon Wick</li>
                         <li>24/7 Supporto Prioritario</li>
