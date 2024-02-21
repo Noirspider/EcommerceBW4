@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace EcommerceBW4
@@ -47,12 +48,7 @@ namespace EcommerceBW4
             }
         }
 
-        protected void DropDownProdottoBoth(object sender, EventArgs e)
-        {
-            DropDownProdotto_SelectedIndexChanged(sender, e);
-            SecondCard(sender, e);
 
-        }
         protected void DropDownProdotto_SelectedIndexChanged(object sender, EventArgs e)
 
         {
@@ -99,53 +95,115 @@ namespace EcommerceBW4
                 Card.Visible = false;
             }
         }
-
-        protected void SecondCard(object sender, EventArgs e)
+        protected void InsertItem(object sender, EventArgs e)
         {
+
+            string Nome = TextBox1.Text;
+            string ImmagineURL = TextBox2.Text;
+            string Prezzo = TextBox3.Text;
+
+            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string selectedValue = DropDownProdotto.SelectedValue;
+                string insertSql = "INSERT INTO Prodotti (Nome,ImmagineURL Prezzo) VALUES (@Nome, @ImmagineURL, @Prezzo)";
+                SqlCommand insertCommand = new SqlCommand(insertSql, connection);
 
-                if (!string.IsNullOrEmpty(selectedValue))
+
+                insertCommand.Parameters.AddWithValue("@Nome", Nome);
+                insertCommand.Parameters.AddWithValue("@ImmagineURL", ImmagineURL);
+                insertCommand.Parameters.AddWithValue("@Prezzo", Prezzo);
+
+                try
                 {
-                    try
-                    {
-                        string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
-                        using (SqlConnection connection = new SqlConnection(connectionString))
-                        {
-                            connection.Open();
-                            string query = "SELECT NomeDestinatario, IndirizzoDestinatario FROM Spedizioni WHERE ProdottoID = @ProdottoID";
+                    connection.Open();
+                    int rowsAffected = insertCommand.ExecuteNonQuery();
+                    Console.WriteLine($"Inserted {rowsAffected} row(s)!");
 
-                            using (SqlCommand cmd = new SqlCommand(query, connection))
-                            {
-                                cmd.Parameters.AddWithValue("ProdottoID", selectedValue);
-                                using (SqlDataReader reader = cmd.ExecuteReader())
-                                {
-                                    if (reader.Read())
-                                    {
-
-                                        Label1.Text = reader["NomeDestinatario"].ToString();
-                                        Label3.Text = reader["IndirizzoDestinatario"].ToString();
-                                        Card1.Visible = true;
-                                    }
-                                    else
-                                    {
-                                        Card1.Visible = false;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-
-                        Console.WriteLine($"Si è verificato un errore: {ex.Message}");
-                    }
+                    string script = "alert('Prodotto Inserito con Successo Bravoh');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
                 }
-                else
+                catch (Exception ex)
                 {
-                    Card1.Visible = false;
+                    Console.WriteLine($"Si è verificato un errore: {ex.Message}");
                 }
             }
         }
+        protected void DeleteItem(object sender, EventArgs e)
+        {
+            string selectedValue = DropDownProdotto.SelectedValue;
+
+            if (!string.IsNullOrEmpty(selectedValue))
+            {
+                string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    string deleteSql = "DELETE FROM Prodotti WHERE ProdottoID = @selectedValue";
+                    SqlCommand deleteCommand = new SqlCommand(deleteSql, connection);
+
+                    deleteCommand.Parameters.AddWithValue("@selectedValue", selectedValue);
+
+                    try
+                    {
+                        connection.Open();
+                        int rowsAffected = deleteCommand.ExecuteNonQuery();
+
+                        string script = "alert('Prodotto eliminato con successo! Bravoh');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+
+                        if (rowsAffected > 0)
+                        {
+                            Card.Visible = false;
+                            DropDownProdotto.SelectedValue = "";
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                        string script = "alert('Non hai eliminato un CAZZO DI NIENTE!!!!!');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+                    }
+                }
+            }
+        }
+        protected void ModificaItem(object sender, EventArgs e)
+
+        {
+            string Nome = TextBox1.Text;
+            string ImmagineURL = TextBox2.Text;
+            string Prezzo = TextBox3.Text;
+
+            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string updateSql = "UPDATE Prodotti SET (Nome, ProdottoID, ImmagineURL, Prezzo) VALUES (@Nome, @ImmagineURL,@ProdottoID, @Prezzo)";
+                SqlCommand updateCommand = new SqlCommand(updateSql, connection);
+
+                updateCommand.Parameters.AddWithValue("@Nome", Nome);
+                updateCommand.Parameters.AddWithValue("@ImmagineURL", ImmagineURL);
+                updateCommand.Parameters.AddWithValue("@Prezzo", Prezzo);
+                updateCommand.Parameters.AddWithValue("@ProdottoID", DropDownProdotto.SelectedValue);
+
+                try
+                {
+                    connection.Open();
+                    int rowsAffected = updateCommand.ExecuteNonQuery();
+
+                    string script = "alert('Prodotto Modificato con Successo');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
+                    string script = "alert('Non hai modificato Nulla Coglione');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+                }
+            }
+        }
+
     }
 }
