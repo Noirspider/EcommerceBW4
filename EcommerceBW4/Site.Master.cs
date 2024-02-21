@@ -23,7 +23,8 @@ namespace EcommerceBW4
                 !url.Contains("/Dettagli") &&
                 !url.Contains("Premium") &&
                 !url.Contains("OrderConfermation") &&
-                !url.Contains("Checkout"))
+                !url.Contains("Checkout") &&
+                !url.Contains("AdminPage"))
             {
                 bannerWelcome.Visible = true;
             }

@@ -61,7 +61,7 @@ ul {
 }
 
     .card:nth-child(1) {
-        --hue: 165;
+        --hue: 338.69;
         --saturation: 82.26%;
         --lightness: 51.37%;
     }
@@ -73,7 +73,7 @@ ul {
     }
 
     .card:nth-child(3) {
-        --hue: 338.69;
+        --hue: 165;
         --saturation: 100%;
         --lightness: 48.04%;
     }

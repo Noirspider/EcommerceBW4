@@ -22,14 +22,12 @@ namespace EcommerceBW4
             string username = txtUsername.Value;
             string password = txtPassword.Value;
 
-            // connessione dal web.config.
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-
-                // string query = "SELECT COUNT(1) FROM Utenti WHERE NomeUtente=@username AND Password=@password";
-                string query = "SELECT UtenteID FROM Utenti WHERE NomeUtente=@username AND Password=@password";
+                // Aggiornamento della query per includere UtenteID
+                string query = "SELECT UtenteID, NomeUtente, Password FROM Utenti WHERE NomeUtente=@username AND Password=@password";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -37,25 +35,42 @@ namespace EcommerceBW4
                     cmd.Parameters.AddWithValue("@password", password);
 
                     conn.Open();
-                    object result = cmd.ExecuteScalar();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            // Prendi l'username, la password e l'UtenteID dal database
+                            int userId = Convert.ToInt32(reader["UtenteID"]);
+                            string dbUsername = reader["NomeUtente"].ToString();
+                            string dbPassword = reader["Password"].ToString();
 
-                    if (result != null)
-                    {
-                        // L'utente è autenticato correttamente.
-                        int userId = Convert.ToInt32(result);
-                        Session["UserId"] = userId;
-                        Session["Username"] = username;
-                        Response.Redirect("Default.aspx");
-                    }
-                    else
-                    {
-                        // Autenticazione fallita.
-                        lblError.Visible = true;
-                        lblError.Text = "Username o password errati";
+                            // Confronto case-sensitive per username e password
+                            if (dbUsername == username && dbPassword == password)
+                            {
+                                // L'utente è autenticato correttamente.
+                                Session["UserId"] = userId;
+                                Session["Username"] = dbUsername;
+                                Response.Redirect("Default.aspx");
+                            }
+                            else
+                            {
+                                // Autenticazione fallita.
+                                lblError.Visible = true;
+                                lblError.Text = "Username o password errati";
+                            }
+                        }
+                        else
+                        {
+                            // Autenticazione fallita.
+                            lblError.Visible = true;
+                            lblError.Text = "Username o password errati";
+                        }
                     }
                 }
             }
         }
+
+
 
         // metodo per il recupero della password
         protected void ForgotPassword_Click(object sender, EventArgs e)
