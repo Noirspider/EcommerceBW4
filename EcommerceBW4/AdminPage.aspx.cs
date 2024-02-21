@@ -9,16 +9,19 @@ namespace EcommerceBW4
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            bool isLogged = Session["UserId"] != null;
-            bool isAdmin = false;
-
-            if (isLogged)
+            if (Session["UserId"] == null)
             {
-                // Recupero l'ID utente dalla sessione
-                int userId = Convert.ToInt32(Session["UserId"]);
+                Response.Redirect("Login.aspx");
+                return;
+            }
 
-                string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            // Procedere solo se l'utente è loggato.
+            bool isAdmin = false;
+            int userId = Convert.ToInt32(Session["UserId"]);
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
+            try
+            {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     string query = "SELECT IsAdmin FROM Utenti WHERE UtenteID = @UtenteID";
@@ -27,35 +30,28 @@ namespace EcommerceBW4
                     {
                         cmd.Parameters.AddWithValue("@UtenteID", userId);
                         conn.Open();
-
-                        // Esegui il comando e recupera il valore
-                        object result = cmd.ExecuteScalar();
-                        if (result != null)
-                        {
-                            isAdmin = Convert.ToBoolean(result);
-                        }
+                        isAdmin = Convert.ToBoolean(cmd.ExecuteScalar());
                     }
                 }
 
-                if (isAdmin)
+                // Se l'utente è amministratore, effettuare il binding dei prodotti altrimenti reindirizzare.
+                if (isAdmin && !IsPostBack)
                 {
-                    if (!IsPostBack)
-                    {
-                        BindProdottiDropDown();
-                    }
+                    BindProdottiDropDown();
                 }
-                else
+                else if (!isAdmin)
                 {
-                    // L'utente non è amministratore, quindi reindirizzare alla pagina di accesso negato
-                    Response.Redirect("Unauthorized.aspx"); // Pagina personalizzata per accesso negato da creare e persolanizzare
+                    Response.Redirect("Unauthorized.aspx");
                 }
-            else
-                {
-                    Response.Redirect("Login.aspx");
-                }
-
+            }
+            catch (Exception ex)
+            {
+                // Log dell'errore e gestire l'eccezione, ad esempio mostrando un messaggio o reindirizzando.
+                Console.WriteLine($"Errore durante il controllo dell'amministratore: {ex.Message}");
+                // Considera l'utilizzo di logging più avanzato o mostrare un messaggio all'utente.
             }
         }
+
 
         private void BindProdottiDropDown()
         {
@@ -219,10 +215,10 @@ namespace EcommerceBW4
             {
                 string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                string updateSql = "UPDATE Prodotti SET Nome = @Nome, ImmagineURL = @ImmagineURL, Prezzo = @Prezzo WHERE ProdottoID = @ProdottoID";
-                SqlCommand updateCommand = new SqlCommand(updateSql, connection);
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    string updateSql = "UPDATE Prodotti SET Nome = @Nome, ImmagineURL = @ImmagineURL, Prezzo = @Prezzo WHERE ProdottoID = @ProdottoID";
+                    SqlCommand updateCommand = new SqlCommand(updateSql, connection);
 
                     updateCommand.Parameters.AddWithValue("@Nome", Nome);
                     //updateCommand.Parameters.AddWithValue("@ImmagineURL", ImmagineURL);
