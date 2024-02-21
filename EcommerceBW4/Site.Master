@@ -52,8 +52,8 @@
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
-                        <!-- <li class="nav-item"><a class="nav-link" runat="server" href="~/About">Login</a></li> -->
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Carrello">Carrello</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/AdminPage" visible="false">Amministrazione</a></li> 
                     </ul>
                 </div>
                 <div class="d-flex align-items-center gap-2">
@@ -79,8 +79,8 @@
                                 </asp:LinkButton></a>
                         </div>
                     </div>
-                </div>
             </div>
+                </div>
         </nav>
 
         <!-- Banner welcome NB: Il css di questo banner si trova in Default.CSS -->

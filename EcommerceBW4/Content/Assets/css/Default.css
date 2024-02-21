@@ -47,7 +47,8 @@
 }
 
 .card-img-top-default {
-    height: 200px;
+    height: 150px;
+    width:auto;
     object-fit: cover;
     opacity: 0.8;
     cursor: pointer;
@@ -107,6 +108,6 @@
     font-weight: 600;
 }
 
-footer p {
-    color: #808080;
+.hover:hover {
+    background-color: #07100A;
 }

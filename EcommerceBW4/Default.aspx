@@ -11,8 +11,8 @@
                         <asp:Repeater ID="prodottiRepeater" runat="server">
                             <ItemTemplate>
                                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 xol-xxl-2 mb-4 d-flex">
-                                    <div class="card card-custom flex-fill d-flex flex-column h-100 bg-dark">
-                                        <div class="card-img-container">
+                                    <div class="card card-custom flex-fill d-flex flex-column h-100 bg-transparent hover">
+                                        <div class="card-img-container text-center m-0 mt-2">
                                             <img src='<%# Eval("ImmagineURL") %>' class="card-img-top card-img-top-default" alt="Immagini del prodotto">
                                         </div>
                                         <div class="card-body card-body-default d-flex flex-column">
