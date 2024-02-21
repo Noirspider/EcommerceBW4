@@ -34,21 +34,21 @@ namespace EcommerceBW4
                 }
             }
 
-                // Se l'utente è amministratore, effettuare il binding dei prodotti altrimenti reindirizzare.
-                if (isAdmin && !IsPostBack)
+            // Se l'utente è amministratore, effettuare il binding dei prodotti altrimenti reindirizzare.
+            if (isAdmin && !IsPostBack)
+            {
+                if (!IsPostBack)
                 {
-                    if (!IsPostBack)
-                    {
-                        BindProdottiDropDown();
-                    }
+                    BindProdottiDropDown();
                 }
-                else
-                {
-                    Response.Redirect("Login.aspx");
-                }
-            
             }
-          }
+            else
+            {
+                Response.Redirect("Login.aspx");
+            }
+
+
+        }
 
         private void BindProdottiDropDown()
         {
