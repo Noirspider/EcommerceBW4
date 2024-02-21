@@ -99,7 +99,6 @@ namespace EcommerceBW4
         {
 
             string Nome = TextBox1.Text;
-            string ImmagineURL = TextBox2.Text;
             string Prezzo = TextBox3.Text;
 
             string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
@@ -111,7 +110,7 @@ namespace EcommerceBW4
 
 
                 insertCommand.Parameters.AddWithValue("@Nome", Nome);
-                insertCommand.Parameters.AddWithValue("@ImmagineURL", ImmagineURL);
+                //insertCommand.Parameters.AddWithValue("@ImmagineURL", ImmagineURL);
                 insertCommand.Parameters.AddWithValue("@Prezzo", Prezzo);
 
                 try
@@ -169,38 +168,40 @@ namespace EcommerceBW4
             }
         }
         protected void ModificaItem(object sender, EventArgs e)
-
         {
             string Nome = TextBox1.Text;
-            string ImmagineURL = TextBox2.Text;
+            //string ImmagineURL = TextBox2.Text;
             string Prezzo = TextBox3.Text;
+            string selectedValue = DropDownProdotto.SelectedValue;
 
-            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            if (!string.IsNullOrEmpty(selectedValue))
             {
-                string updateSql = "UPDATE Prodotti SET (Nome, ProdottoID, ImmagineURL, Prezzo) VALUES (@Nome, @ImmagineURL,@ProdottoID, @Prezzo)";
-                SqlCommand updateCommand = new SqlCommand(updateSql, connection);
+                string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
-                updateCommand.Parameters.AddWithValue("@Nome", Nome);
-                updateCommand.Parameters.AddWithValue("@ImmagineURL", ImmagineURL);
-                updateCommand.Parameters.AddWithValue("@Prezzo", Prezzo);
-                updateCommand.Parameters.AddWithValue("@ProdottoID", DropDownProdotto.SelectedValue);
-
-                try
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    connection.Open();
-                    int rowsAffected = updateCommand.ExecuteNonQuery();
+                    string updateSql = "UPDATE Prodotti SET Nome = @Nome, ImmagineURL = @ImmagineURL, Prezzo = @Prezzo WHERE ProdottoID = @ProdottoID";
+                    SqlCommand updateCommand = new SqlCommand(updateSql, connection);
 
-                    string script = "alert('Prodotto Modificato con Successo');";
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+                    updateCommand.Parameters.AddWithValue("@Nome", Nome);
+                    //updateCommand.Parameters.AddWithValue("@ImmagineURL", ImmagineURL);
+                    updateCommand.Parameters.AddWithValue("@Prezzo", Prezzo);
+                    updateCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
 
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error: {ex.Message}");
-                    string script = "alert('Non hai modificato Nulla Coglione');";
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+                    try
+                    {
+                        connection.Open();
+                        int rowsAffected = updateCommand.ExecuteNonQuery();
+
+                        string script = "alert('Prodotto Modificato con Successo');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                        string script = "alert('Non hai modificato Nulla Coglione');";
+                        ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+                    }
                 }
             }
         }
