@@ -112,12 +112,19 @@ footer a:hover {
 
 
 /* Personalizzazione dei bottoni */
-.btn-custom,
-.btn-custom:hover {
+.btn-custom {
     background-color: #5cdb95;
     border: none;
     margin: 0,8rem;
 }
+
+    .btn-custom:hover,
+    .btn-custom:active,
+    .btn-custom:focus,
+    .btn-custom:focus-visible,
+    .btn-custom:focus-within{
+        background-color: #10261B !IMPORTANT;
+    }
 
     .btn-custom svg {
         color: black;
@@ -141,4 +148,8 @@ footer a:hover {
 
 .hover:hover {
     background-color: #07100A;
+}
+
+.btn-buy {
+    padding-inline: 50px;
 }

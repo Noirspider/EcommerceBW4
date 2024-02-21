@@ -60,7 +60,7 @@ form {
 
 /* the header form form */
 header {
-    margin: 2% auto 10% auto;
+    margin: 2% auto 5% auto;
     text-align: center;
 }
 
@@ -89,9 +89,9 @@ header {
     color: #000000;
     border-radius: 5px 0px 0px 5px;
     position: relative;
-    padding: 13px;
-    top: 3px;
-    left: 0;
+    padding: 12px 14px 14px 14px;
+    top: 2.6px;
+    left: 5px;
     z-index: 5;
     cursor: pointer;
 }
@@ -118,7 +118,7 @@ input[class="form-input"] {
     background-color: #8b8b8b;
     outline: none;
     border: none;
-    border-radius: 0px 5px 5px 0px;
+    border-radius: 5px 5px 5px 5px;
     transition: 0.2s linear;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -133,11 +133,6 @@ input[id="txt-input"] {
     width: 250px;
 }
 
-/* focus  */
-input:focus {
-    transform: translateX(-2px);
-    border-radius: 5px;
-}
 
 /* //////////////////////////////////////////// */
 /* //////////////////////////////////////////// */
@@ -160,8 +155,9 @@ button {
 }
 
 .btn-doblue {
-    width: 270px;
+    width: 280px;
     height: 50px;
+    border-radius: 5px 5px 5px 5px;
 }
 
 .other {
@@ -170,20 +166,15 @@ button {
 }
 
 /*       Forgot Password button FAF3DD  */
-.frgt-pass {
-    background: transparent;
-}
-
-/*     Sign Up button  */
-.sign-up,
-.frgt-pass {
-    background: #83fdba;
+.frgt-pass, .sign-up {
+    margin-top: 10px;
+    background-color: #00000095 !important;
 }
 
     .sign-up:hover,
     .frgt-pass:hover {
         background-color: #000;
-        color: #5cdb95;
+        color: white;
         border: 2px solid #5cdb95;
     }
 
@@ -215,10 +206,16 @@ font-size: 18px;
 
 .btn-pstn {
     position: absolute;
-    top:10px;
+    top:20px;
     right:20px;
     z-index: 5;
 }
+
+.btn-pstn:focus{
+    outline:none;
+    border:none;
+}
+
 .con {
     position: relative;
 }
