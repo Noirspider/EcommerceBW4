@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Configuration;
 using System.Data.SqlClient;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace EcommerceBW4
@@ -9,11 +9,52 @@ namespace EcommerceBW4
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                BindProdottiDropDown();
+            bool isLogged = Session["UserId"] != null;
+            bool isAdmin = false;
 
+            if (isLogged)
+            {
+                // Recupero l'ID utente dalla sessione
+                int userId = Convert.ToInt32(Session["UserId"]);
+
+                string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT IsAdmin FROM Utenti WHERE UtenteID = @UtenteID";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@UtenteID", userId);
+                        conn.Open();
+
+                        // Esegui il comando e recupera il valore
+                        object result = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            isAdmin = Convert.ToBoolean(result);
+                        }
+                    }
+                }
+
+                if (isAdmin)
+                {
+                    if (!IsPostBack)
+                    {
+                        BindProdottiDropDown();
+                    }
+                }
+                else
+                {
+                    // L'utente non è amministratore, quindi reindirizzare o gestire di conseguenza
+                    Response.Redirect("Unauthorized.aspx"); // Pagina personalizzata per accesso negato
+                }
             }
+            else
+            {
+                Response.Redirect("Login.aspx");
+            }
+
         }
 
         private void BindProdottiDropDown()
