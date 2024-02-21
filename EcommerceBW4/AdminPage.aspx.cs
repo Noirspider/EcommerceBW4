@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.IO;
+using System.Linq;
 using System.Web.UI.WebControls;
 
 namespace EcommerceBW4
@@ -126,9 +128,46 @@ namespace EcommerceBW4
         }
         protected void InsertItem(object sender, EventArgs e)
         {
-
             string Nome = TextBox1.Text;
             string Prezzo = TextBox3.Text;
+            string ImmagineURL = string.Empty; // Inizializzazione della variabile per l'URL dell'immagine
+
+            // Controlla se il FileUpload ha un file e che sia un'immagine
+            if (FileUpload1.HasFile)
+            {
+                // Elenco delle estensioni di file immagine accettate
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".bmp" };
+                string fileExtension = Path.GetExtension(FileUpload1.FileName).ToLower();
+
+                if (allowedExtensions.Contains(fileExtension))
+                {
+                    try
+                    {
+                        // Costruisci il percorso dove l'immagine sarà salvata
+                        string filename = Path.GetFileName(FileUpload1.FileName);
+                        string savePath = Server.MapPath("/Content/Assets/images/prodottiUp/") + filename;
+
+                        // Salva l'immagine nel percorso specificato
+                        FileUpload1.SaveAs(savePath);
+
+                        // Imposta l'URL dell'immagine da salvare nel database
+                        ImmagineURL = "/Content/Assets/images/prodottiUp/" + filename;
+                    }
+                    catch (Exception ex)
+                    {
+                        // Gestisci l'eccezione, ad esempio mostrando un messaggio all'utente
+                        Console.WriteLine($"Si è verificato un errore durante il caricamento dell'immagine: {ex.Message}");
+                        return;
+                    }
+                }
+                else
+                {
+                    // Mostra un messaggio di errore se il file non è un'immagine
+                    string script = "alert('Il file selezionato non è un'immagine valida.');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+                    return;
+                }
+            }
 
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
@@ -137,9 +176,8 @@ namespace EcommerceBW4
                 string insertSql = "INSERT INTO Prodotti (Nome,ImmagineURL, Prezzo) VALUES (@Nome, @ImmagineURL, @Prezzo)";
                 SqlCommand insertCommand = new SqlCommand(insertSql, connection);
 
-
                 insertCommand.Parameters.AddWithValue("@Nome", Nome);
-                //insertCommand.Parameters.AddWithValue("@ImmagineURL", ImmagineURL);
+                insertCommand.Parameters.AddWithValue("@ImmagineURL", ImmagineURL);
                 insertCommand.Parameters.AddWithValue("@Prezzo", Prezzo);
 
                 try
@@ -150,6 +188,9 @@ namespace EcommerceBW4
 
                     string script = "alert('Prodotto Inserito con Successo Bravoh');";
                     ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+
+                    // Aggiorna il DropDownList per mostrare il nuovo prodotto
+                    BindProdottiDropDown();
                 }
                 catch (Exception ex)
                 {
@@ -157,6 +198,7 @@ namespace EcommerceBW4
                 }
             }
         }
+
         protected void DeleteItem(object sender, EventArgs e)
         {
             string selectedValue = DropDownProdotto.SelectedValue;
