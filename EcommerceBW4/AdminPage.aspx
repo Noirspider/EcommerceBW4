@@ -34,12 +34,14 @@
                                 </div>
                             </div>
                         </div>
-                        <asp:Button ID="Create" runat="server" Text="Crea Item" OnClick="InsertItem" CssClass="btn btn-secondary me-2" />
-                        <asp:Button ID="Modify" runat="server" Text="Modifica"  OnClick="ModificaItem" CssClass="btn btn-secondary" />
-                        <asp:Button ID="Delete" runat="server" Text="Cancella"  OnClick="DeleteItem" CssClass="btn btn-danger ms-2" />
+                        <div class="mb-4">
+                               <asp:Button ID="Create" runat="server" Text="Crea Item" OnClick="InsertItem" CssClass="btn btn-secondary me-2" />
+                               <asp:Button ID="Modify" runat="server" Text="Modifica"  OnClick="ModificaItem" CssClass="btn btn-secondary" />
+                               <asp:Button ID="Delete" runat="server" Text="Cancella"  OnClick="DeleteItem" CssClass="btn btn-danger ms-2" />
+                        </div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-4 mb-4">
                     <div id="Card" runat="server" class="card" visible="false" style="box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);">
                         <asp:Image ID="ImgCarrello" runat="server" ImageUrl="~/path/to/default/image.jpg" CssClass="card-img-top d-inline-flex" alt="Card Image" Style="object-fit: cover;" />
                         <div class="card-body">

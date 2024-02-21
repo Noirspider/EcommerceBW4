@@ -66,7 +66,6 @@ namespace EcommerceBW4
                             DropDownProdotto.DataTextField = "Nome";
                             DropDownProdotto.DataValueField = "ProdottoID";
                             DropDownProdotto.DataBind();
-
                             DropDownProdotto.Items.Insert(0, new ListItem("Scegli il tuo SpyGadget:", ""));
                         }
                     }
@@ -241,6 +240,7 @@ namespace EcommerceBW4
         }
         protected void ModificaItem(object sender, EventArgs e)
         {
+
             string Nome = TextBox1.Text;
             //string ImmagineURL = TextBox2.Text;
             string Prezzo = TextBox3.Text;
@@ -252,7 +252,7 @@ namespace EcommerceBW4
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string updateSql = "UPDATE Prodotti SET Nome = @Nome, ImmagineURL = @ImmagineURL, Prezzo = @Prezzo WHERE ProdottoID = @ProdottoID";
+                    string updateSql = "UPDATE Prodotti SET Nome = @Nome, Prezzo = @Prezzo WHERE ProdottoID = @ProdottoID";
                     SqlCommand updateCommand = new SqlCommand(updateSql, connection);
 
                     updateCommand.Parameters.AddWithValue("@Nome", Nome);
@@ -264,9 +264,15 @@ namespace EcommerceBW4
                     {
                         connection.Open();
                         int rowsAffected = updateCommand.ExecuteNonQuery();
-
-                        string script = "alert('Prodotto Modificato con Successo');";
-                        ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
+                        AggiornaCard(selectedValue);
+                        BindProdottiDropDown();
+                        TextBox1.Text = "";
+                        TextBox3.Text = "";
+                        if (rowsAffected > 0) 
+                        {
+                            string alertScript = "alert('Prodotto Modificato con Successo');";
+                            ClientScript.RegisterStartupScript(GetType(), "alert", alertScript, true);
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -275,6 +281,39 @@ namespace EcommerceBW4
                         ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
                     }
                 }
+            }
+        }
+        private void AggiornaCard(string selectedValue)
+        {
+            try
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT Nome, Prezzo, ImmagineURL FROM Prodotti WHERE ProdottoID = @ProdottoID";
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@ProdottoID", selectedValue);
+                        connection.Open();
+                        SqlDataReader reader = cmd.ExecuteReader();
+
+                        if (reader.Read())
+                        {
+                            ImgCarrello.ImageUrl = reader["ImmagineURL"].ToString();
+                            LblNome.Text = reader["Nome"].ToString();
+                            LblPrezzo.Text = string.Format("Prezzo: {0:C}", reader["Prezzo"]);
+                            Card.Visible = true;
+                        }
+                        else
+                        {
+                            Card.Visible = false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Si è verificato un errore durante l'aggiornamento della card: {ex.Message}");
             }
         }
     }
