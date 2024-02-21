@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -277,5 +278,110 @@ namespace EcommerceBW4
                 }
             }
         }
+        protected void DropDownStats_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedValue = DropDownStats.SelectedValue;
+            switch (selectedValue)
+            {
+                case "TotalOrders":
+                    GetTotalOrders();
+                    break;
+                case "TotalProductsSold":
+                    GetTotalProductsSold();
+                    break;
+                case "TotalRevenue":
+                    GetTotalRevenue();
+                    break;
+                case "OrdersPerUser":
+                    GetOrdersPerUser();
+                    break;
+                default:
+                    // Gestisci il caso in cui non sia stata selezionata una statistica valida
+                    break;
+            }
+        }
+        protected void GetTotalOrders()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string queryTotalOrders = "SELECT COUNT(*) FROM Ordini";
+                SqlCommand cmd = new SqlCommand(queryTotalOrders, conn);
+                try
+                {
+                    conn.Open();
+                    int totalOrders = (int)cmd.ExecuteScalar();
+                    LblResult.Text = $"Totale ordini effettuati: {totalOrders}";
+                }
+                catch (Exception ex)
+                {
+                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                }
+            }
+        }
+        protected void GetTotalProductsSold()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string queryTotalProductsSold = "SELECT SUM(QuantitaDisponibile) FROM DettaglioProdotto";
+                SqlCommand cmd = new SqlCommand(queryTotalProductsSold, conn);
+                try
+                {
+                    conn.Open();
+                    int totalProductsSold = (int)cmd.ExecuteScalar();
+                    LblResult.Text = $"Totale prodotti venduti: {totalProductsSold}";
+                }
+                catch (Exception ex)
+                {
+                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                }
+            }
+        }
+        protected void GetTotalRevenue()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string queryTotalRevenue = "SELECT SUM(TotaleOrdine) FROM Ordini";
+                SqlCommand cmd = new SqlCommand(queryTotalRevenue, conn);
+                try
+                {
+                    conn.Open();
+                    decimal totalRevenue = (decimal)cmd.ExecuteScalar();
+                    LblResult.Text = $"Incasso totale: {totalRevenue:C}";
+                }
+                catch (Exception ex)
+                {
+                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                }
+            }
+        }
+        protected void GetOrdersPerUser()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string queryOrdersPerUser = "SELECT UtenteID, COUNT(*) AS NumeroOrdini FROM Ordini GROUP BY UtenteID";
+                SqlCommand cmd = new SqlCommand(queryOrdersPerUser, conn);
+                DataTable dataTable = new DataTable();
+                try
+                {
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        dataTable.Load(reader);
+                    }
+                    GridViewResults.DataSource = dataTable;
+                    GridViewResults.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                }
+            }
+        }
+
+
     }
 }
