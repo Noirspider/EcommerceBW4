@@ -43,13 +43,15 @@ namespace EcommerceBW4
                     {
                         BindProdottiDropDown();
                     }
+
+
+                    else
+                    {
+                        // L'utente non è amministratore, quindi reindirizzare alla pagina di accesso negato
+                        Response.Redirect("Unauthorized.aspx"); // Pagina personalizzata per accesso negato da creare e persolanizzare
+                    }
                 }
                 else
-                {
-                    // L'utente non è amministratore, quindi reindirizzare alla pagina di accesso negato
-                    Response.Redirect("Unauthorized.aspx"); // Pagina personalizzata per accesso negato da creare e persolanizzare
-                }
-            else
                 {
                     Response.Redirect("Login.aspx");
                 }
@@ -219,10 +221,10 @@ namespace EcommerceBW4
             {
                 string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                string updateSql = "UPDATE Prodotti SET Nome = @Nome, ImmagineURL = @ImmagineURL, Prezzo = @Prezzo WHERE ProdottoID = @ProdottoID";
-                SqlCommand updateCommand = new SqlCommand(updateSql, connection);
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    string updateSql = "UPDATE Prodotti SET Nome = @Nome, ImmagineURL = @ImmagineURL, Prezzo = @Prezzo WHERE ProdottoID = @ProdottoID";
+                    SqlCommand updateCommand = new SqlCommand(updateSql, connection);
 
                     updateCommand.Parameters.AddWithValue("@Nome", Nome);
                     //updateCommand.Parameters.AddWithValue("@ImmagineURL", ImmagineURL);
@@ -246,6 +248,5 @@ namespace EcommerceBW4
                 }
             }
         }
-
     }
 }
