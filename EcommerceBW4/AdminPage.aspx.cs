@@ -41,19 +41,14 @@ namespace EcommerceBW4
                     {
                         BindProdottiDropDown();
                     }
-
-
-                    else
-                    {
-                        // L'utente non è amministratore, quindi reindirizzare alla pagina di accesso negato
-                        Response.Redirect("Unauthorized.aspx"); // Pagina personalizzata per accesso negato da creare e persolanizzare
-                    }
                 }
                 else
                 {
                     Response.Redirect("Login.aspx");
                 }
-
+            
+            }
+          }
 
         private void BindProdottiDropDown()
         {
