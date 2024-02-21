@@ -30,3 +30,11 @@ html {
 .card-footer {
     border: none;
 }
+
+.dropdown-menu.show {
+    background: #3A895D;
+    color:white;
+    display: block;
+    top: 55px;
+    right: -60px;
+}
