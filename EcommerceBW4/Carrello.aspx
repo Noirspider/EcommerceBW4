@@ -13,7 +13,7 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                     <div class="col-12 col-md-6 col-lg-4 col-xl-3 xol-xxl-2 mb-4 d-flex mb-4">
-                        <div class="card h-100 w-100 bg-dark">
+                        <div class="card h-100 w-100 bg-transparent">
                             <img src='<%# Eval("ImmagineURL") %>' alt="Product Image" class="card-img-top" style="object-fit: cover" />
                             <div class="card-body">
                                 <h5 class="card-title"><%# Eval("Nome") %></h5>

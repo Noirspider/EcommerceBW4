@@ -118,6 +118,17 @@
     <Content Include="Content\Assets\images\detectiveaddsquare.png" />
     <Content Include="Content\Assets\images\LogoEE.png" />
     <Content Include="Content\Assets\images\murderisteryaddsquare.png" />
+    <Content Include="Content\Assets\images\prodottiUp\antenna.png" />
+    <Content Include="Content\Assets\images\prodottiUp\barattolo.png" />
+    <Content Include="Content\Assets\images\prodottiUp\batman.png" />
+    <Content Include="Content\Assets\images\prodottiUp\bowtie.png" />
+    <Content Include="Content\Assets\images\prodottiUp\cintura.png" />
+    <Content Include="Content\Assets\images\prodottiUp\cuffia.png" />
+    <Content Include="Content\Assets\images\prodottiUp\mantello.png" />
+    <Content Include="Content\Assets\images\prodottiUp\occhiali.png" />
+    <Content Include="Content\Assets\images\prodottiUp\penna.png" />
+    <Content Include="Content\Assets\images\prodottiUp\portafogli.png" />
+    <Content Include="Content\Assets\images\prodottiUp\scatola.png" />
     <Content Include="Content\Assets\images\securityaddsquare.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
