@@ -20,38 +20,35 @@ namespace EcommerceBW4
             int userId = Convert.ToInt32(Session["UserId"]);
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    string query = "SELECT IsAdmin FROM Utenti WHERE UtenteID = @UtenteID";
 
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@UtenteID", userId);
-                        conn.Open();
-                        isAdmin = Convert.ToBoolean(cmd.ExecuteScalar());
-                    }
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT IsAdmin FROM Utenti WHERE UtenteID = @UtenteID";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@UtenteID", userId);
+                    conn.Open();
+                    isAdmin = Convert.ToBoolean(cmd.ExecuteScalar());
                 }
+            }
 
                 // Se l'utente è amministratore, effettuare il binding dei prodotti altrimenti reindirizzare.
                 if (isAdmin && !IsPostBack)
                 {
-                    BindProdottiDropDown();
+                    if (!IsPostBack)
+                    {
+                        BindProdottiDropDown();
+                    }
                 }
-                else if (!isAdmin)
+                else
                 {
-                    Response.Redirect("Unauthorized.aspx");
+                    Response.Redirect("Login.aspx");
                 }
+            
             }
-            catch (Exception ex)
-            {
-                // Log dell'errore e gestire l'eccezione, ad esempio mostrando un messaggio o reindirizzando.
-                Console.WriteLine($"Errore durante il controllo dell'amministratore: {ex.Message}");
-                // Considera l'utilizzo di logging più avanzato o mostrare un messaggio all'utente.
-            }
-        }
-
+          }
 
         private void BindProdottiDropDown()
         {
@@ -95,7 +92,7 @@ namespace EcommerceBW4
             {
                 try
                 {
-                    string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+                    string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
                         connection.Open();
@@ -138,7 +135,7 @@ namespace EcommerceBW4
             string Nome = TextBox1.Text;
             string Prezzo = TextBox3.Text;
 
-            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -171,7 +168,7 @@ namespace EcommerceBW4
 
             if (!string.IsNullOrEmpty(selectedValue))
             {
-                string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+                string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -213,7 +210,7 @@ namespace EcommerceBW4
 
             if (!string.IsNullOrEmpty(selectedValue))
             {
-                string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+                string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -231,17 +228,16 @@ namespace EcommerceBW4
                         int rowsAffected = updateCommand.ExecuteNonQuery();
 
                         string script = "alert('Prodotto Modificato con Successo');";
-                        ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+                        ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine($"Error: {ex.Message}");
                         string script = "alert('Non hai modificato Nulla Coglione');";
-                        ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+                        ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
                     }
                 }
             }
         }
-
     }
 }
