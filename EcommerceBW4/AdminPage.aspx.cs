@@ -302,13 +302,14 @@ namespace EcommerceBW4
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string queryTotalOrders = "SELECT COUNT(*) FROM Ordini";
-                SqlCommand cmd = new SqlCommand(queryTotalOrders, conn);
+                string queryTotalOrders = "SELECT 'Totale ordini effettuati' AS Statistica, COUNT(*) AS Valore FROM Ordini";
+                SqlDataAdapter adapter = new SqlDataAdapter(queryTotalOrders, conn);
+                DataTable dataTable = new DataTable();
                 try
                 {
-                    conn.Open();
-                    int totalOrders = (int)cmd.ExecuteScalar();
-                    LblResult.Text = $"Totale ordini effettuati: {totalOrders}";
+                    adapter.Fill(dataTable);
+                    GridViewResults.DataSource = dataTable;
+                    GridViewResults.DataBind();
                 }
                 catch (Exception ex)
                 {
@@ -321,13 +322,14 @@ namespace EcommerceBW4
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string queryTotalProductsSold = "SELECT SUM(QuantitaDisponibile) FROM DettaglioProdotto";
-                SqlCommand cmd = new SqlCommand(queryTotalProductsSold, conn);
+                string queryTotalProductsSold = "SELECT 'Totale prodotti venduti' AS Statistica, SUM(QuantitaDisponibile) AS Valore FROM DettagliProdotto";
+                SqlDataAdapter adapter = new SqlDataAdapter(queryTotalProductsSold, conn);
+                DataTable dataTable = new DataTable();
                 try
                 {
-                    conn.Open();
-                    int totalProductsSold = (int)cmd.ExecuteScalar();
-                    LblResult.Text = $"Totale prodotti venduti: {totalProductsSold}";
+                    adapter.Fill(dataTable);
+                    GridViewResults.DataSource = dataTable;
+                    GridViewResults.DataBind();
                 }
                 catch (Exception ex)
                 {
@@ -340,13 +342,14 @@ namespace EcommerceBW4
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string queryTotalRevenue = "SELECT SUM(TotaleOrdine) FROM Ordini";
-                SqlCommand cmd = new SqlCommand(queryTotalRevenue, conn);
+                string queryTotalRevenue = "SELECT 'Incasso totale' AS Statistica, SUM(TotaleOrdine) AS Valore FROM Ordini";
+                SqlDataAdapter adapter = new SqlDataAdapter(queryTotalRevenue, conn);
+                DataTable dataTable = new DataTable();
                 try
                 {
-                    conn.Open();
-                    decimal totalRevenue = (decimal)cmd.ExecuteScalar();
-                    LblResult.Text = $"Incasso totale: {totalRevenue:C}";
+                    adapter.Fill(dataTable);
+                    GridViewResults.DataSource = dataTable;
+                    GridViewResults.DataBind();
                 }
                 catch (Exception ex)
                 {

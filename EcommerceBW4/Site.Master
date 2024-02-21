@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="./Content/Assets/css/Dettagli.css" />
     <link rel="stylesheet" href="./Content/assets/css/Default.css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="./Content/Assets/css/GridAdminPage.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 <body class="text-white">
@@ -104,15 +105,21 @@
             <footer>
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-3">
-                            <img src="Content/Assets/images/logo-footer.png" style="height: 3vmin" alt="EELogo footer" />
-                        </div>
-                        <div class="col-md-9">
+                        <div class="col-lg-4 col-md-8">
+                            <img src="Content/Assets/images/logo-footer.png" style="height: 4vmin" alt="EELogo footer"/></div>
+                        <div class="col-lg-8 col-md-4">
                             <p>&copy; <%: DateTime.Now.Year %> - Applicazione ASP.NET <span class="welcome-message">by Team Ⅵ</span></p>
+                            <ul class="list-unstyled">
+                        <li><a href="https://github.com/Frelser77" target="_blank"> Salvatore Alessandro D'Amico</a></li>
+                        <li><a href="https://github.com/Aleguid97" target="_blank"> Alessio Guida</a></li>
+                        <li><a href="https://github.com/Noirspider" target="_blank"> Gianluca Grillo</a></li>
+                        <li><a href="https://github.com/Aucons94" target="_blank"> Alessandro Aucone</a></li>
+                        <li><a href="https://github.com/acelilli" target="_blank"> Alice Alessandrini</a></li>
+                        <!-- Aggiungi altre voci della lista se necessario -->
+                    </ul>
                         </div>
                     </div>
                 </div>
-
             </footer>
         </div>
     </form>

@@ -28,8 +28,34 @@
         opacity: 0.6; 
         z-index: -1; 
     }
+/* Footer */
+footer{
+    margin-top: 1rem;
+}
 
+footer p, 
+footer a {
+    opacity: 0.7;
+}
 
+footer ul {
+        list-style: none;
+        font-size: 0.9rem;
+}
+
+    footer ul li {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+footer a {
+  text-decoration: none;
+  color: inherit;
+}
+
+footer a:hover {
+    color: #5cdb95;
+}
 
 /* Personalizzazione delle card */
 .card-custom {
