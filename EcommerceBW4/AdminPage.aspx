@@ -85,6 +85,8 @@
     <asp:ListItem Text="Totale prodotti venduti" Value="TotalProductsSold"></asp:ListItem>
     <asp:ListItem Text="Incasso totale" Value="TotalRevenue"></asp:ListItem>
     <asp:ListItem Text="Ordini per utente" Value="OrdersPerUser"></asp:ListItem>
+                    <asp:ListItem Text="Utenti per Età" Value="UsersPerAge"></asp:ListItem>
+                    <asp:ListItem Text="Utenti per Paese" Value="OrdersPerCountry"></asp:ListItem>
 </asp:DropDownList>
                         </div>
             </div>
