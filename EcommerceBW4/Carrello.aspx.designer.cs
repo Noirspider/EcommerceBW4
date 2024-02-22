@@ -33,15 +33,6 @@ namespace EcommerceBW4
         protected global::System.Web.UI.WebControls.Repeater carrelloRepeater;
 
         /// <summary>
-        /// Controllo BtnClearCart.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnClearCart;
-
-        /// <summary>
         /// Controllo BtnCompleteOrder.
         /// </summary>
         /// <remarks>
@@ -49,5 +40,14 @@ namespace EcommerceBW4
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnCompleteOrder;
+
+        /// <summary>
+        /// Controllo BtnClearCart.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnClearCart;
     }
 }

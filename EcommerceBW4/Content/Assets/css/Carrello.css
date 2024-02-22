@@ -25,3 +25,31 @@ button {
     height: 50px;
     width: 50px;
 }
+.svuotaCarrello {
+    background-color: transparent;
+    border: 1px solid red;
+    margin: 0, 8rem;
+    transition: all 0.3s;
+    color: white;
+}
+.svuotaCarrello:hover {
+    background-color: red;
+    transform: scale(1.1);
+}
+.btn-customCarrello {
+    background-color: transparent;
+    border: 1px solid #5cdb95;
+    margin: 0, 8rem;
+    transition: all 0.3s;
+    color: white;
+}
+.btn-CardsCarrello {
+    width: 100px;
+}
+.btn-customCarrello:hover {
+    transform: scale(1.1);
+    background-color: #5cdb95;
+}
+.customCardCarrello {
+    border: 1px solid #5cdb95;
+}

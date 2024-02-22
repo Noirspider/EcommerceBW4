@@ -90,3 +90,25 @@ btn {
     ::-webkit-scrollbar-thumb:hover {
         background: #555; /* Cambia questo colore per modificare il colore al passaggio del mouse */
     }
+
+.profile-card {
+    background-image: linear-gradient(-220deg, #5cdb95 0%, #333333 60%);
+    opacity: 0.8;
+    transition: background-color 0.4s linear, opacity 0.2s linear;
+}
+
+    .profile-card:hover {
+        background-image: linear-gradient(-220deg, #333333 0%, #5cdb95 60%);
+        opacity: 1;
+    }
+
+.text--stroke-profile {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1.5px #3B8C5F;
+    text-align: center;
+}
+
+    .text--stroke-profile:hover {
+        -webkit-text-fill-color: transparent;
+        -webkit-text-stroke: 1.5px #54C889;
+    }

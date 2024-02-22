@@ -3,7 +3,6 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace EcommerceBW4
 {
@@ -61,6 +60,7 @@ namespace EcommerceBW4
             return dtDettagliOrdine;
         }
 
+        /*
         protected void RepeaterOrders_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "ShowDetails")
@@ -68,21 +68,26 @@ namespace EcommerceBW4
                 int ordineId = Convert.ToInt32(e.CommandArgument);
                 DataTable dtDettagliOrdine = GetDettagliOrdinePerProdotto(ordineId);
 
-                // Trova il PlaceHolder all'interno del RepeaterItem
-                PlaceHolder placeholderDetails = e.Item.FindControl("PlaceholderOrderDetails") as PlaceHolder;
-                if (placeholderDetails != null)
+                
+                Repeater repeaterOrderDetails = modalBody.FindControl("RepeaterOrderDetails") as Repeater;
+                if (repeaterOrderDetails != null)
                 {
-                    Repeater repeaterOrderDetails = new Repeater
-                    {
-                        DataSource = dtDettagliOrdine,
-                        ID = "RepeaterOrderDetails" // Assegna un ID statico per il Repeater
-                    };
+                    repeaterOrderDetails.DataSource = dtDettagliOrdine;
                     repeaterOrderDetails.DataBind();
-
-                    placeholderDetails.Controls.Add(repeaterOrderDetails);
-                    placeholderDetails.Visible = true; // Mostra il PlaceHolder
                 }
+
+                
+                orderDetailsModal.Visible = true;
+                ScriptManager.RegisterStartupScript(this, GetType(), "ShowModal", "$('#orderDetailsModal').modal('show');", true);
             }
         }
+
+        // Metodo per chiudere il modale
+        public void CloseModal()
+        {
+            orderDetailsModal.Visible = false;
+        }
+        */
+
     }
 }

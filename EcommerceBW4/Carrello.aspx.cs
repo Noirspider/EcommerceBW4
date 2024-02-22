@@ -166,7 +166,7 @@ namespace EcommerceBW4
                     }
                 }
             }
-
+            Response.Redirect(Request.RawUrl);
             BindCarrello(); // Aggiorna il carrello a schermo
         }
 
