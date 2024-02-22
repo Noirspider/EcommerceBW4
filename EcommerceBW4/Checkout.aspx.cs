@@ -34,7 +34,7 @@ namespace EcommerceBW4
             }
         }
 
-        // metodo per recuperare i dettagli del carrello e calcolare il totale del carrello
+        // metodo per recuperare i dettagli del carrello
         private void BindDettagliCarrello(int carrelloId)
         {
             decimal totaleCarrello = 0m;
@@ -79,61 +79,72 @@ namespace EcommerceBW4
             }
 
             int utenteId = Convert.ToInt32(Session["UserId"]);
-            int carrelloId = GetCarrelloId(utenteId); // Assicurati che questa funzione ritorni l'ID del carrello attuale dell'utente.
+            int carrelloId = GetCarrelloId(utenteId);
 
-            if (CarrelloVuoto(carrelloId)) // Assicurati che questa funzione verifichi se ci sono prodotti nel carrello.
+            if (CarrelloVuoto(carrelloId))
             {
-                // Usa lo script per mostrare un messaggio di alert
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Il tuo carrello è vuoto! Aggiungi dei prodotti prima di procedere al checkout.');", true);
+                ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Il tuo carrello è vuoto! Aggiungi dei prodotti prima di procedere al checkout.');", true);
                 return;
             }
 
-
-            decimal totaleOrdine = CalcolaTotaleCarrello(carrelloId);
-
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
-            int spedizioneId;
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string querySpedizione = @"
-                        INSERT INTO Spedizioni (UtenteID, NomeDestinatario, IndirizzoDestinatario, CittaDestinatario, CAPDestinatario, PaeseDestinatario, DataSpedizione)
-                        OUTPUT INSERTED.SpedizioneID
-                        VALUES (@UtenteID, @NomeDestinatario, @IndirizzoDestinatario, @CittaDestinatario, @CAPDestinatario, @PaeseDestinatario, GETDATE())";
-
-                using (SqlCommand cmd = new SqlCommand(querySpedizione, conn))
+                try
                 {
+                    SqlCommand cmd = new SqlCommand("CompletaOrdine", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Imposta i parametri per la Stored Procedure
                     cmd.Parameters.AddWithValue("@UtenteID", utenteId);
+                    cmd.Parameters.AddWithValue("@CarrelloID", carrelloId);
                     cmd.Parameters.AddWithValue("@NomeDestinatario", nomeDestinatario.Text);
                     cmd.Parameters.AddWithValue("@IndirizzoDestinatario", indirizzoDestinatario.Text);
                     cmd.Parameters.AddWithValue("@CittaDestinatario", cittaDestinatario.Text);
                     cmd.Parameters.AddWithValue("@CAPDestinatario", capDestinatario.Text);
                     cmd.Parameters.AddWithValue("@PaeseDestinatario", paeseDestinatario.Text);
 
+                    // Parametro di output per il totale dell'ordine
+                    SqlParameter totaleOrdineParam = new SqlParameter("@TotaleOrdine", SqlDbType.Decimal)
+                    {
+                        Precision = 10,
+                        Scale = 2,
+                        Direction = ParameterDirection.Output
+                    };
+                    cmd.Parameters.Add(totaleOrdineParam);
+
+                    // Aggiunta del parametro di output per l'ID dell'ordine
+                    SqlParameter ordineIdParam = new SqlParameter("@OrdineID", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    cmd.Parameters.Add(ordineIdParam);
+
                     conn.Open();
-                    spedizioneId = (int)cmd.ExecuteScalar();
+
+                    cmd.ExecuteNonQuery();
+
+                    // Recupero dell'ID dell'ordine e del totale dell'ordine dai parametri di output
+                    decimal totaleOrdine = (decimal)totaleOrdineParam.Value;
+                    int ordineId = (int)ordineIdParam.Value; // Recupera l'ID dell'ordine dal parametro di output
+
+                    // Salvataggio del totale dell'ordine in una sessione o passarlo alla pagina di conferma
+                    Session["TotaleOrdine"] = totaleOrdine;
+
+                    // Reindirizzamento alla pagina di conferma con l'ID dell'ordine e il totale dell'ordine
+                    Response.Redirect($"OrderConfirmation.aspx?OrdineID={ordineId}&TotaleOrdine={totaleOrdine}");
                 }
-
-                string queryOrdine = @"
-                        INSERT INTO Ordini (UtenteID, SpedizioneID, CarrelloID, DataOrdine, TotaleOrdine)
-                        VALUES (@UtenteID, @SpedizioneID, @CarrelloID, GETDATE(), @TotaleOrdine);
-                        SELECT SCOPE_IDENTITY();";
-
-                using (SqlCommand cmd = new SqlCommand(queryOrdine, conn))
+                catch (Exception ex)
                 {
-                    cmd.Parameters.AddWithValue("@UtenteID", utenteId);
-                    cmd.Parameters.AddWithValue("@SpedizioneID", spedizioneId);
-                    cmd.Parameters.AddWithValue("@CarrelloID", carrelloId);
-                    cmd.Parameters.AddWithValue("@TotaleOrdine", totaleOrdine);
-
-                    int ordineId = Convert.ToInt32(cmd.ExecuteScalar());
-                    Session.Remove("CarrelloVuoto");
-                    SvuotaCarrello(GetCarrelloId(Convert.ToInt32(Session["UserId"]))); // Svuota il carrello
-                    Response.Redirect("OrderConfirmation.aspx?OrdineID=" + ordineId);
-
+                    // Mostra un messaggio di errore all'utente
+                    ClientScript.RegisterStartupScript(GetType(), "alert", $"alert('Errore durante il completamento dell'ordine: {ex.Message}');", true);
                 }
             }
         }
+
+
+
 
         private bool CarrelloVuoto(int carrelloId)
         {
@@ -154,6 +165,7 @@ namespace EcommerceBW4
         }
 
         // Metodo per svuotare il carrello dopo aver completato l'ordine
+        /*
         private void SvuotaCarrello(int carrelloId)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
@@ -168,6 +180,7 @@ namespace EcommerceBW4
                 }
             }
         }
+        */
 
         // Metodo recupera l'ID del carrello dell'utente
         private int GetCarrelloId(int utenteId)
@@ -197,6 +210,7 @@ namespace EcommerceBW4
         }
 
         // Metodo per calcolare il totale del carrello in base all'ID del carrello
+        /*
         private decimal CalcolaTotaleCarrello(int carrelloId)
         {
             decimal totaleCarrello = 0;
@@ -216,7 +230,7 @@ namespace EcommerceBW4
                 }
             }
             return totaleCarrello;
-        }
+        }*/
 
     }
 }

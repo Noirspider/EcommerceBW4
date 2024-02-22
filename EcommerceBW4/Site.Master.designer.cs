@@ -15,15 +15,6 @@ namespace EcommerceBW4
     {
 
         /// <summary>
-        /// Controllo adminLink.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor adminLink;
-
-        /// <summary>
         /// Controllo searchInput.
         /// </summary>
         /// <remarks>
@@ -40,6 +31,15 @@ namespace EcommerceBW4
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton searchButton;
+
+        /// <summary>
+        /// Controllo adminLink.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor adminLink;
 
         /// <summary>
         /// Controllo logoutLinkButton.

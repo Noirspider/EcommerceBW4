@@ -232,15 +232,25 @@ namespace EcommerceBW4
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string deleteSql = "DELETE FROM Prodotti WHERE ProdottoID = @selectedValue";
-                    SqlCommand deleteCommand = new SqlCommand(deleteSql, connection);
-
-                    deleteCommand.Parameters.AddWithValue("@selectedValue", selectedValue);
+                    connection.Open();
+                    SqlTransaction transaction = connection.BeginTransaction();
 
                     try
                     {
-                        connection.Open();
-                        int rowsAffected = deleteCommand.ExecuteNonQuery();
+
+                        string deleteDetailsSql = "DELETE FROM DettagliProdotto WHERE ProdottoID = @ProdottoID";
+                        SqlCommand deleteDetailsCommand = new SqlCommand(deleteDetailsSql, connection, transaction);
+                        deleteDetailsCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
+                        deleteDetailsCommand.ExecuteNonQuery();
+
+
+                        string deleteProductSql = "DELETE FROM Prodotti WHERE ProdottoID = @ProdottoID";
+                        SqlCommand deleteProductCommand = new SqlCommand(deleteProductSql, connection, transaction);
+                        deleteProductCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
+                        int rowsAffected = deleteProductCommand.ExecuteNonQuery();
+
+                        // Completa la transazione
+                        transaction.Commit();
 
                         string script = "alert('Prodotto eliminato con successo! Bravoh');";
                         ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
@@ -251,17 +261,20 @@ namespace EcommerceBW4
                             Card.Visible = false;
                             DropDownProdotto.SelectedValue = "";
                         }
-
                     }
                     catch (Exception ex)
                     {
+
+                        transaction.Rollback();
+
                         Console.WriteLine($"Error: {ex.Message}");
-                        string script = "alert('Non hai eliminato un CAZZO DI NIENTE!!!!!');";
+                        string script = "alert('Errore durante l'eliminazione del prodotto.');";
                         ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
                     }
                 }
             }
         }
+
 
         protected void ModificaItem(object sender, EventArgs e)
         {

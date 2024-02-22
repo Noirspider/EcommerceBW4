@@ -50,27 +50,6 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <asp:Label ID="LabelDescrizione" runat="server" Text="Descrizione" CssClass="control-label"></asp:Label>
-                                    <asp:TextBox ID="TextBoxDescrizione" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="3"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <asp:Label ID="LabelDescrizioneEstesa" runat="server" Text="Descrizione Estesa" CssClass="control-label"></asp:Label>
-                                    <asp:TextBox ID="TextBoxDescrizioneEstesa" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="5"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <asp:Label ID="LabelQuantita" runat="server" Text="Quantità Disponibile" CssClass="control-label"></asp:Label>
-                                    <asp:TextBox ID="TextBoxQuantita" runat="server" CssClass="form-control"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="mb-4">
                             <asp:Button ID="Create" runat="server" Text="Crea Item" OnClick="InsertItem" CssClass="btn btn-secondary me-2" />
                             <asp:Button ID="Modify" runat="server" Text="Modifica" OnClick="ModificaItem" CssClass="btn btn-secondary" />

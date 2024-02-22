@@ -141,60 +141,6 @@ namespace EcommerceBW4
         protected global::System.Web.UI.WebControls.FileUpload FileUploadImmagine;
 
         /// <summary>
-        /// Controllo LabelDescrizione.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelDescrizione;
-
-        /// <summary>
-        /// Controllo TextBoxDescrizione.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxDescrizione;
-
-        /// <summary>
-        /// Controllo LabelDescrizioneEstesa.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelDescrizioneEstesa;
-
-        /// <summary>
-        /// Controllo TextBoxDescrizioneEstesa.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxDescrizioneEstesa;
-
-        /// <summary>
-        /// Controllo LabelQuantita.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelQuantita;
-
-        /// <summary>
-        /// Controllo TextBoxQuantita.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxQuantita;
-
-        /// <summary>
         /// Controllo Create.
         /// </summary>
         /// <remarks>
