@@ -8,7 +8,7 @@
                 <div class="col-4">
                     <div class="form-group">
                         <asp:Label ID="LabelDropDownProdotto" runat="server" AssociatedControlID="DropDownProdotto" Text="Seleziona un Prodotto"></asp:Label>
-                        <asp:DropDownList ID="DropDownProdotto" runat="server" CssClass="form-control mb-3 ms-2" AutoPostBack="true"  OnSelectedIndexChanged="DropDownProdotto_SelectedIndexChanged"></asp:DropDownList>
+                        <asp:DropDownList ID="DropDownProdotto" runat="server" CssClass="form-control mb-3 ms-2" AutoPostBack="true" OnSelectedIndexChanged="DropDownProdotto_SelectedIndexChanged"></asp:DropDownList>
                     </div>
                     <div class="container">
                         <div class="row mb-4">
@@ -45,14 +45,14 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <asp:Label ID="Label4" runat="server" Text="ImgURL" CssClass="control-label"></asp:Label>
-                                    <asp:FileUpload ID="FileUpload1" runat="server" />
+                                    <asp:FileUpload ID="FileUploadImmagine" runat="server" />
                                 </div>
                             </div>
-                         </div>
+                        </div>
                         <div class="mb-4">
-                               <asp:Button ID="Create" runat="server" Text="Crea Item" OnClick="InsertItem" CssClass="btn btn-secondary me-2" />
-                               <asp:Button ID="Modify" runat="server" Text="Modifica"  OnClick="ModificaItem" CssClass="btn btn-secondary" />
-                               <asp:Button ID="Delete" runat="server" Text="Cancella"  OnClick="DeleteItem" CssClass="btn btn-danger ms-2" />
+                            <asp:Button ID="Create" runat="server" Text="Crea Item" OnClick="InsertItem" CssClass="btn btn-secondary me-2" />
+                            <asp:Button ID="Modify" runat="server" Text="Modifica" OnClick="ModificaItem" CssClass="btn btn-secondary" />
+                            <asp:Button ID="Delete" runat="server" Text="Cancella" OnClick="DeleteItem" CssClass="btn btn-danger ms-2" />
                         </div>
                     </div>
                 </div>
@@ -91,12 +91,12 @@
                         </div>
             </div>
                 <div>
-                 <asp:Label ID="LblResult" runat="server" ></asp:Label>
-<asp:GridView ID="GridViewResults" runat="server" CssClass="resultsGrid" AutoGenerateColumns="True">
-</asp:GridView>
+                    <asp:Label ID="LblResult" runat="server"></asp:Label>
+                    <asp:GridView ID="GridViewResults" runat="server" CssClass="resultsGrid" AutoGenerateColumns="True">
+                    </asp:GridView>
 
                 </div>
-                </div>
+            </div>
         </div>
     </main>
 </asp:Content>
