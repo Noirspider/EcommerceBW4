@@ -57,15 +57,15 @@
                     </ul>
                 </div>
                 <div class="d-flex align-items-center gap-2">
-                    <input id="searchInput" runat="server" class="form-control m-sm-2 p-1" type="search" placeholder="Search" aria-label="Search">
+                    <input id="searchInput" runat="server" class="form-control m-sm-2 px-2 py-1" type="search" placeholder="Search" aria-label="Search">
 
-                    <asp:LinkButton ID="searchButton" runat="server" OnClick="Search_Click" CssClass="btn btn-light px-2 py-1 srch-bg">
+                    <asp:LinkButton ID="searchButton" runat="server" OnClick="Search_Click" CssClass="btn btn-custom btn-light px-2 py-1 srch-bg">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                         </svg>
                     </asp:LinkButton>
                     <div class="dropdown">
-                        <button class="btn bg-drop dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-custom btn-light bg-drop dropdown-toggle px-2 py-1 " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="bi bi-person-circle"></i>
                             <!-- Icona dell'utente -->
                         </button>
