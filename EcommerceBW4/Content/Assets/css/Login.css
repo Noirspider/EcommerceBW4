@@ -43,10 +43,9 @@ form {
         display: -webkit-flex;
         display: flex;
         -webkit-justify-content: space-around;
-        justify-content: space-around;
+        justify-content: center;
         -webkit-flex-wrap: wrap;
         flex-wrap: wrap;
-        margin: 0 auto;
     }
 
 /* the header form form */
