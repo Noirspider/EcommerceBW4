@@ -6,7 +6,7 @@
         <h1 class="text--stroke-profile d-inline-block">Profilo</h1>
             <asp:Repeater ID="RepeaterOrders" runat="server" OnItemCommand="RepeaterOrders_ItemCommand">
             <ItemTemplate>
-                <div class="col-4">
+                <div class="col-12 col-md-6 col-lg-4">
 
                     <div class="card bg-transparent border mb-3 profile-card">
                         <div class="card-header d-flex align-items-center justify-content-between border-0 bg-transparent">
