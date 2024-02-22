@@ -94,7 +94,7 @@ namespace EcommerceBW4
                         string query = @"SELECT p.Nome, p.Descrizione, p.Prezzo, p.ImmagineURL, d.DescrizioneEstesa, d.QuantitaDisponibile
                                                 FROM Prodotti p
                                                 INNER JOIN DettagliProdotto d ON p.ProdottoID = d.ProdottoID
-                                                WHERE p.ProdottoID = @ProductId";
+                                                WHERE p.ProdottoID = @ProdottoID";
 
                         using (SqlCommand cmd = new SqlCommand(query, connection))
                         {
@@ -107,11 +107,13 @@ namespace EcommerceBW4
                                     LblNome.Text = reader["Nome"].ToString();
                                     LblDescrizione.Text = reader["Descrizione"].ToString();
                                     LblDescrizioneEstesa.Text = reader["DescrizioneEstesa"].ToString();
+                                    LblQuantitaDisponibile.Text = reader["QuantitaDisponibile"].ToString();
                                     LblPrezzo.Text = string.Format("Prezzo: {0:C}", reader["Prezzo"]);
                                     Card.Visible = true;
                                 }
                                 else
                                 {
+                                    System.Diagnostics.Debug.WriteLine("Errore1");
                                     Card.Visible = false;
                                 }
                             }
@@ -120,19 +122,20 @@ namespace EcommerceBW4
                 }
                 catch (Exception ex)
                 {
-
+                    System.Diagnostics.Debug.WriteLine("Errore2");
                     Console.WriteLine($"Si è verificato un errore: {ex.Message}");
                 }
             }
             else
             {
+                System.Diagnostics.Debug.WriteLine("Errore3");
                 Card.Visible = false;
             }
         }
         protected void InsertItem(object sender, EventArgs e)
         {
-            string Nome = TextBox1.Text;
-            string Prezzo = TextBox3.Text;
+            string Nome = TextBoxNome.Text;
+            string Prezzo = TextBoxPrezzo.Text;
             string ImmagineURL = string.Empty;
 
             // Controlla se il FileUpload ha un file e che sia un'immagine
@@ -256,38 +259,58 @@ namespace EcommerceBW4
                     {
                         connection.Open();
 
-                        if (!string.IsNullOrEmpty(TextBox1.Text))
+                        if (!string.IsNullOrEmpty(TextBoxNome.Text))
                         {
                             string updateNomeSql = "UPDATE Prodotti SET Nome = @Nome WHERE ProdottoID = @ProdottoID";
                             SqlCommand updateNomeCommand = new SqlCommand(updateNomeSql, connection);
-                            updateNomeCommand.Parameters.AddWithValue("@Nome", TextBox1.Text);
+                            updateNomeCommand.Parameters.AddWithValue("@Nome", TextBoxNome.Text);
                             updateNomeCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
                             updateNomeCommand.ExecuteNonQuery();
                         }
 
-                        if (!string.IsNullOrEmpty(TextBox2.Text))
+                        if (!string.IsNullOrEmpty(TextBoxDescrizione.Text))
                         {
                             string updateDescrizioneSql = "UPDATE Prodotti SET Descrizione = @Descrizione WHERE ProdottoID = @ProdottoID";
                             SqlCommand updateDescrizioneCommand = new SqlCommand(updateDescrizioneSql, connection);
-                            updateDescrizioneCommand.Parameters.AddWithValue("@Descrizione", TextBox2.Text);
+                            updateDescrizioneCommand.Parameters.AddWithValue("@Descrizione", TextBoxDescrizione.Text);
                             updateDescrizioneCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
                             updateDescrizioneCommand.ExecuteNonQuery();
                         }
 
-                        if (!string.IsNullOrEmpty(TextBox3.Text))
+                        if (!string.IsNullOrEmpty(TextBoxDescrizioneEstesa.Text))
+                        {
+                            string updatePrezzoSql = "UPDATE DettagliProdotto SET DescrizioneEstesa = @DescrizioneEstesa WHERE ProdottoID = @ProdottoID";
+                            SqlCommand updatePrezzoCommand = new SqlCommand(updatePrezzoSql, connection);
+                            updatePrezzoCommand.Parameters.AddWithValue("@DescrizioneEstesa", TextBoxDescrizioneEstesa.Text);
+                            updatePrezzoCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
+                            updatePrezzoCommand.ExecuteNonQuery();
+                        }
+
+                        if (!string.IsNullOrEmpty(TextBoxQuantita.Text))
+                        {
+                            string updatePrezzoSql = "UPDATE DettagliProdotto SET Quantita = @Quantita WHERE ProdottoID = @ProdottoID";
+                            SqlCommand updatePrezzoCommand = new SqlCommand(updatePrezzoSql, connection);
+                            updatePrezzoCommand.Parameters.AddWithValue("@Quantita", TextBoxQuantita.Text);
+                            updatePrezzoCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
+                            updatePrezzoCommand.ExecuteNonQuery();
+                        }
+
+                        if (!string.IsNullOrEmpty(TextBoxPrezzo.Text))
                         {
                             string updatePrezzoSql = "UPDATE Prodotti SET Prezzo = @Prezzo WHERE ProdottoID = @ProdottoID";
                             SqlCommand updatePrezzoCommand = new SqlCommand(updatePrezzoSql, connection);
-                            updatePrezzoCommand.Parameters.AddWithValue("@Prezzo", TextBox3.Text);
+                            updatePrezzoCommand.Parameters.AddWithValue("@Prezzo", TextBoxPrezzo.Text);
                             updatePrezzoCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
                             updatePrezzoCommand.ExecuteNonQuery();
                         }
 
                         AggiornaCard(selectedValue);
                         BindProdottiDropDown();
-                        TextBox1.Text = "";
-                        TextBox2.Text = "";
-                        TextBox3.Text = "";
+                        TextBoxNome.Text = "";
+                        TextBoxDescrizione.Text = "";
+                        TextBoxDescrizioneEstesa.Text = "";
+                        TextBoxQuantita.Text = "";
+                        TextBoxPrezzo.Text = "";
 
                         string alertScript = "alert('Prodotto Modificato con Successo');";
                         ClientScript.RegisterStartupScript(GetType(), "alert", alertScript, true);
