@@ -34,7 +34,7 @@
                                         <span class="input-items"> 
                                             <i class="fa fa-user"></i> 
                                         </span>
-                                        <input class="form-input" type="text" placeholder="Username" id="txtUsername" required autocomplete="on" />
+                                        <input class="form-input" type="text" placeholder="Username" id="Username" runat="server" autocomplete="on" />
                                     </div>
                                 </div>
 
@@ -45,7 +45,7 @@
                                         <span class="input-items">
                                             <i class="fa fa-key"></i> 
                                         </span>
-                                        <input class="form-input" type="password" placeholder="New password" id="txtPassword" required autocomplete="on" />
+                                        <input class="form-input" type="password" placeholder="New password" id="NewPass" runat="server" />
                                     </div> 
                                     </div>
                                     <!-- Campo per confermare la nuova password -->
@@ -54,17 +54,17 @@
                                             <span class="input-items">
                                                 <i class="fa fa-key"></i>
                                              </span>
-                                            <input class="form-input" type="password" placeholder="Confirm new password" id="txtPassword2" required autocomplete="on" />
+                                            <input class="form-input" type="password" placeholder="Confirm new password" id="ConfirmPass" runat="server" />
                                         </div>
                                     </div>
-
+                                <p class="password-feedback" id="FeedbackMsg" runat="server"></p>
                                 <!-- Bottone per reset password -->
                                 <!-- Riintegrare l'attributo onserverclick ResetPassword_Click e runat -->
-                                <button class="log-in btn-doblue my-2" >Reset Password</button>
+                                <button class="log-in btn-doblue my-2" runat="server" onserverclick="PassReset_Click">Reset Password</button>
 
                                 <!-- Bottone per tornare al login -->
                                 <!-- Reintegrare l'attributo onserverclick BacktoLogin_Click e runat -->
-                                <button class="btn submits frgt-pass btn-doblue my-2 text-light">Back to Login</button>
+                                <button class="btn submits frgt-pass btn-doblue my-2 text-light" runat="server" onserverclick="BackToLogin_Click">Back to Login</button>
                             </div>
                         </div>
                     </div>

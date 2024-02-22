@@ -83,7 +83,9 @@ namespace EcommerceBW4
 
             if (CarrelloVuoto(carrelloId))
             {
-                ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Il tuo carrello è vuoto! Aggiungi dei prodotti prima di procedere al checkout.');", true);
+                // Usa lo script per mostrare un messaggio di alert
+                ModalContent.Text = "Il tuo carrello è vuoto! Aggiungi dei prodotti prima di procedere al checkout.";
+                myModal.Visible = true;
                 return;
             }
 
@@ -230,7 +232,10 @@ namespace EcommerceBW4
                 }
             }
             return totaleCarrello;
-        }*/
-
+        }
+        protected void CloseButton_Click(object sender, EventArgs e)
+        {
+            myModal.Visible = false;
+        }
     }
 }

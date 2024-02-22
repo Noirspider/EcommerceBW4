@@ -72,8 +72,8 @@ namespace EcommerceBW4
             }
             catch (Exception ex)
             {
-
-                Console.WriteLine($"Si è verificato un errore: {ex.Message}");
+                ModalContent.Text = $"Si è verificato un errore: {ex.Message}";
+                myModal.Visible = true;
             }
         }
 
@@ -113,7 +113,8 @@ namespace EcommerceBW4
                                 }
                                 else
                                 {
-                                    System.Diagnostics.Debug.WriteLine("Errore1");
+                                    ModalContent.Text = $"Si è verificato un errore";
+                                    myModal.Visible = true;
                                     Card.Visible = false;
                                 }
                             }
@@ -122,8 +123,8 @@ namespace EcommerceBW4
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine("Errore2");
-                    Console.WriteLine($"Si è verificato un errore: {ex.Message}");
+                    ModalContent.Text = $"Si è verificato un errore: {ex.Message}";
+                    myModal.Visible = true;
                 }
             }
             else
@@ -164,15 +165,16 @@ namespace EcommerceBW4
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"Si è verificato un errore durante il caricamento dell'immagine: {ex.Message}");
+                        ModalContent.Text = $"Si è verificato un errore: {ex.Message}";
+                        myModal.Visible = true;
                         return;
                     }
                 }
                 else
                 {
                     // Mostra un messaggio di errore se il file non è un'immagine
-                    string script = "alert('Il file selezionato non è un'immagine valida.');";
-                    ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
+                    ModalContent.Text = $"Il file selezionato non è un'immagine valida.";
+                    myModal.Visible = true;
                     return;
                 }
             }
@@ -204,10 +206,8 @@ namespace EcommerceBW4
                     cmdDettagliProdotto.ExecuteNonQuery();
 
                     transaction.Commit(); // Esegui il commit della transazione se tutto va a buon fine
-
-                    string script = "alert('Prodotto Inserito con Successo');";
-                    ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
-
+                    ModalContent.Text = $"Prodotto Inserito con Successo";
+                    myModal.Visible = true;
                     // Aggiorna il DropDownList per mostrare il nuovo prodotto
                     BindProdottiDropDown();
                 }
@@ -215,9 +215,8 @@ namespace EcommerceBW4
                 {
                     // Se si verifica un errore, annulla la transazione
                     transaction.Rollback();
-
-                    string script = $"alert('Si è verificato un errore durante l'inserimento del prodotto: {ex.Message}');";
-                    ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
+                    ModalContent.Text = $"Si è verificato un errore durante l'aggiunta del prodotto: {ex.Message}";
+                    myModal.Visible = true;
                 }
             }
         }
@@ -252,8 +251,8 @@ namespace EcommerceBW4
                         // Completa la transazione
                         transaction.Commit();
 
-                        string script = "alert('Prodotto eliminato con successo! Bravoh');";
-                        ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
+                        ModalContent.Text = $"Prodotto eliminato";
+                        myModal.Visible = true;
                         BindProdottiDropDown();
 
                         if (rowsAffected > 0)
@@ -279,6 +278,7 @@ namespace EcommerceBW4
         protected void ModificaItem(object sender, EventArgs e)
         {
             string selectedValue = DropDownProdotto.SelectedValue;
+            bool modificato = false;
 
             if (!string.IsNullOrEmpty(selectedValue))
             {
@@ -297,6 +297,7 @@ namespace EcommerceBW4
                             updateNomeCommand.Parameters.AddWithValue("@Nome", TextBoxNome.Text);
                             updateNomeCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
                             updateNomeCommand.ExecuteNonQuery();
+                            modificato = true;
                         }
 
                         if (!string.IsNullOrEmpty(TextBoxDescrizione.Text))
@@ -306,6 +307,7 @@ namespace EcommerceBW4
                             updateDescrizioneCommand.Parameters.AddWithValue("@Descrizione", TextBoxDescrizione.Text);
                             updateDescrizioneCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
                             updateDescrizioneCommand.ExecuteNonQuery();
+                            modificato = true;
                         }
 
                         if (!string.IsNullOrEmpty(TextBoxDescrizioneEstesa.Text))
@@ -315,15 +317,17 @@ namespace EcommerceBW4
                             updatePrezzoCommand.Parameters.AddWithValue("@DescrizioneEstesa", TextBoxDescrizioneEstesa.Text);
                             updatePrezzoCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
                             updatePrezzoCommand.ExecuteNonQuery();
+                            modificato = true;
                         }
 
                         if (!string.IsNullOrEmpty(TextBoxQuantita.Text))
                         {
-                            string updatePrezzoSql = "UPDATE DettagliProdotto SET Quantita = @Quantita WHERE ProdottoID = @ProdottoID";
+                            string updatePrezzoSql = "UPDATE DettagliProdotto SET QuantitaDisponibile = @Quantita WHERE ProdottoID = @ProdottoID";
                             SqlCommand updatePrezzoCommand = new SqlCommand(updatePrezzoSql, connection);
                             updatePrezzoCommand.Parameters.AddWithValue("@Quantita", TextBoxQuantita.Text);
                             updatePrezzoCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
                             updatePrezzoCommand.ExecuteNonQuery();
+                            modificato = true;
                         }
 
                         if (!string.IsNullOrEmpty(TextBoxPrezzo.Text))
@@ -333,6 +337,7 @@ namespace EcommerceBW4
                             updatePrezzoCommand.Parameters.AddWithValue("@Prezzo", TextBoxPrezzo.Text);
                             updatePrezzoCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
                             updatePrezzoCommand.ExecuteNonQuery();
+                            modificato = true;
                         }
 
                         if (FileUploadImmagine.HasFile)
@@ -346,6 +351,7 @@ namespace EcommerceBW4
                             updateImageCommand.Parameters.AddWithValue("@ImmagineURL", newImageURL);
                             updateImageCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
                             updateImageCommand.ExecuteNonQuery();
+                            modificato = true;
                         }
 
                         DropDownProdotto.SelectedValue = selectedValue;
@@ -357,14 +363,23 @@ namespace EcommerceBW4
                         TextBoxQuantita.Text = "";
                         TextBoxPrezzo.Text = "";
 
-                        string alertScript = "alert('Prodotto Modificato con Successo');";
-                        ClientScript.RegisterStartupScript(GetType(), "alert", alertScript, true);
+
+                        if (modificato)
+                        {
+                            ModalContent.Text = $"Prodotto modificato con successo";
+                            myModal.Visible = true;
+                        }
+                        else
+                        {
+                            ModalContent.Text = $"Nessuna modifica effettuata";
+                            myModal.Visible = true;
+                        }
+
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"Error: {ex.Message}");
-                        string script = "alert('Non hai modificato nulla');";
-                        ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
+                        ModalContent.Text = $"Non hai modificato nulla: {ex.Message}";
+                        myModal.Visible = true;
                     }
                 }
             }
@@ -372,15 +387,17 @@ namespace EcommerceBW4
 
         private void AggiornaCard(string selectedValue)
         {
+            System.Diagnostics.Debug.WriteLine("partita");
             try
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string query = @"SELECT p.Nome, p.Prezzo, p.ImmagineURL, d.DescrizioneEstesa, d.QuantitaDisponibile
-                                     FROM Prodotti p
-                                     INNER JOIN DettagliProdotto d ON p.ProdottoID = d.ProdottoID
-                                     WHERE p.ProdottoID = @ProdottoID";
+                    string query = @"SELECT p.Nome, p.Descrizione, p.Prezzo, p.ImmagineURL, d.DescrizioneEstesa, d.QuantitaDisponibile
+                                           FROM Prodotti p
+                                           INNER JOIN DettagliProdotto d ON p.ProdottoID = d.ProdottoID
+                                           WHERE p.ProdottoID = @ProdottoID";
+
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@ProdottoID", selectedValue);
@@ -389,12 +406,12 @@ namespace EcommerceBW4
 
                         if (reader.Read())
                         {
-                            ImgCarrello.ImageUrl = reader["ImmagineURL"].ToString();
                             LblNome.Text = reader["Nome"].ToString();
                             LblDescrizione.Text = reader["Descrizione"].ToString();
                             LblDescrizioneEstesa.Text = reader["DescrizioneEstesa"].ToString();
                             LblQuantitaDisponibile.Text = reader["QuantitaDisponibile"].ToString();
                             LblPrezzo.Text = string.Format("Prezzo: {0:C}", reader["Prezzo"]);
+                            ImgCarrello.ImageUrl = reader["ImmagineURL"].ToString();
                             Card.Visible = true;
                         }
                         else
@@ -406,6 +423,7 @@ namespace EcommerceBW4
             }
             catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine("Eccezione brutta");
                 Console.WriteLine($"Si è verificato un errore durante l'aggiornamento della card: {ex.Message}");
             }
         }
@@ -427,6 +445,21 @@ namespace EcommerceBW4
                     break;
                 case "OrdersPerUser":
                     GetOrdersPerUser();
+                    break;
+                case "UsersPerAge":
+                    GetUsersPerAge();
+                    break;
+                case "OrdersPerCountry":
+                    GetOrdersPerCountry();
+                    break;
+                case "AverageOrderValue":
+                    GetAverageOrderValue();
+                    break;
+                case "AllProduct":
+                    GetProduct();
+                    break;
+                case "SalesByProduct":
+                    GetSalesByProduct();
                     break;
                 default:
                     // Gestisci il caso in cui non sia stata selezionata una statistica valida
@@ -500,7 +533,7 @@ namespace EcommerceBW4
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string queryOrdersPerUser = "SELECT UtenteID, COUNT(*) AS NumeroOrdini FROM Ordini GROUP BY UtenteID";
+                string queryOrdersPerUser = "SELECT Utenti.UtenteID, Utenti.NomeUtente AS Nome,  COUNT(*) AS NumeroOrdini FROM Ordini INNER JOIN Utenti ON Ordini.UtenteID = Utenti.UtenteID GROUP BY Utenti.UtenteID, Utenti.NomeUtente";
                 SqlCommand cmd = new SqlCommand(queryOrdersPerUser, conn);
                 DataTable dataTable = new DataTable();
                 try
@@ -515,6 +548,148 @@ namespace EcommerceBW4
                 }
                 catch (Exception ex)
                 {
+                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                }
+            }
+        }
+        protected void CloseButton_Click(object sender, EventArgs e)
+        {
+            myModal.Visible = false;
+        }
+        protected void GetUsersPerAge()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string queryUsersPerAge = "SELECT eta, COUNT(*) AS NumeroUtenti FROM Utenti GROUP BY eta";
+                SqlCommand cmd = new SqlCommand(queryUsersPerAge, conn);
+                DataTable dataTable = new DataTable();
+                try
+                {
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        dataTable.Load(reader);
+                    }
+                    GridViewResults.DataSource = dataTable;
+                    GridViewResults.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                }
+            }
+        }
+        protected void GetOrdersPerCountry()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string queryOrdersPerUser = "SELECT PaeseDestinatario, COUNT(*) AS NumeroOrdini FROM Spedizioni GROUP BY PaeseDestinatario";
+                SqlCommand cmd = new SqlCommand(queryOrdersPerUser, conn);
+                DataTable dataTable = new DataTable();
+                try
+                {
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        dataTable.Load(reader);
+                    }
+                    GridViewResults.DataSource = dataTable;
+                    GridViewResults.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                }
+            }
+        }
+        protected void GetAverageOrderValue()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string queryAverageOrderValue = "SELECT 'Valore medio ordini' AS Statistica, ROUND(AVG(TotaleOrdine), 2) AS Valore FROM Ordini";
+                SqlDataAdapter adapter = new SqlDataAdapter(queryAverageOrderValue, conn);
+                DataTable dataTable = new DataTable();
+                try
+                {
+                    adapter.Fill(dataTable);
+                    GridViewResults.DataSource = dataTable;
+                    GridViewResults.DataBind();
+
+                    // Format the value in the GridView to display only two decimal places
+                    foreach (GridViewRow row in GridViewResults.Rows)
+                    {
+                        if (row.RowType == DataControlRowType.DataRow)
+                        {
+                            Label lblValore = (Label)row.FindControl("lblValore");
+                            if (lblValore != null)
+                            {
+                                decimal valore = Convert.ToDecimal(lblValore.Text);
+                                lblValore.Text = valore.ToString("0.00");
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                }
+            }
+        }
+        protected void GetProduct()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string queryGetProduct = @"
+                    SELECT p.Nome AS Prodotto, 
+                           dp.QuantitaDisponibile AS QuantitaDisponibile
+                    FROM DettagliProdotto dp
+                    INNER JOIN Prodotti p ON dp.ProdottoID = p.ProdottoID
+                    ORDER BY p.Nome ASC";
+
+                SqlDataAdapter adapter = new SqlDataAdapter(queryGetProduct, conn);
+                DataTable dataTable = new DataTable();
+                try
+                {
+                    adapter.Fill(dataTable);
+                    GridViewResults.DataSource = dataTable;
+                    GridViewResults.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    // Inserisci qui il codice per gestire l'eccezione, come mostrare un messaggio di errore.
+                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                }
+            }
+        }
+        protected void GetSalesByProduct()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string querySalesByProduct = @"
+            SELECT p.Nome AS Prodotto, 
+                   SUM(dp.QuantitaVenduta), 
+                   SUM(dp.QuantitaVenduta * p.Prezzo) AS RicavoTotale
+            FROM DettagliProdotto dp
+            INNER JOIN Prodotti p ON dp.ProdottoID = p.ProdottoID
+            GROUP BY p.Nome
+            ORDER BY RicavoTotale DESC";
+
+                SqlDataAdapter adapter = new SqlDataAdapter(querySalesByProduct, conn);
+                DataTable dataTable = new DataTable();
+                try
+                {
+                    adapter.Fill(dataTable);
+                    GridViewResults.DataSource = dataTable;
+                    GridViewResults.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    // Inserisci qui il codice per gestire l'eccezione, come mostrare un messaggio di errore.
                     LblResult.Text = $"Si è verificato un errore: {ex.Message}";
                 }
             }
