@@ -129,6 +129,9 @@ namespace EcommerceBW4
             string Nome = TextBox1.Text;
             string Prezzo = TextBox3.Text;
             string ImmagineURL = string.Empty;
+            string Descrizione = TextBoxDescrizione.Text;
+            string DescrizioneEstesa = TextBoxDescrizioneEstesa.Text;
+            int QuantitaDisponibile = Convert.ToInt32(TextBoxQuantita.Text);
 
             // Controlla se il FileUpload ha un file e che sia un'immagine
             if (FileUpload1.HasFile)
@@ -168,22 +171,33 @@ namespace EcommerceBW4
 
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string insertSql = "INSERT INTO Prodotti (Nome,ImmagineURL, Prezzo) VALUES (@Nome, @ImmagineURL, @Prezzo)";
-                SqlCommand insertCommand = new SqlCommand(insertSql, connection);
-
-                insertCommand.Parameters.AddWithValue("@Nome", Nome);
-                insertCommand.Parameters.AddWithValue("@ImmagineURL", ImmagineURL);
-                insertCommand.Parameters.AddWithValue("@Prezzo", Prezzo);
+                conn.Open();
+                SqlTransaction transaction = conn.BeginTransaction();
 
                 try
                 {
-                    connection.Open();
-                    int rowsAffected = insertCommand.ExecuteNonQuery();
-                    Console.WriteLine($"Inserted {rowsAffected} row(s)!");
+                    // Inserisci i dati nella tabella Prodotti e ottieni l'ID
+                    string queryProdotti = "INSERT INTO Prodotti (Nome, Descrizione, Prezzo, ImmagineURL) VALUES (@Nome, @Descrizione, @Prezzo, @ImmagineURL); SELECT SCOPE_IDENTITY();";
+                    SqlCommand cmdProdotti = new SqlCommand(queryProdotti, conn, transaction);
+                    cmdProdotti.Parameters.AddWithValue("@Nome", Nome);
+                    cmdProdotti.Parameters.AddWithValue("@Descrizione", Descrizione);
+                    cmdProdotti.Parameters.AddWithValue("@Prezzo", Prezzo);
+                    cmdProdotti.Parameters.AddWithValue("@ImmagineURL", ImmagineURL);
+                    int prodottoId = Convert.ToInt32(cmdProdotti.ExecuteScalar());
 
-                    string script = "alert('Prodotto Inserito con Successo Bravoh');";
+                    // Inserisci i dettagli nella tabella DettagliProdotto
+                    string queryDettagliProdotto = "INSERT INTO DettagliProdotto (ProdottoID, DescrizioneEstesa, QuantitaDisponibile) VALUES (@ProdottoID, @DescrizioneEstesa, @QuantitaDisponibile);";
+                    SqlCommand cmdDettagliProdotto = new SqlCommand(queryDettagliProdotto, conn, transaction);
+                    cmdDettagliProdotto.Parameters.AddWithValue("@ProdottoID", prodottoId);
+                    cmdDettagliProdotto.Parameters.AddWithValue("@DescrizioneEstesa", DescrizioneEstesa);
+                    cmdDettagliProdotto.Parameters.AddWithValue("@QuantitaDisponibile", QuantitaDisponibile);
+                    cmdDettagliProdotto.ExecuteNonQuery();
+
+                    transaction.Commit(); // Esegui il commit della transazione se tutto va a buon fine
+
+                    string script = "alert('Prodotto Inserito con Successo');";
                     ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
 
                     // Aggiorna il DropDownList per mostrare il nuovo prodotto
@@ -191,7 +205,11 @@ namespace EcommerceBW4
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Si è verificato un errore: {ex.Message}");
+                    // Se si verifica un errore, annulla la transazione
+                    transaction.Rollback();
+
+                    string script = $"alert('Si è verificato un errore durante l'inserimento del prodotto: {ex.Message}');";
+                    ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
                 }
             }
         }
@@ -266,7 +284,7 @@ namespace EcommerceBW4
                         BindProdottiDropDown();
                         TextBox1.Text = "";
                         TextBox3.Text = "";
-                        if (rowsAffected > 0) 
+                        if (rowsAffected > 0)
                         {
                             string alertScript = "alert('Prodotto Modificato con Successo');";
                             ClientScript.RegisterStartupScript(GetType(), "alert", alertScript, true);
