@@ -132,13 +132,13 @@ namespace EcommerceBW4
         protected global::System.Web.UI.WebControls.Label Label4;
 
         /// <summary>
-        /// Controllo FileUpload1.
+        /// Controllo FileUploadImmagine.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadImmagine;
 
         /// <summary>
         /// Controllo Create.

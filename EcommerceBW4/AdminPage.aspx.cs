@@ -139,22 +139,22 @@ namespace EcommerceBW4
             string ImmagineURL = string.Empty;
 
             // Controlla se il FileUpload ha un file e che sia un'immagine
-            if (FileUpload1.HasFile)
+            if (FileUploadImmagine.HasFile)
             {
                 // Elenco delle estensioni di file immagine accettate
                 var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".bmp" };
-                string fileExtension = Path.GetExtension(FileUpload1.FileName).ToLower();
+                string fileExtension = Path.GetExtension(FileUploadImmagine.FileName).ToLower();
 
                 if (allowedExtensions.Contains(fileExtension))
                 {
                     try
                     {
                         // Costruisci il percorso dove l'immagine sarà salvata
-                        string filename = Path.GetFileName(FileUpload1.FileName);
+                        string filename = Path.GetFileName(FileUploadImmagine.FileName);
                         string savePath = Server.MapPath("/Content/Assets/images/prodottiUp/") + filename;
 
                         // Salva l'immagine nel percorso specificato
-                        FileUpload1.SaveAs(savePath);
+                        FileUploadImmagine.SaveAs(savePath);
 
                         // Imposta l'URL dell'immagine da salvare nel database
                         ImmagineURL = "/Content/Assets/images/prodottiUp/" + filename;
@@ -304,6 +304,20 @@ namespace EcommerceBW4
                             updatePrezzoCommand.ExecuteNonQuery();
                         }
 
+                        if (FileUploadImmagine.HasFile)
+                        {
+                            string filename = Path.GetFileName(FileUploadImmagine.FileName);
+                            string savePath = Server.MapPath("/Content/Assets/images/prodottiUp/") + filename;
+                            FileUploadImmagine.SaveAs(savePath);
+                            string newImageURL = "/Content/Assets/images/prodottiUp/" + filename;
+                            string updateImageSql = "UPDATE Prodotti SET ImmagineURL = @ImmagineURL WHERE ProdottoID = @ProdottoID";
+                            SqlCommand updateImageCommand = new SqlCommand(updateImageSql, connection);
+                            updateImageCommand.Parameters.AddWithValue("@ImmagineURL", newImageURL);
+                            updateImageCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
+                            updateImageCommand.ExecuteNonQuery();
+                        }
+
+                        DropDownProdotto.SelectedValue = selectedValue;
                         AggiornaCard(selectedValue);
                         BindProdottiDropDown();
                         TextBoxNome.Text = "";
@@ -332,7 +346,10 @@ namespace EcommerceBW4
                 string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT Nome, Prezzo, ImmagineURL FROM Prodotti WHERE ProdottoID = @ProdottoID";
+                    string query = @"SELECT p.Nome, p.Prezzo, p.ImmagineURL, d.DescrizioneEstesa, d.QuantitaDisponibile
+                                     FROM Prodotti p
+                                     INNER JOIN DettagliProdotto d ON p.ProdottoID = d.ProdottoID
+                                     WHERE p.ProdottoID = @ProdottoID";
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@ProdottoID", selectedValue);
@@ -343,6 +360,9 @@ namespace EcommerceBW4
                         {
                             ImgCarrello.ImageUrl = reader["ImmagineURL"].ToString();
                             LblNome.Text = reader["Nome"].ToString();
+                            LblDescrizione.Text = reader["Descrizione"].ToString();
+                            LblDescrizioneEstesa.Text = reader["DescrizioneEstesa"].ToString();
+                            LblQuantitaDisponibile.Text = reader["QuantitaDisponibile"].ToString();
                             LblPrezzo.Text = string.Format("Prezzo: {0:C}", reader["Prezzo"]);
                             Card.Visible = true;
                         }
@@ -358,6 +378,7 @@ namespace EcommerceBW4
                 Console.WriteLine($"Si è verificato un errore durante l'aggiornamento della card: {ex.Message}");
             }
         }
+
 
         protected void DropDownStats_SelectedIndexChanged(object sender, EventArgs e)
         {
