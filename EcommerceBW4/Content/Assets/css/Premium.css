@@ -160,3 +160,16 @@ ul {
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: 1.5px #3B8C5F;
 }
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}

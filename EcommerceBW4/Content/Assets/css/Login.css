@@ -24,15 +24,6 @@ body {
     opacity: .95;
     /* background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%); */
 }
-
-
-
-/* |||||||||||||||||||||||||||||||||||||||||||||*/
-/* //////////////////////////////////////////// */
-
-
-
-
 /* End body rules */
 
 /* Start form  attributes */
@@ -78,10 +69,6 @@ header {
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
 
-
-
-/* //////////////////////////////////////////// */
-/* //////////////////////////////////////////// */
 
 
 .input-item {
@@ -172,7 +159,8 @@ button {
 }
 
     .sign-up:hover,
-    .frgt-pass:hover {
+    .frgt-pass:hover,
+    .btn-pstn {
         background-color: #000;
         color: white;
         border: 2px solid #5cdb95;
@@ -206,8 +194,8 @@ font-size: 18px;
 
 .btn-pstn {
     position: absolute;
-    top:20px;
-    right:20px;
+    top: 20px;
+    right: 20px;
     z-index: 5;
 }
 
