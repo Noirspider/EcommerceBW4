@@ -84,13 +84,14 @@ namespace EcommerceBW4
             }
         }
 
-        /*
+
         // Metodo per chiudere il modale
-        public void CloseModal()
+        protected void BtnCloseModal_Click(object sender, EventArgs e)
         {
-            orderDetailsModal.Visible = false;
+            // Chiudi il modale
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "closeModal", "$('#orderDetailsModal').modal('hide');", true);
         }
-        */
+
 
     }
 }
