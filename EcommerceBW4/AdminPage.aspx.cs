@@ -432,6 +432,12 @@ namespace EcommerceBW4
                 case "OrdersPerUser":
                     GetOrdersPerUser();
                     break;
+                case "UsersPerAge":
+                    GetUsersPerAge();
+                    break;
+                case "OrdersPerCountry":
+                    GetOrdersPerCountry();
+                    break;
                 default:
                     // Gestisci il caso in cui non sia stata selezionata una statistica valida
                     break;
@@ -504,7 +510,7 @@ namespace EcommerceBW4
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string queryOrdersPerUser = "SELECT UtenteID, COUNT(*) AS NumeroOrdini FROM Ordini GROUP BY UtenteID";
+                string queryOrdersPerUser = "SELECT Utenti.UtenteID, Utenti.NomeUtente AS Nome,  COUNT(*) AS NumeroOrdini FROM Ordini INNER JOIN Utenti ON Ordini.UtenteID = Utenti.UtenteID GROUP BY Utenti.UtenteID, Utenti.NomeUtente";
                 SqlCommand cmd = new SqlCommand(queryOrdersPerUser, conn);
                 DataTable dataTable = new DataTable();
                 try
@@ -527,7 +533,54 @@ namespace EcommerceBW4
         {
             myModal.Visible = false;
         }
+        protected void GetUsersPerAge()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string queryUsersPerAge = "SELECT eta, COUNT(*) AS NumeroUtenti FROM Utenti GROUP BY eta";
+                SqlCommand cmd = new SqlCommand(queryUsersPerAge, conn);
+                DataTable dataTable = new DataTable();
+                try
+                {
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        dataTable.Load(reader);
+                    }
+                    GridViewResults.DataSource = dataTable;
+                    GridViewResults.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                }
+            }
+        }
+        protected void GetOrdersPerCountry()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string queryOrdersPerUser = "SELECT PaeseDestinatario, COUNT(*) AS NumeroOrdini FROM Spedizioni GROUP BY PaeseDestinatario";
+                SqlCommand cmd = new SqlCommand(queryOrdersPerUser, conn);
+                DataTable dataTable = new DataTable();
+                try
+                {
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        dataTable.Load(reader);
+                    }
+                    GridViewResults.DataSource = dataTable;
+                    GridViewResults.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                }
+            }
 
-
+        }
     }
 }

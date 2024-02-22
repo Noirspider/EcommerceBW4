@@ -401,8 +401,9 @@ font-size: 18px;
 
 }
 
-#LoginButton:hover {
-    color: white;
-    background-color: black;
-    border: 2px solid #5cdb95;
-}
+    #LoginButton:hover {
+        color: white;
+        background-color: black;
+        border: 2px solid #5cdb95;
+        animation: ani9 0.4s ease-in-out infinite alternate;
+    }
