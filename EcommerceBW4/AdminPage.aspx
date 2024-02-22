@@ -21,6 +21,12 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
+                                    <asp:Label ID="Label6" runat="server" Text="Descrizione" CssClass="control-label"></asp:Label>
+                                    <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
                                     <asp:Label ID="Label4" runat="server" Text="ImgURL" CssClass="control-label"></asp:Label>
                                     <asp:FileUpload ID="FileUpload1" runat="server" />
                                 </div>
@@ -46,6 +52,8 @@
                         <asp:Image ID="ImgCarrello" runat="server" ImageUrl="~/path/to/default/image.jpg" CssClass="card-img-top d-inline-flex" alt="Card Image" Style="object-fit: cover;" />
                         <div class="card-body">
                             <asp:Label ID="LblNome" runat="server" class="card-text text-black"></asp:Label>
+                            <asp:Label ID="LblDescrizione" runat="server" class="card-text text-black"></asp:Label>
+                            <asp:Label ID="LblDescrizioneEstesa" runat="server" class="card-text text-black"></asp:Label>
                             <asp:Label ID="LblPrezzo" runat="server" class="card-text text-black"></asp:Label>
                         </div>
                     </div>
