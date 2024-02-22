@@ -96,26 +96,6 @@ header {
     cursor: pointer;
 }
 
-.input-items {
-    background: white;
-    color: #000000;
-    border-radius: 5px 0px 0px 5px;
-    position: relative;
-    /*padding: 12px 12px 12px 12px; */
-    font-size: 16px;
-    vertical-align: middle;
-    top: 2.6px;
-    left: 5px;
-    z-index: 5;
-    cursor: pointer;
-    padding-bottom: 0;
-}
-
-    .input-items i {
-        margin: 0;
-        padding: 12px;
-    }
-
 /* Show/hide password Font Icon */
 #eye {
     border-radius: 0px 5px 5px 0px;
@@ -401,9 +381,35 @@ font-size: 18px;
 
 }
 
-    #LoginButton:hover {
-        color: white;
-        background-color: black;
-        border: 2px solid #5cdb95;
-        animation: ani9 0.4s ease-in-out infinite alternate;
+#LoginButton:hover {
+    color: white;
+    background-color: black;
+    border: 2px solid #5cdb95;
+}
+
+/* itemS con la s finale + password-feedback fanno parte dello stile di ForgotPasswordPage */
+.input-items {
+    background: white;
+    color: #000000;
+    border-radius: 5px 0px 0px 5px;
+    position: relative;
+    /*padding: 12px 12px 12px 12px; */
+    font-size: 16px;
+    vertical-align: middle;
+    top: 2.6px;
+    left: 5px;
+    z-index: 5;
+    cursor: pointer;
+    padding-bottom: 0;
+}
+
+    .input-items i {
+        margin: 0;
+        padding: 12px;
     }
+
+.password-feedback {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: white;
+}

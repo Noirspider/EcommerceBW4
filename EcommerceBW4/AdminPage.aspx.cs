@@ -72,8 +72,8 @@ namespace EcommerceBW4
             }
             catch (Exception ex)
             {
-
-                Console.WriteLine($"Si è verificato un errore: {ex.Message}");
+                ModalContent.Text = $"Si è verificato un errore: {ex.Message}";
+                myModal.Visible = true;
             }
         }
 
@@ -113,7 +113,8 @@ namespace EcommerceBW4
                                 }
                                 else
                                 {
-                                    System.Diagnostics.Debug.WriteLine("Errore1");
+                                    ModalContent.Text = $"Si è verificato un errore";
+                                    myModal.Visible = true;
                                     Card.Visible = false;
                                 }
                             }
@@ -122,8 +123,8 @@ namespace EcommerceBW4
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine("Errore2");
-                    Console.WriteLine($"Si è verificato un errore: {ex.Message}");
+                    ModalContent.Text = $"Si è verificato un errore: {ex.Message}";
+                    myModal.Visible = true;
                 }
             }
             else
@@ -164,15 +165,16 @@ namespace EcommerceBW4
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"Si è verificato un errore durante il caricamento dell'immagine: {ex.Message}");
+                        ModalContent.Text = $"Si è verificato un errore: {ex.Message}";
+                        myModal.Visible = true;
                         return;
                     }
                 }
                 else
                 {
                     // Mostra un messaggio di errore se il file non è un'immagine
-                    string script = "alert('Il file selezionato non è un'immagine valida.');";
-                    ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
+                    ModalContent.Text = $"Il file selezionato non è un'immagine valida.";
+                    myModal.Visible = true;
                     return;
                 }
             }
@@ -204,10 +206,8 @@ namespace EcommerceBW4
                     cmdDettagliProdotto.ExecuteNonQuery();
 
                     transaction.Commit(); // Esegui il commit della transazione se tutto va a buon fine
-
-                    string script = "alert('Prodotto Inserito con Successo');";
-                    ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
-
+                    ModalContent.Text = $"Prodotto Inserito con Successo";
+                    myModal.Visible = true;
                     // Aggiorna il DropDownList per mostrare il nuovo prodotto
                     BindProdottiDropDown();
                 }
@@ -215,9 +215,8 @@ namespace EcommerceBW4
                 {
                     // Se si verifica un errore, annulla la transazione
                     transaction.Rollback();
-
-                    string script = $"alert('Si è verificato un errore durante l'inserimento del prodotto: {ex.Message}');";
-                    ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
+                    ModalContent.Text = $"Si è verificato un errore durante l'aggiunta del prodotto: {ex.Message}";
+                    myModal.Visible = true;
                 }
             }
         }
@@ -242,8 +241,8 @@ namespace EcommerceBW4
                         connection.Open();
                         int rowsAffected = deleteCommand.ExecuteNonQuery();
 
-                        string script = "alert('Prodotto eliminato con successo! Bravoh');";
-                        ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
+                        ModalContent.Text = $"Prodotto eliminato";
+                        myModal.Visible = true;
                         BindProdottiDropDown();
 
                         if (rowsAffected > 0)
@@ -255,9 +254,8 @@ namespace EcommerceBW4
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"Error: {ex.Message}");
-                        string script = "alert('Non hai eliminato un CAZZO DI NIENTE!!!!!');";
-                        ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
+                        ModalContent.Text = $"Non hai eliminato nulla: {ex.Message}";
+                        myModal.Visible = true;
                     }
                 }
             }
@@ -266,6 +264,7 @@ namespace EcommerceBW4
         protected void ModificaItem(object sender, EventArgs e)
         {
             string selectedValue = DropDownProdotto.SelectedValue;
+            bool modificato = false;
 
             if (!string.IsNullOrEmpty(selectedValue))
             {
@@ -284,6 +283,7 @@ namespace EcommerceBW4
                             updateNomeCommand.Parameters.AddWithValue("@Nome", TextBoxNome.Text);
                             updateNomeCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
                             updateNomeCommand.ExecuteNonQuery();
+                            modificato = true;
                         }
 
                         if (!string.IsNullOrEmpty(TextBoxDescrizione.Text))
@@ -293,6 +293,7 @@ namespace EcommerceBW4
                             updateDescrizioneCommand.Parameters.AddWithValue("@Descrizione", TextBoxDescrizione.Text);
                             updateDescrizioneCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
                             updateDescrizioneCommand.ExecuteNonQuery();
+                            modificato = true;
                         }
 
                         if (!string.IsNullOrEmpty(TextBoxDescrizioneEstesa.Text))
@@ -302,6 +303,7 @@ namespace EcommerceBW4
                             updatePrezzoCommand.Parameters.AddWithValue("@DescrizioneEstesa", TextBoxDescrizioneEstesa.Text);
                             updatePrezzoCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
                             updatePrezzoCommand.ExecuteNonQuery();
+                            modificato = true;
                         }
 
                         if (!string.IsNullOrEmpty(TextBoxQuantita.Text))
@@ -311,6 +313,7 @@ namespace EcommerceBW4
                             updatePrezzoCommand.Parameters.AddWithValue("@Quantita", TextBoxQuantita.Text);
                             updatePrezzoCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
                             updatePrezzoCommand.ExecuteNonQuery();
+                            modificato = true;
                         }
 
                         if (!string.IsNullOrEmpty(TextBoxPrezzo.Text))
@@ -320,6 +323,7 @@ namespace EcommerceBW4
                             updatePrezzoCommand.Parameters.AddWithValue("@Prezzo", TextBoxPrezzo.Text);
                             updatePrezzoCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
                             updatePrezzoCommand.ExecuteNonQuery();
+                            modificato = true;
                         }
 
                         if (FileUploadImmagine.HasFile)
@@ -333,6 +337,7 @@ namespace EcommerceBW4
                             updateImageCommand.Parameters.AddWithValue("@ImmagineURL", newImageURL);
                             updateImageCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
                             updateImageCommand.ExecuteNonQuery();
+                            modificato = true;
                         }
 
                         DropDownProdotto.SelectedValue = selectedValue;
@@ -344,14 +349,23 @@ namespace EcommerceBW4
                         TextBoxQuantita.Text = "";
                         TextBoxPrezzo.Text = "";
 
-                        string alertScript = "alert('Prodotto Modificato con Successo');";
-                        ClientScript.RegisterStartupScript(GetType(), "alert", alertScript, true);
+
+                        if (modificato)
+                        {
+                            ModalContent.Text = $"Prodotto modificato con successo";
+                            myModal.Visible = true;
+                        }
+                        else
+                        {
+                            ModalContent.Text = $"Nessuna modifica effettuata";
+                            myModal.Visible = true;
+                        }
+
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"Error: {ex.Message}");
-                        string script = "alert('Non hai modificato nulla');";
-                        ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
+                        ModalContent.Text = $"Non hai modificato nulla: {ex.Message}";
+                        myModal.Visible = true;
                     }
                 }
             }
@@ -523,6 +537,10 @@ namespace EcommerceBW4
                     LblResult.Text = $"Si è verificato un errore: {ex.Message}";
                 }
             }
+        }
+        protected void CloseButton_Click(object sender, EventArgs e)
+        {
+            myModal.Visible = false;
         }
         protected void GetUsersPerAge()
         {
