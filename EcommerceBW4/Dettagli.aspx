@@ -12,8 +12,7 @@
                     <p class="m-0"> <asp:Label ID="Descrizione" class="card-text" runat="server"></asp:Label></p>
                     <asp:Button ID="MostraAltroButton" runat="server" Text="altro..." OnClick="MostraDettagli" CssClass="btn text-primary p-0" style="background: none; border: none;" />
                     <div id="DescrizioneEstesaDiv" runat="server" style="display: none;">
-                        <p class="m-0">
-                            <asp:Label ID="DescrizioneEstesa" class="card-text text-light" runat="server"></asp:Label></p>
+                    <p class="m-0"><asp:Label ID="DescrizioneEstesa" class="card-text text-light" runat="server"></asp:Label></p>
                     </div>
                     <asp:Button ID="NascondiButton" runat="server" Text="meno" OnClick="NascondiDettagli" CssClass="btn text-primary p-0" style="background: none; border: none;" Visible="false" />
                     <p class="mt-2">Quantità disponibile: <br /><asp:Label ID="QuantitaDisponibile" class="card-text" runat="server"></asp:Label></p>

@@ -9,9 +9,13 @@ namespace EcommerceBW4
     public partial class Dettagli : Page
     {
 
+       /*
+        * Summary: Effettua la Query al database a seconda del prodotto cliccato sulle altre pagine e la carica al caricamento della pagina
+        * Parameters: l'evento scatentante 
+        * Return: nulla
+       */
         protected void Page_Load(object sender, EventArgs e)
         {
-
             bool isLogged = Session["UserId"] != null;
             if (isLogged)
             {
@@ -58,6 +62,11 @@ namespace EcommerceBW4
             }
         }
 
+      /*
+       * Summary: Raccoglie l'ID e la quantità (e controlla se la quantità è disponibile)  
+       * Parameters: l'evento scatentante data dal click del bottoone
+       * Return: nulla
+      */
         protected void AddCarrello_Click(object sender, EventArgs e)
         {
             if (int.TryParse(Request.QueryString["id"], out int prodottoId))
@@ -96,6 +105,12 @@ namespace EcommerceBW4
                 myModal.Visible = true;
             }
         }
+
+        /*
+           * Summary: Permette l'aggiunta del prodotto visualizzato nel carrello nella quantità richiesta 
+           * Parameters: l'evento scatentante data dal click del bottoone
+           * Return: nulla
+        */
         private void AggiungiAlCarrello(int prodottoId, int quantita)
         {
             if (Session["UserId"] != null && int.TryParse(Session["UserId"].ToString(), out int utenteId))
@@ -160,7 +175,11 @@ namespace EcommerceBW4
                 }
             }
         }
-
+        /*
+          * Summary: Aggiunge il prezzo alla funzione precedente quando deve fare l'inserimento nel carrello
+          * Parameters: l'id del prodotto
+          * Return: il prezzo 
+        */
         private decimal AggiungiPrezzo(int prodottoId)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
@@ -184,10 +203,20 @@ namespace EcommerceBW4
                 }
             }
         }
+        /*
+          * Summary: Permette di chiudere il modale che appare quando si aggiunge qualcosa al carrello
+          * Parameters: click del bottone chiudi sul modale
+          * Return: nulla
+        */
         protected void CloseButton_Click(object sender, EventArgs e)
         {
             myModal.Visible = false;
         }
+        /*
+         * Summary: Permette nella funziona AddCarrello_click di valutare se la quantità richiesta è disponibilw
+         * Parameters: click del bottone chiudi sul modale
+         * Return: la quantità disponibile del prodotto
+        */
         private int GetQuantitaDisponibile(int prodottoId)
         {
             int quantitaDisponibile = 0;
@@ -208,13 +237,22 @@ namespace EcommerceBW4
             }
             return quantitaDisponibile;
         }
+        /*
+          * Summary: Consente di far vedere la descrizione estesa cliccando su altro
+          * Parameters: click del bottone su altro
+          * Return: nulla
+        */
         protected void MostraDettagli(object sender, EventArgs e)
         {
             MostraAltroButton.Visible = false;
             NascondiButton.Visible = true;
             DescrizioneEstesaDiv.Style["display"] = "block";
         }
-
+        /*
+          * Summary: Permette di nascondere la descrizione estesa cliccando su meno
+          * Parameters: click del bottone chiudi su meno
+          * Return: nulla
+        */
         protected void NascondiDettagli(object sender, EventArgs e)
         {
             MostraAltroButton.Visible = true;
