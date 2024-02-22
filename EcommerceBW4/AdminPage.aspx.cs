@@ -424,6 +424,15 @@ namespace EcommerceBW4
                 case "OrdersPerCountry":
                     GetOrdersPerCountry();
                     break;
+                case "AverageOrderValue":
+                    GetAverageOrderValue();
+                    break;
+                case "AllProduct":
+                    GetProduct();
+                    break;
+                case "SalesByProduct":
+                    GetSalesByProduct();
+                    break;
                 default:
                     // Gestisci il caso in cui non sia stata selezionata una statistica valida
                     break;
@@ -562,7 +571,98 @@ namespace EcommerceBW4
                     LblResult.Text = $"Si è verificato un errore: {ex.Message}";
                 }
             }
-
         }
+        protected void GetAverageOrderValue()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string queryAverageOrderValue = "SELECT 'Valore medio ordini' AS Statistica, ROUND(AVG(TotaleOrdine), 2) AS Valore FROM Ordini";
+                SqlDataAdapter adapter = new SqlDataAdapter(queryAverageOrderValue, conn);
+                DataTable dataTable = new DataTable();
+                try
+                {
+                    adapter.Fill(dataTable);
+                    GridViewResults.DataSource = dataTable;
+                    GridViewResults.DataBind();
+
+                    // Format the value in the GridView to display only two decimal places
+                    foreach (GridViewRow row in GridViewResults.Rows)
+                    {
+                        if (row.RowType == DataControlRowType.DataRow)
+                        {
+                            Label lblValore = (Label)row.FindControl("lblValore");
+                            if (lblValore != null)
+                            {
+                                decimal valore = Convert.ToDecimal(lblValore.Text);
+                                lblValore.Text = valore.ToString("0.00");
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                }
+            }
+        }
+        protected void GetProduct()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string queryGetProduct = @"
+                    SELECT p.Nome AS Prodotto, 
+                           dp.QuantitaDisponibile AS QuantitaDisponibile
+                    FROM DettagliProdotto dp
+                    INNER JOIN Prodotti p ON dp.ProdottoID = p.ProdottoID
+                    ORDER BY p.Nome ASC";
+
+                SqlDataAdapter adapter = new SqlDataAdapter(queryGetProduct, conn);
+                DataTable dataTable = new DataTable();
+                try
+                {
+                    adapter.Fill(dataTable);
+                    GridViewResults.DataSource = dataTable;
+                    GridViewResults.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    // Inserisci qui il codice per gestire l'eccezione, come mostrare un messaggio di errore.
+                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                }
+            }
+        }
+        protected void GetSalesByProduct()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string querySalesByProduct = @"
+            SELECT p.Nome AS Prodotto, 
+                   SUM(dp.QuantitaVenduta), 
+                   SUM(dp.QuantitaVenduta * p.Prezzo) AS RicavoTotale
+            FROM DettagliProdotto dp
+            INNER JOIN Prodotti p ON dp.ProdottoID = p.ProdottoID
+            GROUP BY p.Nome
+            ORDER BY RicavoTotale DESC";
+
+                SqlDataAdapter adapter = new SqlDataAdapter(querySalesByProduct, conn);
+                DataTable dataTable = new DataTable();
+                try
+                {
+                    adapter.Fill(dataTable);
+                    GridViewResults.DataSource = dataTable;
+                    GridViewResults.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    // Inserisci qui il codice per gestire l'eccezione, come mostrare un messaggio di errore.
+                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                }
+            }
+        }
+
+
     }
 }

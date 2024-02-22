@@ -87,7 +87,10 @@
     <asp:ListItem Text="Ordini per utente" Value="OrdersPerUser"></asp:ListItem>
                     <asp:ListItem Text="Utenti per Età" Value="UsersPerAge"></asp:ListItem>
                     <asp:ListItem Text="Utenti per Paese" Value="OrdersPerCountry"></asp:ListItem>
-</asp:DropDownList>
+                    <asp:ListItem Text="Valore medio degli ordini" Value="AverageOrderValue"></asp:ListItem>
+                    <asp:ListItem Text="disponibilità per prodotto" Value="AllProduct"></asp:ListItem>
+                    <asp:ListItem Text="Test Errore (Vendite per prodotto)" Value="SalesByProduct"></asp:ListItem>
+                </asp:DropDownList>
                         </div>
             </div>
                 <div>
