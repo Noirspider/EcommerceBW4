@@ -91,7 +91,10 @@ namespace EcommerceBW4
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
                         connection.Open();
-                        string query = "SELECT Nome, Prezzo, ImmagineURL FROM Prodotti WHERE ProdottoID = @ProdottoID";
+                        string query = @"SELECT p.Nome, p.Descrizione, p.Prezzo, p.ImmagineURL, d.DescrizioneEstesa, d.QuantitaDisponibile
+                                                FROM Prodotti p
+                                                INNER JOIN DettagliProdotto d ON p.ProdottoID = d.ProdottoID
+                                                WHERE p.ProdottoID = @ProdottoID";
 
                         using (SqlCommand cmd = new SqlCommand(query, connection))
                         {
@@ -102,11 +105,15 @@ namespace EcommerceBW4
                                 {
                                     ImgCarrello.ImageUrl = reader["ImmagineURL"].ToString();
                                     LblNome.Text = reader["Nome"].ToString();
+                                    LblDescrizione.Text = reader["Descrizione"].ToString();
+                                    LblDescrizioneEstesa.Text = reader["DescrizioneEstesa"].ToString();
+                                    LblQuantitaDisponibile.Text = reader["QuantitaDisponibile"].ToString();
                                     LblPrezzo.Text = string.Format("Prezzo: {0:C}", reader["Prezzo"]);
                                     Card.Visible = true;
                                 }
                                 else
                                 {
+                                    System.Diagnostics.Debug.WriteLine("Errore1");
                                     Card.Visible = false;
                                 }
                             }
@@ -115,41 +122,42 @@ namespace EcommerceBW4
                 }
                 catch (Exception ex)
                 {
-
+                    System.Diagnostics.Debug.WriteLine("Errore2");
                     Console.WriteLine($"Si è verificato un errore: {ex.Message}");
                 }
             }
             else
             {
+                System.Diagnostics.Debug.WriteLine("Errore3");
                 Card.Visible = false;
             }
         }
         protected void InsertItem(object sender, EventArgs e)
         {
-            string Nome = TextBox1.Text;
-            string Prezzo = TextBox3.Text;
+            string Nome = TextBoxNome.Text;
+            string Prezzo = TextBoxPrezzo.Text;
             string ImmagineURL = string.Empty;
             string Descrizione = TextBoxDescrizione.Text;
             string DescrizioneEstesa = TextBoxDescrizioneEstesa.Text;
             int QuantitaDisponibile = Convert.ToInt32(TextBoxQuantita.Text);
 
             // Controlla se il FileUpload ha un file e che sia un'immagine
-            if (FileUpload1.HasFile)
+            if (FileUploadImmagine.HasFile)
             {
                 // Elenco delle estensioni di file immagine accettate
                 var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".bmp" };
-                string fileExtension = Path.GetExtension(FileUpload1.FileName).ToLower();
+                string fileExtension = Path.GetExtension(FileUploadImmagine.FileName).ToLower();
 
                 if (allowedExtensions.Contains(fileExtension))
                 {
                     try
                     {
                         // Costruisci il percorso dove l'immagine sarà salvata
-                        string filename = Path.GetFileName(FileUpload1.FileName);
+                        string filename = Path.GetFileName(FileUploadImmagine.FileName);
                         string savePath = Server.MapPath("/Content/Assets/images/prodottiUp/") + filename;
 
                         // Salva l'immagine nel percorso specificato
-                        FileUpload1.SaveAs(savePath);
+                        FileUploadImmagine.SaveAs(savePath);
 
                         // Imposta l'URL dell'immagine da salvare nel database
                         ImmagineURL = "/Content/Assets/images/prodottiUp/" + filename;
@@ -254,12 +262,9 @@ namespace EcommerceBW4
                 }
             }
         }
+
         protected void ModificaItem(object sender, EventArgs e)
         {
-
-            string Nome = TextBox1.Text;
-            //string ImmagineURL = TextBox2.Text;
-            string Prezzo = TextBox3.Text;
             string selectedValue = DropDownProdotto.SelectedValue;
 
             if (!string.IsNullOrEmpty(selectedValue))
@@ -268,37 +273,90 @@ namespace EcommerceBW4
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string updateSql = "UPDATE Prodotti SET Nome = @Nome, Prezzo = @Prezzo WHERE ProdottoID = @ProdottoID";
-                    SqlCommand updateCommand = new SqlCommand(updateSql, connection);
-
-                    updateCommand.Parameters.AddWithValue("@Nome", Nome);
-                    //updateCommand.Parameters.AddWithValue("@ImmagineURL", ImmagineURL);
-                    updateCommand.Parameters.AddWithValue("@Prezzo", Prezzo);
-                    updateCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
-
                     try
                     {
                         connection.Open();
-                        int rowsAffected = updateCommand.ExecuteNonQuery();
+
+                        if (!string.IsNullOrEmpty(TextBoxNome.Text))
+                        {
+                            string updateNomeSql = "UPDATE Prodotti SET Nome = @Nome WHERE ProdottoID = @ProdottoID";
+                            SqlCommand updateNomeCommand = new SqlCommand(updateNomeSql, connection);
+                            updateNomeCommand.Parameters.AddWithValue("@Nome", TextBoxNome.Text);
+                            updateNomeCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
+                            updateNomeCommand.ExecuteNonQuery();
+                        }
+
+                        if (!string.IsNullOrEmpty(TextBoxDescrizione.Text))
+                        {
+                            string updateDescrizioneSql = "UPDATE Prodotti SET Descrizione = @Descrizione WHERE ProdottoID = @ProdottoID";
+                            SqlCommand updateDescrizioneCommand = new SqlCommand(updateDescrizioneSql, connection);
+                            updateDescrizioneCommand.Parameters.AddWithValue("@Descrizione", TextBoxDescrizione.Text);
+                            updateDescrizioneCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
+                            updateDescrizioneCommand.ExecuteNonQuery();
+                        }
+
+                        if (!string.IsNullOrEmpty(TextBoxDescrizioneEstesa.Text))
+                        {
+                            string updatePrezzoSql = "UPDATE DettagliProdotto SET DescrizioneEstesa = @DescrizioneEstesa WHERE ProdottoID = @ProdottoID";
+                            SqlCommand updatePrezzoCommand = new SqlCommand(updatePrezzoSql, connection);
+                            updatePrezzoCommand.Parameters.AddWithValue("@DescrizioneEstesa", TextBoxDescrizioneEstesa.Text);
+                            updatePrezzoCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
+                            updatePrezzoCommand.ExecuteNonQuery();
+                        }
+
+                        if (!string.IsNullOrEmpty(TextBoxQuantita.Text))
+                        {
+                            string updatePrezzoSql = "UPDATE DettagliProdotto SET Quantita = @Quantita WHERE ProdottoID = @ProdottoID";
+                            SqlCommand updatePrezzoCommand = new SqlCommand(updatePrezzoSql, connection);
+                            updatePrezzoCommand.Parameters.AddWithValue("@Quantita", TextBoxQuantita.Text);
+                            updatePrezzoCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
+                            updatePrezzoCommand.ExecuteNonQuery();
+                        }
+
+                        if (!string.IsNullOrEmpty(TextBoxPrezzo.Text))
+                        {
+                            string updatePrezzoSql = "UPDATE Prodotti SET Prezzo = @Prezzo WHERE ProdottoID = @ProdottoID";
+                            SqlCommand updatePrezzoCommand = new SqlCommand(updatePrezzoSql, connection);
+                            updatePrezzoCommand.Parameters.AddWithValue("@Prezzo", TextBoxPrezzo.Text);
+                            updatePrezzoCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
+                            updatePrezzoCommand.ExecuteNonQuery();
+                        }
+
+                        if (FileUploadImmagine.HasFile)
+                        {
+                            string filename = Path.GetFileName(FileUploadImmagine.FileName);
+                            string savePath = Server.MapPath("/Content/Assets/images/prodottiUp/") + filename;
+                            FileUploadImmagine.SaveAs(savePath);
+                            string newImageURL = "/Content/Assets/images/prodottiUp/" + filename;
+                            string updateImageSql = "UPDATE Prodotti SET ImmagineURL = @ImmagineURL WHERE ProdottoID = @ProdottoID";
+                            SqlCommand updateImageCommand = new SqlCommand(updateImageSql, connection);
+                            updateImageCommand.Parameters.AddWithValue("@ImmagineURL", newImageURL);
+                            updateImageCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
+                            updateImageCommand.ExecuteNonQuery();
+                        }
+
+                        DropDownProdotto.SelectedValue = selectedValue;
                         AggiornaCard(selectedValue);
                         BindProdottiDropDown();
-                        TextBox1.Text = "";
-                        TextBox3.Text = "";
-                        if (rowsAffected > 0)
-                        {
-                            string alertScript = "alert('Prodotto Modificato con Successo');";
-                            ClientScript.RegisterStartupScript(GetType(), "alert", alertScript, true);
-                        }
+                        TextBoxNome.Text = "";
+                        TextBoxDescrizione.Text = "";
+                        TextBoxDescrizioneEstesa.Text = "";
+                        TextBoxQuantita.Text = "";
+                        TextBoxPrezzo.Text = "";
+
+                        string alertScript = "alert('Prodotto Modificato con Successo');";
+                        ClientScript.RegisterStartupScript(GetType(), "alert", alertScript, true);
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine($"Error: {ex.Message}");
-                        string script = "alert('Non hai modificato Nulla Coglione');";
+                        string script = "alert('Non hai modificato nulla');";
                         ClientScript.RegisterStartupScript(GetType(), "alert", script, true);
                     }
                 }
             }
         }
+
         private void AggiornaCard(string selectedValue)
         {
             try
@@ -306,7 +364,10 @@ namespace EcommerceBW4
                 string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT Nome, Prezzo, ImmagineURL FROM Prodotti WHERE ProdottoID = @ProdottoID";
+                    string query = @"SELECT p.Nome, p.Prezzo, p.ImmagineURL, d.DescrizioneEstesa, d.QuantitaDisponibile
+                                     FROM Prodotti p
+                                     INNER JOIN DettagliProdotto d ON p.ProdottoID = d.ProdottoID
+                                     WHERE p.ProdottoID = @ProdottoID";
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@ProdottoID", selectedValue);
@@ -317,6 +378,9 @@ namespace EcommerceBW4
                         {
                             ImgCarrello.ImageUrl = reader["ImmagineURL"].ToString();
                             LblNome.Text = reader["Nome"].ToString();
+                            LblDescrizione.Text = reader["Descrizione"].ToString();
+                            LblDescrizioneEstesa.Text = reader["DescrizioneEstesa"].ToString();
+                            LblQuantitaDisponibile.Text = reader["QuantitaDisponibile"].ToString();
                             LblPrezzo.Text = string.Format("Prezzo: {0:C}", reader["Prezzo"]);
                             Card.Visible = true;
                         }
@@ -332,6 +396,8 @@ namespace EcommerceBW4
                 Console.WriteLine($"Si è verificato un errore durante l'aggiornamento della card: {ex.Message}");
             }
         }
+
+
         protected void DropDownStats_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedValue = DropDownStats.SelectedValue;
@@ -354,6 +420,7 @@ namespace EcommerceBW4
                     break;
             }
         }
+
         protected void GetTotalOrders()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
@@ -374,6 +441,7 @@ namespace EcommerceBW4
                 }
             }
         }
+
         protected void GetTotalProductsSold()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
