@@ -306,7 +306,7 @@ namespace EcommerceBW4
 
                         if (!string.IsNullOrEmpty(TextBoxQuantita.Text))
                         {
-                            string updatePrezzoSql = "UPDATE DettagliProdotto SET Quantita = @Quantita WHERE ProdottoID = @ProdottoID";
+                            string updatePrezzoSql = "UPDATE DettagliProdotto SET QuantitaDisponibile = @Quantita WHERE ProdottoID = @ProdottoID";
                             SqlCommand updatePrezzoCommand = new SqlCommand(updatePrezzoSql, connection);
                             updatePrezzoCommand.Parameters.AddWithValue("@Quantita", TextBoxQuantita.Text);
                             updatePrezzoCommand.Parameters.AddWithValue("@ProdottoID", selectedValue);
@@ -359,15 +359,17 @@ namespace EcommerceBW4
 
         private void AggiornaCard(string selectedValue)
         {
+            System.Diagnostics.Debug.WriteLine("partita");
             try
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string query = @"SELECT p.Nome, p.Prezzo, p.ImmagineURL, d.DescrizioneEstesa, d.QuantitaDisponibile
-                                     FROM Prodotti p
-                                     INNER JOIN DettagliProdotto d ON p.ProdottoID = d.ProdottoID
-                                     WHERE p.ProdottoID = @ProdottoID";
+                    string query = @"SELECT p.Nome, p.Descrizione, p.Prezzo, p.ImmagineURL, d.DescrizioneEstesa, d.QuantitaDisponibile
+                                           FROM Prodotti p
+                                           INNER JOIN DettagliProdotto d ON p.ProdottoID = d.ProdottoID
+                                           WHERE p.ProdottoID = @ProdottoID";
+
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@ProdottoID", selectedValue);
@@ -376,12 +378,12 @@ namespace EcommerceBW4
 
                         if (reader.Read())
                         {
-                            ImgCarrello.ImageUrl = reader["ImmagineURL"].ToString();
                             LblNome.Text = reader["Nome"].ToString();
                             LblDescrizione.Text = reader["Descrizione"].ToString();
                             LblDescrizioneEstesa.Text = reader["DescrizioneEstesa"].ToString();
                             LblQuantitaDisponibile.Text = reader["QuantitaDisponibile"].ToString();
                             LblPrezzo.Text = string.Format("Prezzo: {0:C}", reader["Prezzo"]);
+                            ImgCarrello.ImageUrl = reader["ImmagineURL"].ToString();
                             Card.Visible = true;
                         }
                         else
@@ -393,6 +395,7 @@ namespace EcommerceBW4
             }
             catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine("Eccezione brutta");
                 Console.WriteLine($"Si è verificato un errore durante l'aggiornamento della card: {ex.Message}");
             }
         }
