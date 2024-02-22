@@ -3,8 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="row">
-        <h1 class="text--stroke-profile">Profilo</h1>
-        <asp:Repeater ID="RepeaterOrders" runat="server" OnItemCommand="RepeaterOrders_ItemCommand">
+        <h1 class="text--stroke-profile d-inline-block">Profilo</h1>
+            <asp:Repeater ID="RepeaterOrders" runat="server" OnItemCommand="RepeaterOrders_ItemCommand">
             <ItemTemplate>
                 <div class="col-4">
 

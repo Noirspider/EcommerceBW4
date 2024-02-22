@@ -3,6 +3,8 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI;
+using System.Web.UI.WebControls;
+
 
 namespace EcommerceBW4
 {
@@ -60,7 +62,7 @@ namespace EcommerceBW4
             return dtDettagliOrdine;
         }
 
-        /*
+
         protected void RepeaterOrders_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "ShowDetails")
@@ -68,7 +70,7 @@ namespace EcommerceBW4
                 int ordineId = Convert.ToInt32(e.CommandArgument);
                 DataTable dtDettagliOrdine = GetDettagliOrdinePerProdotto(ordineId);
 
-                
+
                 Repeater repeaterOrderDetails = modalBody.FindControl("RepeaterOrderDetails") as Repeater;
                 if (repeaterOrderDetails != null)
                 {
@@ -76,12 +78,13 @@ namespace EcommerceBW4
                     repeaterOrderDetails.DataBind();
                 }
 
-                
+
                 orderDetailsModal.Visible = true;
                 ScriptManager.RegisterStartupScript(this, GetType(), "ShowModal", "$('#orderDetailsModal').modal('show');", true);
             }
         }
 
+        /*
         // Metodo per chiudere il modale
         public void CloseModal()
         {
