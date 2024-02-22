@@ -70,7 +70,7 @@
                             <!-- Icona dell'utente -->
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Profilo</a>
+                            <a class="dropdown-item" href="Profilo.aspx">Profilo</a>
                             <a class="dropdown-item" href="ForgotPasswordPage.aspx">Reimposta password</a>
                             <a class="dropdown-item" runat="server" id="adminLink" href="~/AdminPage">Amministrazione</a>
                             <a class="dropdown-item p-0 m-0">
