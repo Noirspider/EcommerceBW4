@@ -14,6 +14,11 @@ namespace EcommerceBW4
             {
                 Response.Redirect("Default.aspx");
             }
+
+            if (IsPostBack)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "hideLoader", "document.getElementById('loader').style.display='none';", true);
+            }
         }
 
         // metodo per il login dell'utente 
@@ -50,6 +55,7 @@ namespace EcommerceBW4
                                 // L'utente è autenticato correttamente.
                                 Session["UserId"] = userId;
                                 Session["Username"] = dbUsername;
+                                ScriptManager.RegisterStartupScript(this, GetType(), "hideLoader", "hideLoader();", true);
                                 Response.Redirect("Default.aspx");
                             }
                             else

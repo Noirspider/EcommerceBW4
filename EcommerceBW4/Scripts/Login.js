@@ -38,3 +38,44 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.body.addEventListener("pointermove", applyOverlayMask);
 });
 */
+
+/* FUNZIONE LOADING */
+/*
+
+
+function hideLoader() {
+console.log('hideLoader eseguito');
+    document.getElementById('loader').style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('DOM caricato' + "")
+    hideLoader();
+});
+*/
+/*
+function showLoader() {
+    console.log('showLoader eseguito');
+    document.getElementById('loader').style.display = 'flex';
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    let loginButton = document.getElementById('<%= LoginButton.ClientID %>');
+    console.log('DOM caricato' + "loginbutton preso" + loginButton)
+    if (loginButton) {
+        loginButton.addEventListener('click', function () {
+            document.getElementById('loader').style.display = 'block';
+            console.log('click' + "loader mostrato")
+        });
+    }
+})
+*/;
+
+document.addEventListener('DOMContentLoaded', function () {
+    var loginButton = document.getElementById('<%= LoginButton.ClientID %>');
+    if (loginButton) {
+        loginButton.addEventListener('click', function () {
+            document.getElementById('loader').style.display = 'block';
+        });
+    }
+});

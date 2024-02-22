@@ -19,6 +19,7 @@
 
 </head>
 <body>
+
     <div class="cards__inner">
         <div class="overlay">
             <form id="form1" runat="server">
@@ -49,14 +50,15 @@
                                     </span>
                                     <div class="input-group">
                                         <input class="form-input" type="password" placeholder="Password" id="txtPassword" required autocomplete="on" runat="server" />
-                                           <i class="fa fa-eye mx-0" aria-hidden="true" id="eye"></i>
+                                        <i class="fa fa-eye mx-0" aria-hidden="true" id="eye"></i>
 
-                                        
+
                                     </div>
-                                    
+
                                 </div>
 
-                                <button class="log-in btn-doblue my-2" runat="server" onserverclick="Login_Click">Log In</button>
+                                <asp:Button ID="LoginButton" class="log-in btn-doblue my-2" runat="server" Text="Log In" OnClick="Login_Click" OnClientClick="document.getElementById('loader').style.display='block';" />
+
 
                                 <button class="btn submits frgt-pass btn-doblue my-2 text-light" runat="server" onserverclick="ForgotPassword_Click">Forgot Password</button>
 
@@ -68,7 +70,7 @@
                             <header class="head-form">
                                 <h2>Sign Up</h2>
                                 <p>Insert username and password and click Sign Up</p>
-                                <p class="fs-4 fw-semibold"> Age is required!</p>
+                                <p class="fs-4 fw-semibold">Age is required!</p>
                             </header>
                             <br />
 
@@ -78,27 +80,27 @@
                             <div class="d-flex flex-column align-items-center justify-content-center mb-2">
 
                                 <div class="d-flex align-items-center justify-content-center">
-                                 <span class="input-item">
-                                     <i class="fa fa-user-circle"></i>
-                                 </span>
-                                <asp:TextBox ID="txtUsernameSignUp" CssClass="form-input" TextMode="SingleLine" placeholder="Username" runat="server" />
-                               </div>
-
-                                <div class="d-flex align-items-center justify-content-center">
-
-                                  <span class="input-item">
-                                      <i class="fa fa-key"></i>
-                                  </span>
-                                <asp:TextBox ID="txtPasswordSignUp" CssClass="form-input" TextMode="Password" placeholder="Password" runat="server" />
-                               </div>
-
-                                <div class="d-flex align-items-center justify-content-center">
-                                     <span class="input-item">
-                                        <i class="fa fa-birthday-cake"></i> 
+                                    <span class="input-item">
+                                        <i class="fa fa-user-circle"></i>
                                     </span>
-                                <asp:TextBox ID="txtEta" CssClass="form-input" TextMode="SingleLine" placeholder="Età" runat="server" />
+                                    <asp:TextBox ID="txtUsernameSignUp" CssClass="form-input" TextMode="SingleLine" placeholder="Username" runat="server" />
+                                </div>
 
-                               </div>
+                                <div class="d-flex align-items-center justify-content-center">
+
+                                    <span class="input-item">
+                                        <i class="fa fa-key"></i>
+                                    </span>
+                                    <asp:TextBox ID="txtPasswordSignUp" CssClass="form-input" TextMode="Password" placeholder="Password" runat="server" />
+                                </div>
+
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <span class="input-item">
+                                        <i class="fa fa-birthday-cake"></i>
+                                    </span>
+                                    <asp:TextBox ID="txtEta" CssClass="form-input" TextMode="SingleLine" placeholder="Età" runat="server" />
+
+                                </div>
 
                                 <button class="btn submits sign-up btn-doblue text-white" runat="server" onserverclick="SignUp_Click">
                                     Sign Up
@@ -111,6 +113,27 @@
             </form>
         </div>
     </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <!-- ###################### LOADING ###################### -->
+                <div id="loader">
+                    <div class="hand">
+                        <span class="finger thumb"></span>
+                        <span class="finger"></span>
+                        <span class="finger"></span>
+                        <span class="finger"></span>
+                        <span class="finger"></span>
+                        <span class="palm"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <script src="Scripts\CardRotation.js"></script>
     <script src="Scripts\Login.js"></script>
 </body>
