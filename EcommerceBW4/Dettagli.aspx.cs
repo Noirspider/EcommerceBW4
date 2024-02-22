@@ -9,11 +9,11 @@ namespace EcommerceBW4
     public partial class Dettagli : Page
     {
 
-       /*
-        * Summary: Effettua la Query al database a seconda del prodotto cliccato sulle altre pagine e la carica al caricamento della pagina
-        * Parameters: l'evento scatentante 
-        * Return: nulla
-       */
+        /*
+         * Summary: Effettua una query al database per recuperare i dettagli del prodotto e li carica alla visualizzazione della pagina. Controlla anche se l'utente è loggato. Se non lo è, lo reindirizza alla pagina di login.
+         * Parameters: l'evento scatentante 
+         * Return: nulla
+        */
         protected void Page_Load(object sender, EventArgs e)
         {
             bool isLogged = Session["UserId"] != null;
@@ -62,11 +62,11 @@ namespace EcommerceBW4
             }
         }
 
-      /*
-       * Summary: Raccoglie l'ID e la quantità (e controlla se la quantità è disponibile)  
-       * Parameters: l'evento scatentante data dal click del bottoone
-       * Return: nulla
-      */
+        /*
+         * Summary: Gestisce l'aggiunta del prodotto al carrello. Controlla anche se la quantità richiesta è disponibile. Se non lo è, visualizza un messaggio di avviso.  
+         * Parameters: l'evento scatentante data dal click del bottoone
+         * Return: nulla
+        */
         protected void AddCarrello_Click(object sender, EventArgs e)
         {
             if (int.TryParse(Request.QueryString["id"], out int prodottoId))
@@ -107,8 +107,8 @@ namespace EcommerceBW4
         }
 
         /*
-           * Summary: Permette l'aggiunta del prodotto visualizzato nel carrello nella quantità richiesta 
-           * Parameters: l'evento scatentante data dal click del bottoone
+           * Summary: Aggiunge il prodotto al carrello. Se l'utente è loggato, recupera l'ID del carrello associato all'utente. Se il prodotto è già nel carrello, aggiorna la quantità. Altrimenti, aggiunge un nuovo record al carrello.
+           * Parameters: l'evento scatentante data dal click del bottone
            * Return: nulla
         */
         private void AggiungiAlCarrello(int prodottoId, int quantita)
@@ -213,7 +213,7 @@ namespace EcommerceBW4
             myModal.Visible = false;
         }
         /*
-         * Summary: Permette nella funziona AddCarrello_click di valutare se la quantità richiesta è disponibilw
+         * Summary: Permette nella funziona AddCarrello_click di valutare se la quantità richiesta è disponibile
          * Parameters: click del bottone chiudi sul modale
          * Return: la quantità disponibile del prodotto
         */
