@@ -218,6 +218,9 @@ namespace EcommerceBW4
             }
             return totaleCarrello;
         }
-
+        protected void CloseButton_Click(object sender, EventArgs e)
+        {
+            myModal.Visible = false;
+        }
     }
 }
