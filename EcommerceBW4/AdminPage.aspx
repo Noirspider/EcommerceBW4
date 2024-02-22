@@ -97,4 +97,10 @@
             </div>
         </div>
     </main>
+    <div id="myModal" class="modal" runat="server" visible="false">
+        <div class="modal-content">
+        <asp:Label ID="ModalContent" runat="server" CssClass="text-white" />
+        <asp:Button ID="CloseButton" runat="server" Text="Chiudi" OnClick="CloseButton_Click" CssClass="bottoneModale" />
+    </div>
+</div>
 </asp:Content>
