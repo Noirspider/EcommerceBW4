@@ -393,3 +393,16 @@ font-size: 18px;
 .finger:nth-child(5) {
     --n: 5;
 }
+
+
+
+#LoginButton {
+    transition: color 0.4s ease-in-out, background-color 0.4s ease-in-out, border 0.4s ease-in-out;
+
+}
+
+#LoginButton:hover {
+    color: white;
+    background-color: black;
+    border: 2px solid #5cdb95;
+}
