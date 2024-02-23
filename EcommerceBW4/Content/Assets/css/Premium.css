@@ -107,6 +107,7 @@ ul {
 }
 
 .cta {
+    z-index: 9999;
     display: block;
     align-self: end;
     margin: 1em 0 0.5em 0;
@@ -176,4 +177,12 @@ ul {
 
 .gapp {
     gap: 7px;
+}
+
+a {
+    text-decoration: none;
+}
+a:hover{
+    color: #fff;
+    text-decoration:none;
 }

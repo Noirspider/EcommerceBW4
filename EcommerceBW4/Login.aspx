@@ -81,7 +81,7 @@
                             <div class="d-flex flex-column align-items-center justify-content-center mb-2">
 
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <span class="input-item">
+                                    <span class="input-item sing-in">
                                         <i class="fa fa-user-circle"></i>
                                     </span>
                                     <asp:TextBox ID="txtUsernameSignUp" CssClass="form-input" TextMode="SingleLine" placeholder="Username" runat="server" />

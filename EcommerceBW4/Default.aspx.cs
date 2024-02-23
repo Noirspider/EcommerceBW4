@@ -45,14 +45,22 @@ namespace EcommerceBW4
             }
         }
 
-        // metodo per gestire il clicl sul pulsante "Dettagli"
+        /*
+          * Summary: Gestisce il clic sul pulsante "Dettagli"
+          * Parameters: oggetto sender, argomenti del comando
+          * Return: null
+        */
         protected void ToDetail_Command(object sender, CommandEventArgs e)
         {
             string productId = e.CommandArgument.ToString();
             Response.Redirect($"Dettagli.aspx?id={productId}");
         }
 
-        // metodo per gestire il clicl sul pulsante "Aggiungi al carrello"
+        /*
+          * Summary: Gestisce il clic sul pulsante "Aggiungi al carrello"
+          * Parameters: oggetto sender, argomenti del comando
+          * Return: null
+        */
         protected void AddToCart_Command(object sender, CommandEventArgs e)
         {
             string productId = e.CommandArgument.ToString();
@@ -86,7 +94,11 @@ namespace EcommerceBW4
         }
 
 
-        // Gestisce il clic sul pulsante "Aggiungi al carrello" per aggiungere il prodotto selezionato al carrello 
+        /*
+          * Summary: Gestisce il clic sul pulsante "Aggiungi al carrello" per aggiungere il prodotto selezionato al carrello 
+          * Parameters: oggetto sender, argomenti dell'evento
+          * Return: null
+        */
         protected void AddCart_OnClickButton(object sender, EventArgs e)
         {
             LinkButton btn = (LinkButton)sender;
@@ -108,13 +120,29 @@ namespace EcommerceBW4
                 }
                 else
                 {
-                    // Inserisco un nuovo dettaglio carrello.
-                    InsertNewProdottoInCarrello(conn, carrelloId, prodottoId);
+                    // Prima di inserire, controllo se c'è già un abbonamento nel carrello.
+                    if (IsAnotherSubscriptionInCart(conn, carrelloId))
+                    {
+                        // Se c'è già un abbonamento, mostriamo un messaggio popup.
+                        ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Puoi avere solo un abbonamento alla volta nel tuo carrello. Per cambiare abbonamento, rimuovi prima quello esistente dal tuo carrello.');", true);
+                    }
+                    else
+                    {
+                        // Inserisco un nuovo dettaglio carrello.
+                        InsertNewProdottoInCarrello(conn, carrelloId, prodottoId);
+                        // Reindirizza l'utente alla pagina del carrello o mostra un messaggio di conferma
+                        ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Prodotto aggiunto al carrello con successo.'); window.location='Carrello.aspx';", true);
+                    }
                 }
             }
         }
 
-        // Metodo per ottenere l'ID del carrello esistente o crearne uno nuovo.
+
+        /*
+        * Summary: Ottiene l'ID del carrello esistente o crea uno nuovo.
+        * Parameters: id dell'utente
+        * Return: ID del carrello
+        */
         private int GetOrCreateTimeCarrello(int utenteId)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString))
@@ -143,7 +171,11 @@ namespace EcommerceBW4
         }
 
 
-        // Metodo per controllare se un prodotto è già nel carrello.
+        /*
+          * Summary: Controlla se un prodotto è già nel carrello.
+          * Parameters: connessione al database, ID del carrello, ID del prodotto
+          * Return: true se il prodotto è già nel carrello, altrimenti false
+        */
         private bool ProdottoAlreadyInCarrello(SqlConnection conn, int carrelloId, int prodottoId)
         {
             string query = "SELECT COUNT(*) FROM CarrelloDettaglio WHERE CarrelloID = @carrelloId AND ProdottoID = @prodottoId";
@@ -156,7 +188,11 @@ namespace EcommerceBW4
             }
         }
 
-        // Metodo per aggiornare la quantità di un prodotto nel carrello.
+        /*
+          * Summary: Aggiorna la quantità di un prodotto nel carrello.
+          * Parameters: connessione al database, ID del carrello, ID del prodotto
+          * Return: null
+        */
         private void UpdateQuantitaProdottoInCarrello(SqlConnection conn, int carrelloId, int prodottoId)
         {
             string query = "UPDATE CarrelloDettaglio SET Quantita = Quantita + 1 WHERE CarrelloID = @carrelloId AND ProdottoID = @prodottoId";
@@ -168,7 +204,11 @@ namespace EcommerceBW4
             }
         }
 
-        // Metodo per inserire un nuovo prodotto nel carrello.
+        /*
+        * Summary: Metodo per inserire un nuovo prodotto nel carrello.
+        * Parameters: connessione al database, ID del carrello, ID del prodotto
+        * Return: void
+        */
         private void InsertNewProdottoInCarrello(SqlConnection conn, int carrelloId, int prodottoId)
         {
             // Recupera il prezzo del prodotto da aggiungere al carrello
@@ -188,7 +228,11 @@ namespace EcommerceBW4
             }
         }
 
-        // Metodo per ricercare che fa apparire DENTRO DEFAULT
+        /*
+        * Summary: Metodo per ricercare i prodotti in base a una stringa di ricerca e visualizzarli nel repeater.
+        * Parameters: stringa di ricerca
+        * Return: void
+        */
         protected void ShowSearchedProducts(string searchText)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
@@ -201,6 +245,29 @@ namespace EcommerceBW4
                 prodottiRepeater.DataSource = reader;
                 prodottiRepeater.DataBind();
                 reader.Close();
+            }
+        }
+
+        /*
+        *Summary:
+        *Parameters:
+        *Return:
+         */
+        private bool IsAnotherSubscriptionInCart(SqlConnection conn, int carrelloId)
+        {
+
+            // Esempio di implementazione:
+            string checkSubscriptionQuery = @"
+            SELECT COUNT(*)
+            FROM CarrelloDettaglio cd
+            INNER JOIN Prodotti p ON cd.ProdottoID = p.ProdottoID
+            WHERE cd.CarrelloID = @CarrelloID AND p.Categoria = 'Abbonamento'";
+
+            using (SqlCommand checkCmd = new SqlCommand(checkSubscriptionQuery, conn))
+            {
+                checkCmd.Parameters.AddWithValue("@CarrelloID", carrelloId);
+                int subscriptionCount = (int)checkCmd.ExecuteScalar();
+                return subscriptionCount > 0;
             }
         }
     }

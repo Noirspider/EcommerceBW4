@@ -58,13 +58,17 @@
 }
 
     .btnDettagli:hover {
-        background-color: #11281C !IMPORTANT;
+        background-color: #2E6D4A !IMPORTANT;
         color: #ffffffde !important;
         border: none;
     }
-    background-color: #5cdb95 !important;
-    border: none;
+   /* background-color: #5cdb95 !important;
+    border: none;*/ 
 }
 .btnDettagli:hover {
     transform: scale(1.05); 
+}
+
+.my-input {
+    max-width: 165px;
 }

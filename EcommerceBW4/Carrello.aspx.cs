@@ -10,6 +10,7 @@ namespace EcommerceBW4
 {
     public partial class Carrello : Page
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             bool isLogged = Session["UserId"] != null;
@@ -70,6 +71,13 @@ namespace EcommerceBW4
                     }
                 }
             }
+            decimal totaleCarrello = 0;
+            foreach (var item in itemsDelCarrello)
+            {
+                totaleCarrello += item.Totale;
+            }
+
+            TotaleCarrello.Text = totaleCarrello.ToString("C");
 
             if (itemsDelCarrello.Count == 0)
             {
