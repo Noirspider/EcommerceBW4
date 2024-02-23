@@ -285,6 +285,42 @@ namespace EcommerceBW4
         protected global::System.Web.UI.WebControls.GridView GridViewResults;
 
         /// <summary>
+        /// Controllo UsersDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList UsersDropDownList;
+
+        /// <summary>
+        /// Controllo AssignAdminButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button AssignAdminButton;
+
+        /// <summary>
+        /// Controllo DeleteAdminButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button DeleteAdminButton;
+
+        /// <summary>
+        /// Controllo lblMessage.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessage;
+
+        /// <summary>
         /// Controllo myModal.
         /// </summary>
         /// <remarks>

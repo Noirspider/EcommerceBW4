@@ -39,6 +39,7 @@ namespace EcommerceBW4
             if (isAdmin && !IsPostBack)
             {
                 BindProdottiDropDown();
+                PopolaDropDownList();
             }
             else if (!isAdmin)
             {
@@ -738,5 +739,120 @@ namespace EcommerceBW4
         }
 
 
+
+
+        private void PopolaDropDownList()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand("SELECT UtenteID, NomeUtente, IsAdmin FROM Utenti", con))
+                {
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        string nomeUtente = reader["NomeUtente"].ToString();
+                        string utenteId = reader["UtenteID"].ToString();
+                        bool isAdmin = Convert.ToBoolean(reader["IsAdmin"]);
+
+                        ListItem item = new ListItem
+                        {
+                            Text = isAdmin ? $"{nomeUtente} (Admin)" : nomeUtente,
+                            Value = utenteId
+                        };
+
+                        UsersDropDownList.Items.Add(item);
+                    }
+                }
+            }
+            UsersDropDownList.Items.Insert(0, new ListItem("-- Seleziona Utente --", "0"));
+        }
+
+
+        protected void AssignAdminButton_Click(object sender, EventArgs e)
+        {
+            int userId;
+            if (int.TryParse(UsersDropDownList.SelectedValue, out userId) && userId > 0)
+            {
+                bool result = AssegnaRuoloAmministratore(userId);
+                if (result)
+                {
+                    lblMessage.Text = "Ruolo di amministratore assegnato con successo.";
+                }
+                else
+                {
+                    lblMessage.Text = "Errore nell'assegnazione del ruolo di amministratore.";
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                }
+                lblMessage.Visible = true;
+            }
+        }
+
+        private bool AssegnaRuoloAmministratore(int userId)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                string query = "UPDATE Utenti SET IsAdmin = 1 WHERE UtenteID = @UtenteID";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@UtenteID", userId);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+        }
+
+        protected void DeleteAdminButton_Click(object sender, EventArgs e)
+        {
+            int userId;
+            int currentUserId = Convert.ToInt32(Session["UserId"]); // Assumiamo che l'ID utente corrente sia memorizzato in sessione
+
+            if (int.TryParse(UsersDropDownList.SelectedValue, out userId) && userId > 0)
+            {
+                if (userId == currentUserId)
+                {
+                    lblMessage.Text = "Non è possibile rimuovere i privilegi di amministratore dal proprio account.";
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                }
+                else
+                {
+                    RimuoviRuoloAmministratore(userId);
+                }
+                lblMessage.Visible = true;
+            }
+        }
+
+        private void RimuoviRuoloAmministratore(int userId)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                string query = "UPDATE Utenti SET IsAdmin = 0 WHERE UtenteID = @UtenteID";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@UtenteID", userId);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        lblMessage.Text = "Privilegi di amministratore rimossi con successo.";
+                        lblMessage.ForeColor = System.Drawing.Color.Green;
+                    }
+                    else
+                    {
+                        lblMessage.Text = "Errore nella rimozione dei privilegi di amministratore.";
+                        lblMessage.ForeColor = System.Drawing.Color.Red;
+                    }
+                }
+            }
+        }
+
     }
+
+
+
 }
+

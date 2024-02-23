@@ -100,6 +100,20 @@
                     </asp:GridView>
 
                 </div>
+                <br />
+                <div class="row">
+                      <div class="col-12">
+                          <h3 class="mt-5">Amministratori</h3>
+           <asp:DropDownList ID="UsersDropDownList" CssClass="select-dropdown" runat="server" DataTextField="NomeUtente" DataValueField="UtenteID">
+</asp:DropDownList>
+                               
+<asp:Button ID="AssignAdminButton" runat="server" Text="Assegna Amministratore" OnClick="AssignAdminButton_Click" CssClass="btn btn-success  fs-6 mb-2" />
+<asp:Button ID="DeleteAdminButton" runat="server" Text="Rimuovi Amministratore"  OnClick="DeleteAdminButton_Click"  CssClass="btn btn-danger fs-6 mb-2"/>
+                          <br />
+                          <asp:Label ID="lblMessage" runat="server" Visible="false" ForeColor="Green"></asp:Label>   
+                     
+        </div>
+                </div>
             </div>
         </div>
     </main>
