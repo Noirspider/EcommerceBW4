@@ -23,6 +23,13 @@ textarea {
 }
 */
 
+
+body {
+   /* background-color: #BECA9F;*/
+   background-color: #000;
+}
+
+
 html {
     scroll-behavior:auto;
 }
@@ -48,24 +55,36 @@ html {
         background-color: #11281ca3;
     }
 
-.bg-drop {
+.bg-drop  {
+    color: #fff;
     background-color: #57D08D;
 }
 
-    .bg-drop:hover {
+    .bg-drop:hover, .bg-drop:active, .bg-drop:focus, .bg-drop:focus-visible, .bg-drop:focus-within, .bg-drop:target {
+        color: #000;
         background-color: #11281C !IMPORTANT;
     }
 
-.srch-bg {
+.srch-bg  {
+    fill: #000;
     background-color: #5cdb95;
 }
 
-    .srch-bg:hover {
-        color: white;
+    .srch-bg:hover, .srch-bg:active,
+    .srch-bg:focus, .srch-bg:focus-within, .srch-bg:focus-visible, .srch-bg:target{
+        fill: #fff;
         background-color: #11281C !IMPORTANT;
     }
 
-btn {
+.srch-bg svg {
+    fill: #fff;
+}
+
+.srch-bg:hover svg {
+    fill: #000;
+}
+
+    btn {
     border-width: inherit !important;
 }
 
@@ -92,7 +111,7 @@ btn {
     }
 
 .profile-card {
-    background-image: linear-gradient(-220deg, #5cdb95 0%, #333333 60%);
+    background-image: linear-gradient(-220deg, #c8f4dc 0%, #333333 60%);
     opacity: 0.8;
     transition: background-color 0.4s linear, opacity 0.2s linear;
 }

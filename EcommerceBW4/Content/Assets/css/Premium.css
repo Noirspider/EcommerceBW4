@@ -173,3 +173,7 @@ ul {
     background-color: transparent;
     border: 0;
 }
+
+.gapp {
+    gap: 7px;
+}

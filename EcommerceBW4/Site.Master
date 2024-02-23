@@ -12,13 +12,13 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
+    <link href="~/Content/Assets/images/logo-footer-page.png" rel="shortcut icon" type="image/png" height="32px" widtht="32px"/>
 
-    <webopt:BundleReference runat="server" Path="~/Content/css" />
-    <link rel="stylesheet" href="./Content/Assets/css/Carrello.css" />
     <link rel="stylesheet" href="./Content/Assets/css/Checkout.css" />
     <link rel="stylesheet" href="./Content/Assets/css/Dettagli.css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link rel="stylesheet" href="./Content/Assets/css/Carrello.css" />
     <link rel="stylesheet" href="./Content/assets/css/Default.css" />
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link rel="stylesheet" href="./Content/Assets/css/GridAdminPage.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
@@ -124,7 +124,7 @@
     </form>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
 

@@ -80,7 +80,8 @@ namespace EcommerceBW4
 
 
                 orderDetailsModal.Visible = true;
-                ScriptManager.RegisterStartupScript(this, GetType(), "ShowModal", "$('#orderDetailsModal').modal('show');", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "ShowModal", "$('#" + orderDetailsModal.ClientID + "').modal('show');", true);
+
             }
         }
 

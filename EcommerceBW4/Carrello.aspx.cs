@@ -234,5 +234,13 @@ namespace EcommerceBW4
             return carrelloId;
         }
 
+        protected void CarrelloRepeater_ProductId(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "RedirectToDetails")
+            {
+                string productId = e.CommandArgument.ToString();
+                Response.Redirect($"Dettagli.aspx?id={productId}");
+            }
+        }
     }
 }
