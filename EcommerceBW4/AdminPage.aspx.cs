@@ -428,7 +428,7 @@ namespace EcommerceBW4
             }
         }
 
-
+        // Gestione delle statistiche
         protected void DropDownStats_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedValue = DropDownStats.SelectedValue;
@@ -466,7 +466,7 @@ namespace EcommerceBW4
                     break;
             }
         }
-
+        // Metodi per ottenere le statistiche totale ordini
         protected void GetTotalOrders()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
@@ -483,11 +483,16 @@ namespace EcommerceBW4
                 }
                 catch (Exception ex)
                 {
-                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                    DataTable errorTable = new DataTable();
+                    errorTable.Columns.Add("Errore");
+                    errorTable.Rows.Add(ex.Message);
+                    GridViewResults.DataSource = errorTable;
+                    GridViewResults.DataBind();
                 }
             }
         }
 
+        // Metodi per ottenere le statistiche totale prodotti venduti
         protected void GetTotalProductsSold()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
@@ -504,10 +509,15 @@ namespace EcommerceBW4
                 }
                 catch (Exception ex)
                 {
-                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                    DataTable errorTable = new DataTable();
+                    errorTable.Columns.Add("Errore");
+                    errorTable.Rows.Add(ex.Message);
+                    GridViewResults.DataSource = errorTable;
+                    GridViewResults.DataBind();
                 }
             }
         }
+        // Metodi per ottenere le statistiche totale incasso
         protected void GetTotalRevenue()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
@@ -524,10 +534,15 @@ namespace EcommerceBW4
                 }
                 catch (Exception ex)
                 {
-                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                    DataTable errorTable = new DataTable();
+                    errorTable.Columns.Add("Errore");
+                    errorTable.Rows.Add(ex.Message);
+                    GridViewResults.DataSource = errorTable;
+                    GridViewResults.DataBind();
                 }
             }
         }
+        // Metodi per ottenere le statistiche ordini per utente
         protected void GetOrdersPerUser()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
@@ -548,10 +563,15 @@ namespace EcommerceBW4
                 }
                 catch (Exception ex)
                 {
-                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                    DataTable errorTable = new DataTable();
+                    errorTable.Columns.Add("Errore");
+                    errorTable.Rows.Add(ex.Message);
+                    GridViewResults.DataSource = errorTable;
+                    GridViewResults.DataBind();
                 }
             }
         }
+        // Metodi per ottenere le statistiche utenti per età
         protected void CloseButton_Click(object sender, EventArgs e)
         {
             myModal.Visible = false;
@@ -576,10 +596,15 @@ namespace EcommerceBW4
                 }
                 catch (Exception ex)
                 {
-                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                    DataTable errorTable = new DataTable();
+                    errorTable.Columns.Add("Errore");
+                    errorTable.Rows.Add(ex.Message);
+                    GridViewResults.DataSource = errorTable;
+                    GridViewResults.DataBind();
                 }
             }
         }
+        // Metodi per ottenere le statistiche ordini per paese
         protected void GetOrdersPerCountry()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
@@ -600,10 +625,15 @@ namespace EcommerceBW4
                 }
                 catch (Exception ex)
                 {
-                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                    DataTable errorTable = new DataTable();
+                    errorTable.Columns.Add("Errore");
+                    errorTable.Rows.Add(ex.Message);
+                    GridViewResults.DataSource = errorTable;
+                    GridViewResults.DataBind();
                 }
             }
         }
+        // Metodi per ottenere le statistiche valore medio ordini
         protected void GetAverageOrderValue()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
@@ -634,10 +664,15 @@ namespace EcommerceBW4
                 }
                 catch (Exception ex)
                 {
-                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                    DataTable errorTable = new DataTable();
+                    errorTable.Columns.Add("Errore");
+                    errorTable.Rows.Add(ex.Message);
+                    GridViewResults.DataSource = errorTable;
+                    GridViewResults.DataBind();
                 }
             }
         }
+        // Metodi per ottenere le statistiche prodotti
         protected void GetProduct()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
@@ -660,11 +695,15 @@ namespace EcommerceBW4
                 }
                 catch (Exception ex)
                 {
-                    // Inserisci qui il codice per gestire l'eccezione, come mostrare un messaggio di errore.
-                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                    DataTable errorTable = new DataTable();
+                    errorTable.Columns.Add("Errore");
+                    errorTable.Rows.Add(ex.Message);
+                    GridViewResults.DataSource = errorTable;
+                    GridViewResults.DataBind();
                 }
             }
         }
+        // Metodi per ottenere le statistiche vendite per prodotto
         protected void GetSalesByProduct()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
@@ -689,8 +728,11 @@ namespace EcommerceBW4
                 }
                 catch (Exception ex)
                 {
-                    // Inserisci qui il codice per gestire l'eccezione, come mostrare un messaggio di errore.
-                    LblResult.Text = $"Si è verificato un errore: {ex.Message}";
+                    DataTable errorTable = new DataTable();
+                    errorTable.Columns.Add("Errore");
+                    errorTable.Rows.Add(ex.Message);
+                    GridViewResults.DataSource = errorTable;
+                    GridViewResults.DataBind();
                 }
             }
         }
