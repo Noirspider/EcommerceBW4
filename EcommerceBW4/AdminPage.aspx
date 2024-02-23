@@ -6,6 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
+                    <!--Menu Admin-->
                     <div class="btn-group mb-3" role="group" aria-label="Basic example">
                         <asp:Button ID="BtnGestioneProdotti" runat="server" Text="Gestione Prodotti" CssClass="bottoneMenuAdmin btn" CommandArgument="0" OnClick="ChangeView" />
                         <asp:Button ID="BtnStatistiche" runat="server" Text="Statistiche" CssClass="bottoneMenuAdmin btn" CommandArgument="1" OnClick="ChangeView" />
@@ -14,6 +15,8 @@
                 </div>
                 <asp:MultiView ID="MainMultiView" runat="server" ActiveViewIndex="0">
                     <asp:View ID="ViewGestioneProdotti" runat="server">
+
+                        <!--Gestione Prodotti-->
                         <div class="col-4">
                             <div class="form-group">
                                 <asp:Label ID="LabelDropDownProdotto" runat="server" AssociatedControlID="DropDownProdotto" Text="Seleziona un Prodotto" CssClass="text-light text-start ms-2 my-2"></asp:Label>
@@ -92,7 +95,7 @@
                             </div>
                         </div>
                     </asp:View>
-                    //Gestione STATISTICHE
+                    <!--Gestione STATISTICHE-->
                 <asp:View ID="ViewStatistiche" runat="server">
                     <div class="col-12">
                         <h3 class="mt-5">Statistiche</h3>
@@ -118,7 +121,7 @@
                 </asp:View>
 
                     <asp:View ID="ViewAmministratori" runat="server">
-                        //Gestione utenti ADMIN
+                        <!--Gestione utenti ADMIN-->
                 <br />
 
 

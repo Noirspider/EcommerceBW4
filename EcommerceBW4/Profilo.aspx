@@ -28,7 +28,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title fs-3" id="modalTitle">Dettagli Ordine #<%# SelectedOrderId %> </h5>
+                   <h5 class="modal-title fs-3" id="modalTitle" runat="server">Dettagli Ordine</h5>
                 </div>
                 <div class="modal-body" runat="server" id="modalBody">
                     <asp:Repeater ID="RepeaterOrderDetails" runat="server">
