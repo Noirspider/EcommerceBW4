@@ -94,7 +94,8 @@ button {
 
 
 .img-size {
-    margin-inline: auto;
+    padding: 10px;
+    margin: auto;
     max-width: 160px;
 }
 
@@ -103,4 +104,10 @@ button {
     color: inherit;
     display: block;
     margin-inline: auto;
+}
+
+.card-body {
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
 }
