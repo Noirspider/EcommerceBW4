@@ -91,3 +91,17 @@
     .select-dropdown option {
         padding: 0px 2px;
     }
+
+.bottoneMenuAdmin {
+    background-color: #2E6D4A;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    }
+.bottoneMenuAdmin:hover {
+            background-color: #5cdb95;
+
+        }

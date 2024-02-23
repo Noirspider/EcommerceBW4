@@ -15,6 +15,51 @@ namespace EcommerceBW4
     {
 
         /// <summary>
+        /// Controllo BtnGestioneProdotti.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnGestioneProdotti;
+
+        /// <summary>
+        /// Controllo BtnStatistiche.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnStatistiche;
+
+        /// <summary>
+        /// Controllo BtnAmministratori.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnAmministratori;
+
+        /// <summary>
+        /// Controllo MainMultiView.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.MultiView MainMultiView;
+
+        /// <summary>
+        /// Controllo ViewGestioneProdotti.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View ViewGestioneProdotti;
+
+        /// <summary>
         /// Controllo LabelDropDownProdotto.
         /// </summary>
         /// <remarks>
@@ -258,6 +303,15 @@ namespace EcommerceBW4
         protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
+        /// Controllo ViewStatistiche.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View ViewStatistiche;
+
+        /// <summary>
         /// Controllo DropDownStats.
         /// </summary>
         /// <remarks>
@@ -283,6 +337,15 @@ namespace EcommerceBW4
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewResults;
+
+        /// <summary>
+        /// Controllo ViewAmministratori.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View ViewAmministratori;
 
         /// <summary>
         /// Controllo UsersDropDownList.
