@@ -850,6 +850,12 @@ namespace EcommerceBW4
             }
         }
 
+        protected void ChangeView(object sender, EventArgs e)
+        {
+            Button clickedButton = (Button)sender;
+            int viewIndex = Convert.ToInt32(clickedButton.CommandArgument);
+            MainMultiView.ActiveViewIndex = viewIndex;
+        }
     }
 
 

@@ -82,15 +82,15 @@ header {
     cursor: pointer;
 }
 
-/* Show/hide password Font Icon */
-#eye {
-    border-radius: 0px 5px 5px 0px;
-    position: absolute;
-    top: 20px;
-    right: 9%;
-    z-index: 5;
-    cursor: pointer;
-}
+    /* Show/hide password Font Icon */
+    #eye {
+        border-radius: 0px 5px 5px 0px;
+        position: absolute;
+        top: 20px;
+        right: 9%;
+        z-index: 5;
+        cursor: pointer;
+    }
 
 /* inputs form  */
 input[class="form-input"] {

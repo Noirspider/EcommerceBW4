@@ -37,7 +37,10 @@
                 </FooterTemplate>
             </asp:Repeater>
             <div class="d-flex justify-content-between">
-                <asp:Button ID="BtnCompleteOrder" runat="server" OnClick="BtnCompleteOrder_Click" Text="Completa ordine" CssClass="btn btn-checkOut" />
+                <div class="d-flex align-items-center">
+                    <asp:Button ID="BtnCompleteOrder" runat="server" OnClick="BtnCompleteOrder_Click" Text="Completa ordine" CssClass="btn btn-checkOut" />
+                    <p class="mb-0 ms-3">Totale ordine: <asp:Label ID="TotaleCarrello" runat="server" Text="" CssClass=""></asp:Label></p>
+                </div>
                 <asp:Button ID="BtnClearCart" runat="server" OnClick="BtnClearCart_Click" Text="Svuota carrello" CssClass="btn svuotaCarrello" />
             </div>
         </div>
