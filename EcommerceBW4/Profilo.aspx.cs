@@ -93,6 +93,5 @@ namespace EcommerceBW4
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "closeModal", "$('#orderDetailsModal').modal('hide');", true);
         }
 
-
     }
 }
