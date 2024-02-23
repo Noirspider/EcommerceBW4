@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-4">
                     <div class="form-group">
-                        <asp:Label ID="LabelDropDownProdotto" runat="server" AssociatedControlID="DropDownProdotto" Text="Seleziona un Prodotto"></asp:Label>
+                        <asp:Label ID="LabelDropDownProdotto" runat="server" AssociatedControlID="DropDownProdotto" Text="Seleziona un Prodotto" CssClass="text-light text-start ms-2 my-2"></asp:Label>
                         <asp:DropDownList ID="DropDownProdotto" runat="server" CssClass="form-control mb-3 ms-2" AutoPostBack="true" OnSelectedIndexChanged="DropDownProdotto_SelectedIndexChanged"></asp:DropDownList>
                     </div>
                     <div class="container">

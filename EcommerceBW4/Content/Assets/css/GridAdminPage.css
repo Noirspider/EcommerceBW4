@@ -10,15 +10,35 @@
     font-family: Arial, sans-serif;
     font-size: 0.9em;
     min-width: 400px;
-    color: #333333; 
-    background-color: #ffffff; 
+    color: #333333;
+    background-color: #ffffffde;
     border: 0px;
-    border-radius: 5px; 
+    border-radius: 5px;
 }
+    .resultsGrid tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+        .resultsGrid tr:nth-child(even):hover {
+            background-color: #ddd; 
+        }
+
+    
+    .resultsGrid tr:nth-child(odd) {
+        background-color: #fff;
+    }
+
+        /* Stile per le righe dispari al hover - sfondo chiaro */
+        .resultsGrid tr:nth-child(odd):hover {
+            background-color: #f2f2f2; /* O un altro colore chiaro che preferisci */
+        }
+    .resultsGrid tr:hover {
+        background-color: #ddd;
+    }
 
     .resultsGrid tr:first-child {
         background-image: linear-gradient(-220deg, #5cdb95 0%, #333333 100%);
-        color: #ffffff;
+        color: #000;
     }
   
     .resultsGrid th,
