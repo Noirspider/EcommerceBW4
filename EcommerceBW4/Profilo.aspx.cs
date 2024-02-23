@@ -80,6 +80,7 @@ namespace EcommerceBW4
 
                 // Imposta direttamente il titolo del modale
                 Label modalTitle = orderDetailsModal.FindControl("modalTitle") as Label;
+                UpdateModalTitle(ordineId);
                 if (modalTitle != null)
                 {
                     modalTitle.Text = "Dettagli Ordine #" + ordineId.ToString();

@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace EcommerceBW4
 {
@@ -14,6 +9,23 @@ namespace EcommerceBW4
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (!IsPostBack)
+            {
+
+                if (Session["UserId"] != null)
+                {
+
+                    BackToLogin.Visible = false;
+                    BackToShop.Visible = true;
+                }
+                else
+                {
+
+                    BackToLogin.Visible = true;
+                    BackToShop.Visible = false;
+                }
+            }
 
         }
 
@@ -111,6 +123,11 @@ namespace EcommerceBW4
         protected void BackToLogin_Click(object sender, EventArgs e)
         {
             Response.Redirect("Login.aspx");
+        }
+
+        protected void BackToShop_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Default.aspx");
         }
     }
 }

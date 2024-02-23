@@ -186,33 +186,6 @@ namespace EcommerceBW4
         protected global::System.Web.UI.WebControls.FileUpload FileUploadImmagine;
 
         /// <summary>
-        /// Controllo Create.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Create;
-
-        /// <summary>
-        /// Controllo Modify.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Modify;
-
-        /// <summary>
-        /// Controllo Delete.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Delete;
-
-        /// <summary>
         /// Controllo Card.
         /// </summary>
         /// <remarks>
@@ -276,31 +249,31 @@ namespace EcommerceBW4
         protected global::System.Web.UI.WebControls.Label LblPrezzo;
 
         /// <summary>
-        /// Controllo Card1.
+        /// Controllo Create.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Card1;
+        protected global::System.Web.UI.WebControls.Button Create;
 
         /// <summary>
-        /// Controllo Label1.
+        /// Controllo Modify.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Button Modify;
 
         /// <summary>
-        /// Controllo Label3.
+        /// Controllo Delete.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.Button Delete;
 
         /// <summary>
         /// Controllo ViewStatistiche.

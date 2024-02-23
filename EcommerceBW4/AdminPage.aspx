@@ -63,14 +63,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class=" mb-4 col-12">
-                            <asp:Button ID="Create" runat="server" Text="Crea Item" OnClick="InsertItem" CssClass="btn btn-secondary me-2" />
-                            <asp:Button ID="Modify" runat="server" Text="Modifica" OnClick="ModificaItem" CssClass="btn btn-secondary" />
-                            <asp:Button ID="Delete" runat="server" Text="Cancella" OnClick="DeleteItem" CssClass="btn btn-danger ms-2" />
-                        </div>
-                        <div class="col-4 mt-4">
+
+                        <div class="col-4 my-auto">
                             <div id="Card" runat="server" class="card" visible="false" style="box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);">
-                                <asp:Image ID="ImgCarrello" runat="server" ImageUrl="~/path/to/default/image.jpg" CssClass="card-img-top d-inline-flex" alt="Card Image" Style="object-fit: cover; height: 340px;" />
+                                <div class="img-container p-2">
+                                    <asp:Image ID="ImgCarrello" runat="server" ImageUrl="~/path/to/default/image.jpg" CssClass="card-img-top d-inline-flex" alt="Card Image" Style="object-fit: cover; height: 340px;" />
+                                </div>
                                 <div class="card-body">
                                     <asp:Label ID="LblNome" runat="server" class="card-text text-black"></asp:Label>
                                     <br />
@@ -86,43 +84,43 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4">
-                            <div id="Card1" runat="server" class="card" visible="false" style="box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);">
-                                <div class="card-body">
-                                    <asp:Label ID="Label1" runat="server" class="card-title text-black"></asp:Label>
-                                    <asp:Label ID="Label3" runat="server" class="card-text text-black"></asp:Label>
-                                </div>
-                            </div>
+
+                        <div class=" mb-4 col-12">
+                            <asp:Button ID="Create" runat="server" Text="Crea Item" OnClick="InsertItem" CssClass="btn btn-secondary me-2" />
+                            <asp:Button ID="Modify" runat="server" Text="Modifica" OnClick="ModificaItem" CssClass="btn btn-secondary" />
+                            <asp:Button ID="Delete" runat="server" Text="Cancella" OnClick="DeleteItem" CssClass="btn btn-danger ms-2" />
                         </div>
+
+
                     </asp:View>
                     <!--Gestione STATISTICHE-->
-                <asp:View ID="ViewStatistiche" runat="server">
-                    <div class="col-12">
-                        <h3 class="mt-5">Statistiche</h3>
-                        <asp:DropDownList ID="DropDownStats" CssClass="select-dropdown" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownStats_SelectedIndexChanged">
-                            <asp:ListItem Text="Seleziona una statistica" Value=""></asp:ListItem>
-                            <asp:ListItem Text="Totale ordini effettuati" Value="TotalOrders"></asp:ListItem>
-                            <asp:ListItem Text="Totale prodotti venduti" Value="TotalProductsSold"></asp:ListItem>
-                            <asp:ListItem Text="Incasso totale" Value="TotalRevenue"></asp:ListItem>
-                            <asp:ListItem Text="Ordini per utente" Value="OrdersPerUser"></asp:ListItem>
-                            <asp:ListItem Text="Utenti per Età" Value="UsersPerAge"></asp:ListItem>
-                            <asp:ListItem Text="Utenti per Paese" Value="OrdersPerCountry"></asp:ListItem>
-                            <asp:ListItem Text="Valore medio degli ordini" Value="AverageOrderValue"></asp:ListItem>
-                            <asp:ListItem Text="disponibilità per prodotto" Value="AllProduct"></asp:ListItem>
-                            <asp:ListItem Text="Test Errore (Vendite per prodotto)" Value="SalesByProduct"></asp:ListItem>
-                        </asp:DropDownList>
-                    </div>
+                    <asp:View ID="ViewStatistiche" runat="server">
+                        <div class="col-12">
+                            <h3 class="mt-5">Statistiche</h3>
+                            <asp:DropDownList ID="DropDownStats" CssClass="select-dropdown" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownStats_SelectedIndexChanged">
+                                <asp:ListItem Text="Seleziona una statistica" Value=""></asp:ListItem>
+                                <asp:ListItem Text="Totale ordini effettuati" Value="TotalOrders"></asp:ListItem>
+                                <asp:ListItem Text="Totale prodotti venduti" Value="TotalProductsSold"></asp:ListItem>
+                                <asp:ListItem Text="Incasso totale" Value="TotalRevenue"></asp:ListItem>
+                                <asp:ListItem Text="Ordini per utente" Value="OrdersPerUser"></asp:ListItem>
+                                <asp:ListItem Text="Utenti per Età" Value="UsersPerAge"></asp:ListItem>
+                                <asp:ListItem Text="Utenti per Paese" Value="OrdersPerCountry"></asp:ListItem>
+                                <asp:ListItem Text="Valore medio degli ordini" Value="AverageOrderValue"></asp:ListItem>
+                                <asp:ListItem Text="disponibilità per prodotto" Value="AllProduct"></asp:ListItem>
+                                <asp:ListItem Text="Test Errore (Vendite per prodotto)" Value="SalesByProduct"></asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
 
-                    <div>
-                        <asp:Label ID="LblResult" runat="server"></asp:Label>
-                        <asp:GridView ID="GridViewResults" runat="server" CssClass="resultsGrid" AutoGenerateColumns="True">
-                        </asp:GridView>
-                    </div>
-                </asp:View>
+                        <div>
+                            <asp:Label ID="LblResult" runat="server"></asp:Label>
+                            <asp:GridView ID="GridViewResults" runat="server" CssClass="resultsGrid" AutoGenerateColumns="True">
+                            </asp:GridView>
+                        </div>
+                    </asp:View>
 
                     <asp:View ID="ViewAmministratori" runat="server">
                         <!--Gestione utenti ADMIN-->
-                <br />
+                        <br />
 
 
                         <div class="col-12">

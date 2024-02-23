@@ -93,6 +93,7 @@
     }
 
 .bottoneMenuAdmin {
+    font-weight:600;
     background-color: #2E6D4A;
     color: white;
     padding: 14px 20px;
@@ -101,7 +102,7 @@
     cursor: pointer;
     width: 100%;
     }
-.bottoneMenuAdmin:hover {
-            background-color: #5cdb95;
-
-        }
+    .bottoneMenuAdmin:hover, .bottoneMenuAdmin:active, .bottoneMenuAdmin:focus-visible, .bottoneMenuAdmin:focus-within, .bottoneMenuAdmin:focus {
+        color: #000 !IMPORTANT;
+        background-color: #5cdb95 !IMPORTANT;
+    }

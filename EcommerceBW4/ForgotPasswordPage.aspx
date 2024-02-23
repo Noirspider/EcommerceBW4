@@ -64,7 +64,9 @@
 
                                 <!-- Bottone per tornare al login -->
                                 <!-- Reintegrare l'attributo onserverclick BacktoLogin_Click e runat -->
-                                <button class="btn submits frgt-pass btn-doblue my-2 text-light" runat="server" onserverclick="BackToLogin_Click">Back to Login</button>
+                                <button class="btn submits frgt-pass btn-doblue my-2 text-light" runat="server" onserverclick="BackToLogin_Click" id="BackToLogin" visible="false">Back to Login</button>
+                                <button class="btn submits frgt-pass btn-doblue my-2 text-light" runat="server" onserverclick="BackToShop_Click" id="BackToShop" visible="false">Back to Shop</button>
+
                             </div>
                         </div>
                     </div>
