@@ -68,3 +68,7 @@
 .btnDettagli:hover {
     transform: scale(1.05); 
 }
+
+.my-input {
+    max-width: 165px;
+}

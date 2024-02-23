@@ -103,7 +103,7 @@ button {
     text-decoration: none; 
     color: inherit;
     display: block;
-    margin-inline: auto;
+    margin: auto;
 }
 
 .card-body {

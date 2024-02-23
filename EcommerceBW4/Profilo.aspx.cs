@@ -10,6 +10,7 @@ namespace EcommerceBW4
 {
     public partial class Profilo : Page
     {
+        public int SelectedOrderId { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -68,6 +69,7 @@ namespace EcommerceBW4
             if (e.CommandName == "ShowDetails")
             {
                 int ordineId = Convert.ToInt32(e.CommandArgument);
+                SelectedOrderId = ordineId;
                 DataTable dtDettagliOrdine = GetDettagliOrdinePerProdotto(ordineId);
 
 

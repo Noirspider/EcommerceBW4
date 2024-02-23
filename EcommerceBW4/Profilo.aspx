@@ -28,12 +28,12 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle">Dettagli Ordine</h5>
+                    <h5 class="modal-title fs-3" id="modalTitle">Dettagli Ordine #<%# SelectedOrderId %> </h5>
                 </div>
                 <div class="modal-body" runat="server" id="modalBody">
                     <asp:Repeater ID="RepeaterOrderDetails" runat="server">
                         <ItemTemplate>
-                            <p><%# Eval("NomeProdotto") %> - Quantità: <%# Eval("Quantita") %> - Prezzo: €<%# Eval("Prezzo") %></p>
+                            <p><%# Eval("NomeProdotto") %> - x: <%# Eval("Quantita") %> - Prezzo: €<%# Eval("Prezzo") %></p>
                         </ItemTemplate>
                     </asp:Repeater>
                    <asp:Button ID="BtnCloseModal" runat="server" CssClass="btn btn-secondary" OnClick="BtnCloseModal_Click" Text="&times;" />

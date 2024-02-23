@@ -120,11 +120,23 @@ namespace EcommerceBW4
                 }
                 else
                 {
-                    // Inserisco un nuovo dettaglio carrello.
-                    InsertNewProdottoInCarrello(conn, carrelloId, prodottoId);
+                    // Prima di inserire, controllo se c'è già un abbonamento nel carrello.
+                    if (IsAnotherSubscriptionInCart(conn, carrelloId))
+                    {
+                        // Se c'è già un abbonamento, mostriamo un messaggio popup.
+                        ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Puoi avere solo un abbonamento alla volta nel tuo carrello. Per cambiare abbonamento, rimuovi prima quello esistente dal tuo carrello.');", true);
+                    }
+                    else
+                    {
+                        // Inserisco un nuovo dettaglio carrello.
+                        InsertNewProdottoInCarrello(conn, carrelloId, prodottoId);
+                        // Reindirizza l'utente alla pagina del carrello o mostra un messaggio di conferma
+                        ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Prodotto aggiunto al carrello con successo.'); window.location='Carrello.aspx';", true);
+                    }
                 }
             }
         }
+
 
         /*
         * Summary: Ottiene l'ID del carrello esistente o crea uno nuovo.
@@ -233,6 +245,29 @@ namespace EcommerceBW4
                 prodottiRepeater.DataSource = reader;
                 prodottiRepeater.DataBind();
                 reader.Close();
+            }
+        }
+
+        /*
+        *Summary:
+        *Parameters:
+        *Return:
+         */
+        private bool IsAnotherSubscriptionInCart(SqlConnection conn, int carrelloId)
+        {
+
+            // Esempio di implementazione:
+            string checkSubscriptionQuery = @"
+            SELECT COUNT(*)
+            FROM CarrelloDettaglio cd
+            INNER JOIN Prodotti p ON cd.ProdottoID = p.ProdottoID
+            WHERE cd.CarrelloID = @CarrelloID AND p.Categoria = 'Abbonamento'";
+
+            using (SqlCommand checkCmd = new SqlCommand(checkSubscriptionQuery, conn))
+            {
+                checkCmd.Parameters.AddWithValue("@CarrelloID", carrelloId);
+                int subscriptionCount = (int)checkCmd.ExecuteScalar();
+                return subscriptionCount > 0;
             }
         }
     }
