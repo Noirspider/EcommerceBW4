@@ -132,14 +132,19 @@ footer a:hover {
 
 /* Ads */
 
+.carousel-style {
+    opacity: 0.5;
+}
+
+.carousel-style:hover {
+    opacity: 1;
+}
 /* .sideAds {
     position: -webkit-sticky;
     position: sticky;
     top: 100px;
     z-index: 10;
 }*/
-
-
 /* Personalizzazione del messaggio di benvenuto */
 .welcome-message {
     color: #5cdb95;
