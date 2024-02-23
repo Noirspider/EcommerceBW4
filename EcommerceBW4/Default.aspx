@@ -46,10 +46,10 @@
                     <h6>Benvenuto <span id="helloUser" runat="server" class="welcome-message"><%# Session["Username"] %></span>,</h6>
                     <p>Dai un'occhiata ai nostri partner!</p>
                     <div>
-                        <div id="AdscCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div id="AdsCarousel" class="carousel slide carousel-style" data-touch="false" data-interval="3000">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="Content/Assets/images/detectiveaddsquare.png" class="img-fluid d-block w-100" alt="Banner 1">
+                                    <img src="Content/Assets/images/biggamesquare.png" class="img-fluid d-block w-100" alt="Banner1">
                                 </div>
                                 <div class="carousel-item">
                                     <img src="Content/Assets/images/securityaddsquare.png" class="img-fluid d-block w-100" alt="Banner2">
@@ -58,7 +58,7 @@
                                     <img src="Content/Assets/images/murderisteryaddsquare.png" class="img-fluid d-block w-100" alt="Banner3">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="Content/Assets/images/biggamesquare.png" class="img-fluid d-block w-100" alt="Banner3">
+                                    <img src="Content/Assets/images/detectiveaddsquare.png" class="img-fluid d-block w-100" alt="Banner4">
                                 </div>
                             </div>
                         </div>

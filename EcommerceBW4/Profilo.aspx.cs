@@ -62,7 +62,7 @@ namespace EcommerceBW4
             return dtDettagliOrdine;
         }
 
-
+        // metdo per gestire il clicl sul pulsante "Dettagli" all'interno del Repeater
         protected void RepeaterOrders_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "ShowDetails")
@@ -80,13 +80,13 @@ namespace EcommerceBW4
 
 
                 orderDetailsModal.Visible = true;
-                ScriptManager.RegisterStartupScript(this, GetType(), "ShowModal", "$('#" + orderDetailsModal.ClientID + "').modal('show');", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "ShowModal", "$('#orderDetailsModal').modal('show');", true);
 
             }
         }
 
 
-        // Metodo per chiudere il modale
+        // Metodo per chiudere il modale con i dettagli dell'ordine
         protected void BtnCloseModal_Click(object sender, EventArgs e)
         {
             // Chiudi il modale
