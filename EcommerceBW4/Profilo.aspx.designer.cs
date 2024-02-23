@@ -33,6 +33,15 @@ namespace EcommerceBW4
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl orderDetailsModal;
 
         /// <summary>
+        /// Controllo modalTitle.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl modalTitle;
+
+        /// <summary>
         /// Controllo modalBody.
         /// </summary>
         /// <remarks>

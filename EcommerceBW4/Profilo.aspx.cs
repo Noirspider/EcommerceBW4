@@ -10,7 +10,7 @@ namespace EcommerceBW4
 {
     public partial class Profilo : Page
     {
-        public int SelectedOrderId { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -22,7 +22,6 @@ namespace EcommerceBW4
                 }
                 else
                 {
-                    // Reindirizza all'accesso se l'utente non è loggato
                     Response.Redirect("Login.aspx");
                 }
             }
@@ -69,9 +68,8 @@ namespace EcommerceBW4
             if (e.CommandName == "ShowDetails")
             {
                 int ordineId = Convert.ToInt32(e.CommandArgument);
-                SelectedOrderId = ordineId;
+                ViewState["SelectedOrderId"] = ordineId;
                 DataTable dtDettagliOrdine = GetDettagliOrdinePerProdotto(ordineId);
-
 
                 Repeater repeaterOrderDetails = modalBody.FindControl("RepeaterOrderDetails") as Repeater;
                 if (repeaterOrderDetails != null)
@@ -80,12 +78,19 @@ namespace EcommerceBW4
                     repeaterOrderDetails.DataBind();
                 }
 
-
+                // Imposta direttamente il titolo del modale
+                Label modalTitle = orderDetailsModal.FindControl("modalTitle") as Label;
+                if (modalTitle != null)
+                {
+                    modalTitle.Text = "Dettagli Ordine #" + ordineId.ToString();
+                }
                 orderDetailsModal.Visible = true;
-                ScriptManager.RegisterStartupScript(this, GetType(), "ShowModal", "$('#orderDetailsModal').modal('show');", true);
 
+                // Sposta questa chiamata dopo l'impostazione del titolo del modale
+                ScriptManager.RegisterStartupScript(this, GetType(), "ShowModal", "$('#orderDetailsModal').modal('show');", true);
             }
         }
+
 
         // Metodo per chiudere il modale con i dettagli dell'ordine
         protected void BtnCloseModal_Click(object sender, EventArgs e)
@@ -95,5 +100,14 @@ namespace EcommerceBW4
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "closeModal", "$('#orderDetailsModal').modal('hide');", true);
         }
 
+        private void UpdateModalTitle(int ordineId)
+        {
+            // Ora usa il parametro passato al metodo per impostare il titolo
+            Label modalTitle = orderDetailsModal.FindControl("modalTitle") as Label;
+            if (modalTitle != null)
+            {
+                modalTitle.Text = "Dettagli Ordine #" + ordineId;
+            }
+        }
     }
 }
