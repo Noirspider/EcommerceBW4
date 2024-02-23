@@ -45,14 +45,22 @@ namespace EcommerceBW4
             }
         }
 
-        // metodo per gestire il clicl sul pulsante "Dettagli"
+        /*
+          * Summary: Gestisce il clic sul pulsante "Dettagli"
+          * Parameters: oggetto sender, argomenti del comando
+          * Return: null
+        */
         protected void ToDetail_Command(object sender, CommandEventArgs e)
         {
             string productId = e.CommandArgument.ToString();
             Response.Redirect($"Dettagli.aspx?id={productId}");
         }
 
-        // metodo per gestire il clicl sul pulsante "Aggiungi al carrello"
+        /*
+          * Summary: Gestisce il clic sul pulsante "Aggiungi al carrello"
+          * Parameters: oggetto sender, argomenti del comando
+          * Return: null
+        */
         protected void AddToCart_Command(object sender, CommandEventArgs e)
         {
             string productId = e.CommandArgument.ToString();
@@ -86,7 +94,11 @@ namespace EcommerceBW4
         }
 
 
-        // Gestisce il clic sul pulsante "Aggiungi al carrello" per aggiungere il prodotto selezionato al carrello 
+        /*
+          * Summary: Gestisce il clic sul pulsante "Aggiungi al carrello" per aggiungere il prodotto selezionato al carrello 
+          * Parameters: oggetto sender, argomenti dell'evento
+          * Return: null
+        */
         protected void AddCart_OnClickButton(object sender, EventArgs e)
         {
             LinkButton btn = (LinkButton)sender;
@@ -114,7 +126,11 @@ namespace EcommerceBW4
             }
         }
 
-        // Metodo per ottenere l'ID del carrello esistente o crearne uno nuovo.
+        /*
+        * Summary: Ottiene l'ID del carrello esistente o crea uno nuovo.
+        * Parameters: id dell'utente
+        * Return: ID del carrello
+        */
         private int GetOrCreateTimeCarrello(int utenteId)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString))
@@ -143,7 +159,11 @@ namespace EcommerceBW4
         }
 
 
-        // Metodo per controllare se un prodotto è già nel carrello.
+        /*
+          * Summary: Controlla se un prodotto è già nel carrello.
+          * Parameters: connessione al database, ID del carrello, ID del prodotto
+          * Return: true se il prodotto è già nel carrello, altrimenti false
+        */
         private bool ProdottoAlreadyInCarrello(SqlConnection conn, int carrelloId, int prodottoId)
         {
             string query = "SELECT COUNT(*) FROM CarrelloDettaglio WHERE CarrelloID = @carrelloId AND ProdottoID = @prodottoId";
@@ -156,7 +176,11 @@ namespace EcommerceBW4
             }
         }
 
-        // Metodo per aggiornare la quantità di un prodotto nel carrello.
+        /*
+          * Summary: Aggiorna la quantità di un prodotto nel carrello.
+          * Parameters: connessione al database, ID del carrello, ID del prodotto
+          * Return: null
+        */
         private void UpdateQuantitaProdottoInCarrello(SqlConnection conn, int carrelloId, int prodottoId)
         {
             string query = "UPDATE CarrelloDettaglio SET Quantita = Quantita + 1 WHERE CarrelloID = @carrelloId AND ProdottoID = @prodottoId";
@@ -168,7 +192,11 @@ namespace EcommerceBW4
             }
         }
 
-        // Metodo per inserire un nuovo prodotto nel carrello.
+        /*
+        * Summary: Metodo per inserire un nuovo prodotto nel carrello.
+        * Parameters: connessione al database, ID del carrello, ID del prodotto
+        * Return: void
+        */
         private void InsertNewProdottoInCarrello(SqlConnection conn, int carrelloId, int prodottoId)
         {
             // Recupera il prezzo del prodotto da aggiungere al carrello
@@ -188,7 +216,11 @@ namespace EcommerceBW4
             }
         }
 
-        // Metodo per ricercare che fa apparire DENTRO DEFAULT
+        /*
+        * Summary: Metodo per ricercare i prodotti in base a una stringa di ricerca e visualizzarli nel repeater.
+        * Parameters: stringa di ricerca
+        * Return: void
+        */
         protected void ShowSearchedProducts(string searchText)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;

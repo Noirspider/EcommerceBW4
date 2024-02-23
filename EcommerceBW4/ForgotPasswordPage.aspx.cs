@@ -16,12 +16,17 @@ namespace EcommerceBW4
         {
 
         }
-        // Metodo per aggiornare la password
+
+        /*
+        * Summary: Metodo per aggiornare la password dell'utente.
+        * Parameters: click del bottone "PassReset".
+        * Return: Nessuno.
+        */
         protected void PassReset_Click(object sender, EventArgs e)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString; 
+            string connectionString = ConfigurationManager.ConnectionStrings["EcommerceBW4"].ConnectionString;
 
-            string username = Username.Value; 
+            string username = Username.Value;
             string newPassword = NewPass.Value;
             string confirmPassword = ConfirmPass.Value;
 
@@ -98,12 +103,13 @@ namespace EcommerceBW4
             }
         }
 
-
-
-        // Metodo per tornare alla pagina di Login
+        /*
+          * Summary: Metodo per tornare alla pagina di Login.
+          * Parameters: click del bottone "BackToLogin".
+          * Return: Nessuno.
+        */
         protected void BackToLogin_Click(object sender, EventArgs e)
         {
-
             Response.Redirect("Login.aspx");
         }
     }
